@@ -12,7 +12,6 @@ urlpatterns = [
     url(r'^accounts/', include('allauth.urls')),
     url(r'^auth/', include('sms_auth.urls')),
 
-urlpatterns+ = [
     url(r'', include('main.urls', namespace="main")),
 ]
 
