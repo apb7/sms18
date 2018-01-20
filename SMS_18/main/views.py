@@ -89,8 +89,6 @@ def StocksPrimaryData(request):
 def LBdata(request):
 	x=20#the number of people to be shown in the leaderboard
 	up = UserProfile.objects.order_by('balance')[:]
-	n=len(up)
-	#up=up[n-x:]
 	d=[]
 	for i in up:
 		if(i.balance>0):
