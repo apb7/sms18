@@ -6,5 +6,7 @@ Stock Market Simulation 2018 for APOGEE 2018
 * Replace db.sqlite3 with mysql.
 * Decide a suitable website structure for the project.
 * Resolve KeyError in sms_auth/home.html (Vidit)  
- 
+* Add Security checks for unauthorised users.
+
+
 Remember to migrate database before use. 
