@@ -13,9 +13,14 @@ import json
 from django.core import serializers
 
 
+def index(request):#just a render view
+	return render(request, 'main/index.html' )
 
-def index(request):
-	return HttpResponse("Ayeh!")
+def game(request):#just a render view
+	return render(request, 'main/gamepage.html' )
+
+def leaderboard(request):#just a render view
+	return render(request, 'main/leaderboard.html')
 
 def BuyStocks(request):
 	current_user = UserProfile.objects.get(user = request.user)
@@ -68,6 +73,7 @@ def UserStockDetails(request):
 		StocksData.append(stock_data)
 
 	return HttpResponse(json.dumps(StocksData), content_type = "application/json")
+	#I havent renderred any template. This view is only for pinging and sending data
 
 def StocksPrimaryData(request):
 	All_stocks = Stock.objects.all()
@@ -78,10 +84,22 @@ def StocksPrimaryData(request):
 		StocksData.append(stock_data)
 
 	return HttpResponse(json.dumps(StocksData), content_type = "application/json")
+	#I havent renderred any template. This view is only for pinging and sending data
 
-
-
-
+def LBdata(request):
+	x=20#the number of people to be shown in the leaderboard
+	up = UserProfile.objects.order_by('balance')[:]
+	n=len(up)
+	#up=up[n-x:]
+	d=[]
+	for i in up:
+		if(i.balance>0):
+			d.append({
+				'Username':i.name,
+				'balance':i.balance
+				})
+			d.reverse()
+	return HttpResponse(json.dumps(d), content_type = "application/json")
 
 
 
