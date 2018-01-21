@@ -11,9 +11,10 @@ from django.db import IntegrityError
 from django.contrib.auth.models import User
 import json
 from django.core import serializers
-
+from .StartGame import start
 
 def index(request):#just a render view
+	start()
 	return render(request, 'main/index.html' )
 
 def game(request):#just a render view
@@ -81,7 +82,6 @@ def UserPrimaryDetails(request): #this view will give you all info of the user! 
 	#I havent renderred any template. This view is only for pinging and sending data
 
 def UserStockDetails(request):
-
 	if not request.user.is_authenticated():
 		resp={
 			'error':'The user is not registered yet.'

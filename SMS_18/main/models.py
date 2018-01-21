@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import datetime  
 
 class UserProfile(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE) #extending user model
@@ -13,7 +14,6 @@ class UserProfile(models.Model):
 class Stock(models.Model):
 	product_name = models.CharField(max_length=100) #from manforce to mrf, anything in between xD
 	stock_price = models.IntegerField(default=0) #Stock price at any instant
-	stocks_sold = models.IntegerField(default=0) #analytic purposes
 
 	def __str__(self):
 		return self.product_name
@@ -33,3 +33,17 @@ class GameSwitch(models.Model):
 
 	def __str__(self):
 		return self.switch_name
+
+class StockPriceVariation(models.Model):
+	stock_id = models.ForeignKey('Stock' , on_delete=models.CASCADE)
+	date_and_time = models.DateTimeField(default=datetime.now, blank=True)
+	price_at_time = models.IntegerField(null=False,default = 0)
+
+	def __str__(self):
+		return self.date_and_time
+
+class CurrentTime(models.Model):
+	current_time = models.DateTimeField(default=datetime.now, blank=True)
+
+	def __str__(self):
+		return "current_time"
