@@ -23,6 +23,11 @@ def leaderboard(request):#just a render view
 	return render(request, 'main/leaderboard.html')
 
 def BuyStocks(request):
+	if not request.user.is_authenticated():
+		resp={
+			'error':'The user is not registered yet.'
+		}
+		return HttpResponse(json.dumps(resp), content_type = "application/json")
 	current_user = UserProfile.objects.get(user = request.user)
 	transaction_form = BuyStockForm(request.POST)
 	if request.method == 'POST':
@@ -38,6 +43,12 @@ def BuyStocks(request):
 	#I havent renderred any template. This view is only for pinging and sending data
 
 def SellStocks(request):
+
+	if not request.user.is_authenticated():
+		resp={
+			'error':'The user is not registered yet.'
+		}
+		return HttpResponse(json.dumps(resp), content_type = "application/json")
 	current_user = UserProfile.objects.get(user = request.user)
 	transaction_form = BuyStockForm(request.POST)
 	if request.method == 'POST':
@@ -54,6 +65,12 @@ def SellStocks(request):
 
 
 def UserPrimaryDetails(request): #this view will give you all info of the user! Check out the fields.
+
+	if not request.user.is_authenticated():
+		resp={
+			'error':'The user is not registered yet.'
+		}
+		return HttpResponse(json.dumps(resp), content_type = "application/json")
 	current_user = UserProfile.objects.get(user = request.user)
 	resp={
 		'username': current_user.name ,
@@ -64,6 +81,12 @@ def UserPrimaryDetails(request): #this view will give you all info of the user! 
 	#I havent renderred any template. This view is only for pinging and sending data
 
 def UserStockDetails(request):
+
+	if not request.user.is_authenticated():
+		resp={
+			'error':'The user is not registered yet.'
+		}
+		return HttpResponse(json.dumps(resp), content_type = "application/json")
 	current_user = UserProfile.objects.get(user = request.user)
 	UserStocks = StockPurchased.objects.filter(owner=current_user)
 	StocksData = []
@@ -76,6 +99,12 @@ def UserStockDetails(request):
 	#I havent renderred any template. This view is only for pinging and sending data
 
 def StocksPrimaryData(request):
+
+	if not request.user.is_authenticated():
+		resp={
+			'error':'The user is not registered yet.'
+		}
+		return HttpResponse(json.dumps(resp), content_type = "application/json")
 	All_stocks = Stock.objects.all()
 	StocksData = []
 
@@ -87,6 +116,12 @@ def StocksPrimaryData(request):
 	#I havent renderred any template. This view is only for pinging and sending data
 
 def LBdata(request):
+	
+	if not request.user.is_authenticated():
+		resp={
+			'error':'The user is not registered yet.'
+		}
+		return HttpResponse(json.dumps(resp), content_type = "application/json")
 	x=20#the number of people to be shown in the leaderboard
 	up = UserProfile.objects.order_by('balance')[:]
 	d=[]
