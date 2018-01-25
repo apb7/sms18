@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" name="viewport" content=" width = device-width, initial-scale = 1.0">
+	<title> Sell Stocks </title>
+</head>
+	<link rel="stylesheet" type="text/css" href="../../static/main/css/buy-style.css">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<body>
+
+	<div class="stock-summary">
+		<div class="stock-name"> Stock Name </div>
+		<div class="stock-details">	
+			<div class="stock-price">  </div>
+			<div class="stock-change"> &#x2191 2% </div>
+		</div>	
+	</div>
+	
+	<div class="nav-bar">
+		<div class=""> Home </div>
+		<div class=""> Profile </div>
+		<div class=""> Leaderboard </div>
+	</div>
+	
+	<div class="buy-stocks"> 
+
+
+		<div class="stock-buy"> 
+			<div> Number of Stocks Owned </div>
+			<div class="stocksOwned"> </div>
+		</div>
+
+		<div class="stock-buy">
+			<div class=""> Stocks to sell </div>
+			
+			<div class="counter">
+        		
+        		<div class="minus" onclick="minusClick()"> - </div>
+        		<div class="number">  </div>
+        		<div class="plus" onclick="plusClick()"> + </div>
+
+ 			</div> 
+	
+		</div>	
+
+		<div class="stock-buy"> 
+			<div> Total Gain </div>
+			<div class="amount"> </div>
+		</div>
+
+		<div class="stock-buy"> 
+			<div> New Balance </div>
+			<div class="balance"> </div>
+		</div>
+
+		<div class="submit-btn"> 
+			<button class="btn btn-primary btn-block"> Confirm </button>
+		</div>
+	
+	</div>
+
+
+
+<script type="text/javascript">
+	
+	var number = 0;
+	var amount=0;
+	var costPerStock = 50;  // COST OF STOCK; DATA FROM BACKEND FOR EACH STOCK
+	var increasedBalance = 1000;
+	var stocksOwned = 12;
+
+	document.getElementsByClassName('amount')[0].innerHTML  = "&#8377" + " " + amount;
+	document.getElementsByClassName("number")[0].innerHTML = number;
+	document.getElementsByClassName("balance")[0].innerHTML = "&#8377" + " " + increasedBalance;
+	document.getElementsByClassName('stock-price')[0].innerHTML = "&#8377" + " " + costPerStock;
+	document.getElementsByClassName('stocksOwned')[0].innerHTML = stocksOwned;
+
+	function plusClick() {												 //FOR INCREMENTING COUNTER				
+		if (number<stocksOwned) {
+			number = number + 1;
+			document.getElementsByClassName("number")[0].innerHTML = number;
+			amount = costPerStock * number;
+			document.getElementsByClassName('amount')[0].innerHTML  = "&#8377" + " " + amount;
+			increasedBalance = increasedBalance + costPerStock;
+			document.getElementsByClassName("balance")[0].innerHTML = "&#8377" + " " + increasedBalance;
+		}
+	}
+
+	function minusClick() {
+		if (number>0) {
+			number = number - 1;
+			document.getElementsByClassName("number")[0].innerHTML = number;
+			amount = costPerStock * number;
+			document.getElementsByClassName('amount')[0].innerHTML  = "&#8377" + " " + amount;
+			increasedBalance = increasedBalance - costPerStock;
+			document.getElementsByClassName("balance")[0].innerHTML = "&#8377" + " " + increasedBalance;
+		}
+		else {
+			document.getElementsByClassName("number")[0].innerHTML = number;
+		} 
+
+	}
+
+	
+
+	
+
+
+</script>
+
+</body>
+</html>
