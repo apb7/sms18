@@ -1,0 +1,108 @@
+body{
+	margin: 0;
+	padding: 0;
+	background-color: #e3e3e3;
+}
+
+.container{
+	background: black;
+}
+
+.header{
+	position: fixed;
+	width: 100%;
+	height: 75px;
+	background: #a0f7d7;
+	display: flex;
+	z-index: 2;
+}
+
+.nav{
+	margin: 5px;
+	width: 30%;
+	text-align: center;
+	line-height: 70px;
+	border-radius: 10%;
+	background: #17d891;
+}
+
+.nav:nth-child(3){
+	/*padding: 0 5%;*/
+	/*text-align: left;*/
+	width: 40%;
+}
+
+.main{
+	position: absolute;
+	top: 75px;
+	width: 100%;
+	display: flex;
+	background: white;
+	flex-wrap: wrap;
+}
+
+.stock{
+	width: 100%;
+	height: 100px;
+	background: #e3e3e3;
+	border-radius: 10%;
+	margin: 0.5vh;
+	line-height: 100px;
+	transition: height 300ms;
+	overflow: hidden;
+}
+
+.stock.show{
+	height: 200px;
+}
+
+.name, .price, .buy, .sell{
+	width: 50%;
+	float: left;
+	text-align: center;
+}
+
+/* WORKS WITHOUT THIS SHIT
+.hidden{
+	width: 100%;
+	height: 0;
+	transition: height 300ms;
+	text-align: center;
+}
+
+.hidden.showen{
+	height: 100px;
+}
+*/
+
+a{
+	text-decoration: none;
+}
+
+.buy a{
+	padding: 15px 20px;
+	color: white;
+	background: #25b256;
+	transition: background 500ms;
+}
+
+.buy a:hover{
+	background: #23aa52;
+}
+
+.sell a{
+	padding: 15px 20px;
+	color: white;
+	background: #f71b1b;
+	transition: background 500ms;
+}
+
+.sell a:hover{
+	background: #e51919;
+}
+
+/*@media screen and (max-width: 375px){
+	.nav:nth-child(3){
+		padding: 0 10% 0 2%;
+	}
+}*/
