@@ -1,9 +1,9 @@
 body{
 	margin: 0;
 	padding: 0;
-	background-color: #e3e3e3;
+	background-color: white;
 }
-
+	
 .header{
 	position: fixed;
 	width: 100%;
@@ -37,6 +37,7 @@ body{
 	background: #17d891;
 }
 
+
 .nav{
 	padding: 0 5px;
 	margin-top: 2.5px;
@@ -49,13 +50,15 @@ body{
 	cursor: pointer;
 }
 
-.nav a {
+a {
 	text-decoration: none;
 	color: black;
 }
-.nav a:hover {
+a:hover {
 	color: black;
 }
+
+
 
 .nav:hover:not(.active){
 	background: rgba(24, 242, 162, 0.8);
@@ -65,85 +68,21 @@ body{
 	background: #17d891;
 }
 
+
 .main{
-	position: absolute;
-	top: 175px;
+	padding-top: 175px;
 	width: 100%;
-	height: 100%;
+	display: flex;
 	background: white;
 	flex-wrap: wrap;
 }
 
-.stock{
+.leader{
 	width: 100%;
 	height: 100px;
 	background: #e3e3e3;
 	border-radius: 10%;
 	margin: 0.5vh;
 	line-height: 100px;
-	transition: height 300ms;
-	overflow: hidden;
-}
-
-.stock.show{
-	height: 200px;
-}
-
-.shown, .hidden{
-	text-align: center;
-	display: flex;
-	text-align: center;
-}
-
-.shown div, .hidden div {
-	flex-basis: 50%;
-}
-
-/* WORKS WITHOUT THIS SHIT
-.hidden{
-	width: 100%;
-	height: 0;
-	transition: height 300ms;
-	text-align: center;
-}
-
-.hidden.showen{
-	height: 100px;
-}
-*/
-
-a{
-	text-decoration: none;
-}
-
-.buy button{
-	padding: 15px 20px;
-	color: white;
-	background: #25b256;
-	transition: background 500ms;
-}
-
-.buy button:hover{
-	background: #23aa52;
-}
-
-.sell button{
-	padding: 15px 20px;
-	color: white;
-	background: #f71b1b;
-	transition: background 500ms;
-}
-
-.sell button:hover{
-	background: #e51919;
-}
-
-button {
-	cursor: pointer;
-	border-radius: 12px;
-}
-
-.disabled {
-	cursor: not-allowed;
-	opacity: 0.5;
+	padding-left: 2vw;
 }

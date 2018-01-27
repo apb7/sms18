@@ -71,79 +71,29 @@ body{
 	width: 100%;
 	height: 100%;
 	background: white;
-	flex-wrap: wrap;
+
 }
 
-.stock{
-	width: 100%;
+.stock {
 	height: 100px;
 	background: #e3e3e3;
 	border-radius: 10%;
 	margin: 0.5vh;
 	line-height: 100px;
 	transition: height 300ms;
-	overflow: hidden;
-}
-
-.stock.show{
-	height: 200px;
-}
-
-.shown, .hidden{
-	text-align: center;
 	display: flex;
+	justify-content: space-around;
 	text-align: center;
 }
 
-.shown div, .hidden div {
-	flex-basis: 50%;
+.profile-details {
+	flex-basis: 25%;
 }
 
-/* WORKS WITHOUT THIS SHIT
-.hidden{
-	width: 100%;
-	height: 0;
-	transition: height 300ms;
-	text-align: center;
-}
 
-.hidden.showen{
-	height: 100px;
-}
-*/
 
-a{
-	text-decoration: none;
-}
 
-.buy button{
-	padding: 15px 20px;
-	color: white;
-	background: #25b256;
-	transition: background 500ms;
-}
 
-.buy button:hover{
-	background: #23aa52;
-}
 
-.sell button{
-	padding: 15px 20px;
-	color: white;
-	background: #f71b1b;
-	transition: background 500ms;
-}
 
-.sell button:hover{
-	background: #e51919;
-}
 
-button {
-	cursor: pointer;
-	border-radius: 12px;
-}
-
-.disabled {
-	cursor: not-allowed;
-	opacity: 0.5;
-}

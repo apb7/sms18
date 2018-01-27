@@ -53,49 +53,7 @@
 	</div>		
 
 
-<script type="text/javascript">
-	
-	var number = 0;
-	var amount=0;
-	var costPerStock = 50;  // COST OF STOCK; DATA FROM BACKEND FOR EACH STOCK
-	var remainingBalance = 1000;
-
-	document.getElementsByClassName('amount')[0].innerHTML  = "&#8377" + " " + amount;
-	document.getElementsByClassName("number")[0].innerHTML = number;
-	document.getElementsByClassName("balance")[0].innerHTML = "&#8377" + " " + remainingBalance;
-	document.getElementsByClassName('stock-price')[0].innerHTML = "&#8377" + " " + costPerStock;
-
-
-	function plusClick() {												 //FOR INCREMENTING COUNTER				
-		if (remainingBalance >= costPerStock) {
-			number = number + 1;
-			document.getElementsByClassName("number")[0].innerHTML = number;
-			amount = costPerStock * number;
-			document.getElementsByClassName('amount')[0].innerHTML  = "&#8377" + " " + amount;
-			remainingBalance = remainingBalance - costPerStock;
-			document.getElementsByClassName("balance")[0].innerHTML = "&#8377" + " " + remainingBalance;
-		}
-	}
-
-	function minusClick() {
-		if (number>0) {
-			number = number - 1;
-			document.getElementsByClassName("number")[0].innerHTML = number;
-			amount = costPerStock * number;
-			document.getElementsByClassName('amount')[0].innerHTML  = "&#8377" + " " + amount;
-			remainingBalance = remainingBalance + costPerStock;
-			document.getElementsByClassName("balance")[0].innerHTML = "&#8377" + " " + remainingBalance;
-		}
-		else {
-			document.getElementsByClassName("number")[0].innerHTML = number;
-		} 
-
-	}
-
-	
-
-	
-
+<script type="text/javascript" src="../../static/main/js/script.js">
 
 </script>
 
