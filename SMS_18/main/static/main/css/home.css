@@ -4,37 +4,63 @@ body{
 	background-color: #e3e3e3;
 }
 
-.container{
-	background: black;
-}
-
 .header{
 	position: fixed;
 	width: 100%;
-	height: 75px;
-	background: #a0f7d7;
+	height: 175px;
 	display: flex;
 	z-index: 2;
 }
 
-.nav{
-	margin: 5px;
-	width: 30%;
+.profile{
+	height: 100px;
+	width: 100%;
+}
+
+.navbar{
+	position: absolute;
+	top: 100px;
+	width: 100%;
+	height: 75px;
+	background: #a0f7d7;
+}
+
+.user{
+	height: 100px;
+	width: 50%;
+	float: left;
+	background: white;
 	text-align: center;
-	line-height: 70px;
-	border-radius: 10%;
+	line-height: 100px;
 	background: #17d891;
 }
 
+.nav{
+	margin: 5px 0.5%;
+	width: 30%;
+	float: left;
+	height: 65px;
+	line-height: 65px;
+	text-align: center;
+	border-radius: 10%;
+	transition: background 300ms;
+}
+
 .nav:nth-child(3){
-	/*padding: 0 5%;*/
-	/*text-align: left;*/
-	width: 40%;
+	width: 37%;
+}
+
+.nav:hover:not(.active){
+	background: rgba(24, 242, 162, 0.8);
+}
+
+.active{
+	background: #17d891;
 }
 
 .main{
 	position: absolute;
-	top: 75px;
+	top: 175px;
 	width: 100%;
 	display: flex;
 	background: white;
