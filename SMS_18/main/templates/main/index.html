@@ -1,3 +1,180 @@
-<p>Take a look where to ping for what data in main/urls.py
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Stock Market Stimulation</title>
+<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- <link rel="stylesheet" type="text/css" href="../../static/main/css/home.css"> -->
+<link rel="stylesheet" type="text/css" href="./home2.css">
+</head>
+<body>
+	<div class="container">
+			<div class="header">
+			<div class="profile">
+				<div class="user">UJJWAL GANDHI</div> 
+				<div class="user">Balance: 50$</div>	
+			</div>
+			<div class="navbar">
+				<a href="#"><div class="nav">PROFILE</div></a>
+				<a href="#"><div class="nav active">HOME</div></a>
+				<a href="./leaderboard.html"><div class="nav">LEADERBOARD</div></a>
+			</div>
+			</div>
+		<div class="main">
+			<div class="stock">
+				<div class="shown">
+					<div class="name">ABC</div>
+					<div class="price">5$</div>
+				</div>
+				<div class="hidden">
+					<div class="buy"><a>BUY</a></div>
+					<div class="sell" onload="sellButton()"><a href="./index.html">SELL</a></div>
+				</div>
+			</div>
 
-    Check the main/view.py file for the specifics! YOLO</p>
+			<div class="stock">
+				<div class="shown">
+					<div class="name">ABC</div>
+					<div class="price">5$</div>
+				</div>
+				<div class="hidden">
+					<div class="buy"><a>BUY</a></div>
+					<div class="sell"><a>SELL</a></div>
+				</div>
+			</div>
+
+			<div class="stock">
+				<div class="shown">
+					<div class="name">ABC</div>
+					<div class="price">5$</div>
+				</div>
+				<div class="hidden">
+					<div class="buy"><a>BUY</a></div>
+					<div class="sell"><a>SELL</a></div>
+				</div>
+			</div>
+
+			<div class="stock">
+				<div class="shown">
+					<div class="name">ABC</div>
+					<div class="price">5$</div>
+				</div>
+				<div class="hidden">
+					<div class="buy"><a>BUY</a></div>
+					<div class="sell"><a>SELL</a></div>
+				</div>
+			</div>
+
+			<div class="stock">
+				<div class="shown">
+					<div class="name">ABC</div>
+					<div class="price">5$</div>
+				</div>
+				<div class="hidden">
+					<div class="buy"><a>BUY</a></div>
+					<div class="sell"><a>SELL</a></div>
+				</div>
+			</div>
+
+			<div class="stock">
+				<div class="shown">
+					<div class="name">ABC</div>
+					<div class="price">5$</div>
+				</div>
+				<div class="hidden">
+					<div class="buy"><a>BUY</a></div>
+					<div class="sell"><a>SELL</a></div>
+				</div>
+			</div>
+
+			<div class="stock">
+				<div class="shown">
+					<div class="name">ABC</div>
+					<div class="price">5$</div>
+				</div>
+				<div class="hidden">
+					<div class="buy"><a>BUY</a></div>
+					<div class="sell"><a>SELL</a></div>
+				</div>
+			</div>
+
+			<div class="stock">
+				<div class="shown">
+					<div class="name">ABC</div>
+					<div class="price">5$</div>
+				</div>
+				<div class="hidden">
+					<div class="buy"><a>BUY</a></div>
+					<div class="sell"><a>SELL</a></div>
+				</div>
+			</div>
+
+			<div class="stock">
+				<div class="shown">
+					<div class="name">ABC</div>
+					<div class="price">5$</div>
+				</div>
+				<div class="hidden">
+					<div class="buy"><a>BUY</a></div>
+					<div class="sell"><a>SELL</a></div>
+				</div>
+			</div>
+
+			<div class="stock">
+				<div class="shown">
+					<div class="name">ABC</div>
+					<div class="price">5$</div>
+				</div>
+				<div class="hidden">
+					<div class="buy"><a>BUY</a></div>
+					<div class="sell"><a>SELL</a></div>
+				</div>
+			</div>
+
+			<div class="stock">
+				<div class="shown">
+					<div class="name">ABC</div>
+					<div class="price">5$</div>
+				</div>
+				<div class="hidden">
+					<div class="buy"><a>BUY</a></div>
+					<div class="sell"><a>SELL</a></div>
+				</div>
+			</div>
+
+			<div class="stock">
+				<div class="shown">
+					<div class="name">ABC</div>
+					<div class="price">5$</div>
+				</div>
+				<div class="hidden">
+					<div class="buy"><a>BUY</a></div>
+					<div class="sell"><a>SELL</a></div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+<script type="text/javascript">
+	
+var i=0;
+while (i<12){
+	document.getElementsByClassName("stock")[i].addEventListener("click", function(){
+		this.classList.toggle("show");
+	});
+	i=i+1;
+}
+
+var stocksOwned=0;
+var costPerStock=50;
+
+function sellButton(){
+	if (stocksOwned<1){
+		document.getElementsByTagName(a)[1].disabled=true;
+	}
+}
+
+</script>
+
+</body>
+</html>
