@@ -10,6 +10,7 @@ from django.contrib import auth
 from django.db import IntegrityError
 from django.contrib.auth.models import User
 import json
+from .forms import TransactionForm
 from django.core import serializers
 from .StartGame import start
 
@@ -30,7 +31,7 @@ def BuyStocks(request):
 		}
 		return HttpResponse(json.dumps(resp), content_type = "application/json")
 	current_user = UserProfile.objects.get(user = request.user)
-	transaction_form = BuyStockForm(request.POST)
+	transaction_form = TransactionForm(request.POST)
 	if request.method == 'POST':
 		if transaction_form.is_valid():
 			data = transaction_form.cleaned_data
@@ -51,7 +52,7 @@ def SellStocks(request):
 		}
 		return HttpResponse(json.dumps(resp), content_type = "application/json")
 	current_user = UserProfile.objects.get(user = request.user)
-	transaction_form = BuyStockForm(request.POST)
+	transaction_form = TransactionForm(request.POST)
 	if request.method == 'POST':
 		if transaction_form.is_valid():
 			data = transaction_form.cleaned_data
