@@ -12,6 +12,7 @@ from django.contrib.auth.models import User
 import json
 from .forms import TransactionForm
 from django.core import serializers
+from django.views.decorators.csrf import csrf_exempt
 
 def index(request):#just a render view
 	return render(request, 'main/index.html' )
@@ -22,46 +23,69 @@ def game(request):#just a render view
 def leaderboard(request):#just a render view
 	return render(request, 'main/leaderboard.html')
 
-def BuyStocks(request):
+def Buy(request, id):#just a render view
+	return render(request, 'main/buy.html')
+
+def Sell(request, id):#just a render view
+	return render(request, 'main/sell.html')
+
+def profile(request):#just a render view
+	return render(request, 'main/profile.html')
+
+
+
+def createProfile(request):
+	#TODO
+	UserProfile.objects.create()
+
+
+
+@csrf_exempt
+def BuyStocks(request, id):
 	if not request.user.is_authenticated():
 		resp={
 			'error':'The user is not registered yet.'
 		}
 		return HttpResponse(json.dumps(resp), content_type = "application/json")
 	current_user = UserProfile.objects.get(user = request.user)
-	transaction_form = TransactionForm(request.POST)
 	if request.method == 'POST':
-		if transaction_form.is_valid():
-			data = transaction_form.cleaned_data
-			#data will have two fields: the stock-name of purchase and the number of units
-			current_stock = StockPurchased.objects.filter(owner=current_user).filter(stockid=data['stockname'])
-			stock_info = Stock.objects.get(product_name=data['stockname'])
-			current_user.balance-= (data['units']*stock_info.stock_price)
-			current_stock.number_of_stocks+= data['units']
-			current_stock.save()
-			current_user.save()			
-	#I havent renderred any template. This view is only for pinging and sending data
+		data = request.POST
+		stock_info = Stock.objects.get(id=id)
+		current_user.balance -= int(data['units'])*stock_info.stock_price
+		current_user.save()
 
-def SellStocks(request):
+		try:
+			current_stock = StockPurchased.objects.get(owner_id=current_user.id, stockid=stock_info)
+		except:
+			current_stock = StockPurchased.objects.create(owner_id=current_user.id, stockid=stock_info)
 
+		current_stock.number_of_stocks += int(data['units'])
+		current_stock.save()
+		return redirect('/')
+
+
+
+@csrf_exempt
+def SellStocks(request, id):
 	if not request.user.is_authenticated():
 		resp={
 			'error':'The user is not registered yet.'
 		}
 		return HttpResponse(json.dumps(resp), content_type = "application/json")
 	current_user = UserProfile.objects.get(user = request.user)
-	transaction_form = TransactionForm(request.POST)
 	if request.method == 'POST':
-		if transaction_form.is_valid():
-			data = transaction_form.cleaned_data
-			#data will have two fields: the stock-name of sale and the number of units
-			current_stock = StockPurchased.objects.filter(owner=current_user).filter(stockid=data['stockname'])
-			stock_info = Stock.objects.get(product_name=data['stockname'])
-			current_user.balance+= (data['units']*stock_info.stock_price)
-			current_stock.number_of_stocks-= data['units']
+		data = request.POST
+		stock_info = Stock.objects.get(id=id)
+		current_user.balance += int(data['units'])*stock_info.stock_price
+		current_user.save()
+		current_stock = StockPurchased.objects.get(owner_id=current_user.id, stockid=stock_info)
+		current_stock.number_of_stocks -= int(data['units'])
+		if current_stock.number_of_stocks is 0:
+			current_stock.delete()
+		else:
 			current_stock.save()
-			current_user.save()			
-	#I havent renderred any template. This view is only for pinging and sending data
+		return redirect('/')
+
 
 
 def UserPrimaryDetails(request): #this view will give you all info of the user! Check out the fields.
@@ -80,6 +104,8 @@ def UserPrimaryDetails(request): #this view will give you all info of the user! 
 	return HttpResponse(json.dumps(resp), content_type = "application/json")
 	#I havent renderred any template. This view is only for pinging and sending data
 
+
+
 def UserStockDetails(request):
 	if not request.user.is_authenticated():
 		resp={
@@ -90,12 +116,18 @@ def UserStockDetails(request):
 	UserStocks = StockPurchased.objects.filter(owner=current_user)
 	StocksData = []
 	for this_stock in UserStocks:
-		stock_data = { this_stock.name : this_stock.number_of_stocks }
+		current_stock = Stock.objects.get(id=this_stock.stockid.id)
+		stock_data = {
+		"name" : current_stock.product_name,
+		"num" : this_stock.number_of_stocks,
+		"price" : current_stock.stock_price,
+		}
 		#this will send the name of the stock along with the number of units the user is currently owning
 		StocksData.append(stock_data)
 
 	return HttpResponse(json.dumps(StocksData), content_type = "application/json")
-	#I havent renderred any template. This view is only for pinging and sending data
+
+
 
 def StocksPrimaryData(request):
 
@@ -108,14 +140,44 @@ def StocksPrimaryData(request):
 	StocksData = []
 
 	for this_stock in All_stocks:
-		stock_data = { this_stock.product_name : this_stock.stock_price }
+		stock_data = {
+			"id" : this_stock.id,
+			"name" : this_stock.product_name,
+			"price" : this_stock.stock_price,
+		}
 		StocksData.append(stock_data)
 
 	return HttpResponse(json.dumps(StocksData), content_type = "application/json")
-	#I havent renderred any template. This view is only for pinging and sending data
+
+
+
+def StockData(request, id):
+
+	if not request.user.is_authenticated():
+		resp={
+			'error':'The user is not registered yet.'
+		}
+		return HttpResponse(json.dumps(resp), content_type = "application/json")
+
+	this_stock = Stock.objects.get(id = id)
+	num = 0
+	try:
+		current_stock = StockPurchased.objects.get(owner=UserProfile.objects.get(user = request.user), stockid=this_stock)
+		num = current_stock.number_of_stocks
+	except:
+		pass
+	stock_data = {
+		"name" : this_stock.product_name,
+		"price" : this_stock.stock_price,
+		"num" : num
+	}
+
+	return HttpResponse(json.dumps(stock_data), content_type = "application/json")
+
+
 
 def LBdata(request):
-	
+
 	if not request.user.is_authenticated():
 		resp={
 			'error':'The user is not registered yet.'
@@ -132,9 +194,3 @@ def LBdata(request):
 				})
 			d.reverse()
 	return HttpResponse(json.dumps(d), content_type = "application/json")
-
-
-
-
-
-
