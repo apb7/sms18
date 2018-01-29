@@ -38,12 +38,8 @@ class StockPriceVariation(models.Model):
 	stock_id = models.ForeignKey('Stock' , on_delete=models.CASCADE)
 	date_and_time = models.DateTimeField(default=datetime.now, blank=True)
 	price_at_time = models.IntegerField(null=False,default = 0)
+	sequence_id = models.IntegerField(null=False, choices=((1,'1'),(2,'2'),(3,'3')),default = 1)
+	#this will store what sequence of price is it for a particular stock
 
 	def __str__(self):
 		return self.date_and_time
-
-class CurrentTime(models.Model):
-	current_time = models.DateTimeField(default=datetime.now, blank=True)
-
-	def __str__(self):
-		return "current_time"

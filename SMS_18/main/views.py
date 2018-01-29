@@ -12,10 +12,8 @@ from django.contrib.auth.models import User
 import json
 from .forms import TransactionForm
 from django.core import serializers
-from .StartGame import start
 
 def index(request):#just a render view
-	start()
 	return render(request, 'main/index.html' )
 
 def game(request):#just a render view
