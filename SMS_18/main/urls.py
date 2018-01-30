@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^userstockdetails$', views.UserStockDetails , name='UserStockDetails'),
     url(r'^stocksprimarydata$', views.StocksPrimaryData , name='StocksPrimaryData'),
     url(r'^stockdata/(?P<id>\d+)$', views.StockData , name='StockData'),
+    url(r'^leaderboard$', views.leaderboard , name='leaderboard'),
     url(r'^lbdata$', views.LBdata , name='LBdata'),
     url(r'^createProfile$', views.createProfile , name='createProfile'),
     url(r'^profile$', views.profile , name='profile'),
