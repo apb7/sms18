@@ -177,20 +177,28 @@ def StockData(request, id):
 
 
 def LBdata(request):
-
 	if not request.user.is_authenticated():
 		resp={
 			'error':'The user is not registered yet.'
 		}
 		return HttpResponse(json.dumps(resp), content_type = "application/json")
-	x=20#the number of people to be shown in the leaderboard
-	up = UserProfile.objects.order_by('balance')[:]
+
+	for this_user in UserProfile.objects.all():
+		this_user.net_worth=0
+		for this_stock in StockPurchased.objects.filter(owner=this_user):
+			this_user.net_worth+=this_stock.number_of_stocks * (this_stock.stockid).stock_price
+		this_user.net_worth+=this_user.balance
+	up = UserProfile.objects.order_by('net_worth')[:]
+	x = 20
+	n = len(up)
+	up = up[abs(x-n):]
 	d=[]
 	for i in up:
-		if(i.balance>0):
+		if(i.net_worth>0):
 			d.append({
 				'Username':i.name,
 				'balance':i.balance
 				})
 			d.reverse()
+	print (this_user.net_worth)
 	return HttpResponse(json.dumps(d), content_type = "application/json")
