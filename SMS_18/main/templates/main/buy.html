@@ -9,51 +9,52 @@
 <body>
 
 	<div class="stock-summary">
-		<div class="stock-name"> Stock Name </div>
-		<div class="stock-details">	
-			<div class="stock-price">  </div>
+		<div class="stock-name" id="stockName"> Stock Name </div>
+		<div class="stock-details">
+			<div class="stock-price" id="stockPrice"></div>
 			<div class="stock-change"> &#x2191 2% </div>
-		</div>	
+		</div>
 	</div>
-	
+
 	<div class="nav-bar">
-		<div class=""> Home </div>
+		<div class=""><a href="/"> Home </a></div>
 		<div class=""> Profile </div>
 		<div class=""> Leaderboard </div>
 	</div>
-	
-	<div class="buy-stocks"> 
+
+	<form class="buy-stocks" method="POST" action="/buystocks/" id="form">
 		<div class="stock-buy">
 			<div class=""> Stocks to buy </div>
-			
+
 			<div class="counter">
-        		
+
         		<div class="minus" onclick="minusClick()"> - </div>
-        		<div class="number">  </div>
+        		<div class="number"> <input type="text" id="number" name="units"></div>
         		<div class="plus" onclick="plusClick()"> + </div>
 
- 			</div> 
-	
-		</div>	
-		
-		<div class="stock-buy"> 
-			<div> Total Cost </div>
-			<div class="amount"> </div>
+ 			</div>
+
 		</div>
 
-		<div class="stock-buy"> 
+		<div class="stock-buy">
+			<div> Total Cost </div>
+			<div class="amount">&#8377<input type="text" id="amount" name="amount"></div>
+		</div>
+
+		<div class="stock-buy">
 			<div> Remaining Balance </div>
 			<div class="balance"> </div>
 		</div>
 
-		<div class="submit-btn"> 
+		<div class="submit-btn">
+			<input type="Submit">
 			<button class="btn btn-primary btn-block"> Confirm </button>
 		</div>
-	
-	</div>		
+
+	</form>
 
 
-<script type="text/javascript" src="../../static/main/js/script.js">
+<script type="text/javascript" src="../../static/main/js/buy_sell.js">
 
 </script>
 
