@@ -16,4 +16,6 @@ urlpatterns = [
     url(r'^lbdata$', views.LBdata , name='LBdata'),
     url(r'^createProfile$', views.createProfile , name='createProfile'),
     url(r'^profile$', views.profile , name='profile'),
+    url(r'^register$', views.register , name='register'),
+    url(r'^login$', views.login , name='login'),
 ]
