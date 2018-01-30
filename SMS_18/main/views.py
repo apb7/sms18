@@ -23,10 +23,10 @@ def game(request):#just a render view
 def leaderboard(request):#just a render view
 	return render(request, 'main/leaderboard.html')
 
-def Buy(request, id):#just a render view
+def buy(request, id):#just a render view
 	return render(request, 'main/buy.html')
 
-def Sell(request, id):#just a render view
+def sell(request, id):#just a render view
 	return render(request, 'main/sell.html')
 
 def profile(request):#just a render view
