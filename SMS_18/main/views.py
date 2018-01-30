@@ -78,7 +78,7 @@ def SellStocks(request, id):
 		stock_info = Stock.objects.get(id=id)
 		current_user.balance += int(data['units'])*stock_info.stock_price
 		current_user.save()
-		current_stock = StockPurchased.objects.get(owner_id=current_user.id, stockid=stock_info)
+		current_stock = StockPurchased.objects.get(owner=current_user.id, stockid=stock_info)
 		current_stock.number_of_stocks -= int(data['units'])
 		if current_stock.number_of_stocks is 0:
 			current_stock.delete()
@@ -188,17 +188,17 @@ def LBdata(request):
 		for this_stock in StockPurchased.objects.filter(owner=this_user):
 			this_user.net_worth+=this_stock.number_of_stocks * (this_stock.stockid).stock_price
 		this_user.net_worth+=this_user.balance
-	up = UserProfile.objects.order_by('net_worth')[:]
+		this_user.save()
+	up = UserProfile.objects.order_by('net_worth')
+	up.reverse()
 	x = 20
 	n = len(up)
-	up = up[abs(x-n):]
+	up = up[:abs(x-n)]
 	d=[]
 	for i in up:
-		if(i.net_worth>0):
+		if i.net_worth>0:
 			d.append({
-				'Username':i.name,
-				'balance':i.balance
+				'name':i.name,
+				'net_worth':i.net_worth
 				})
-			d.reverse()
-	print (this_user.net_worth)
 	return HttpResponse(json.dumps(d), content_type = "application/json")
