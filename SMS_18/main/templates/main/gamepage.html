@@ -1,1 +1,29 @@
-<h1> YOLO AF! Build the main page here. </h1>
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Stock Market Stimulation</title>
+	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="../../static/main/css/home.css">
+	<script type="text/javascript" src="{% static 'main/js/stockDetails.js' %}"></script>
+	<script type="text/javascript" src="{% static 'main/js/userDetails.js' %}"></script>
+</head>
+<body>
+	<div class="container">
+			<div class="header">
+			<div class="profile">
+				<div class="user" id="userName"></div>
+				<div class="user">Balance: &#8377 <span  id="userBalance"></span></div>
+			</div>
+			<div class="navbar">
+				<div class="nav"> <a href="{% url 'main:profile' %}"><span>PROFILE</span></a> </div>
+				<div class="nav active"> <a href="{% url 'main:game' %}"><span>HOME</span></a> </div>
+				<div class="nav"> <a href="{% url 'main:leaderboard' %}"><span>LEADERBOARD</span></a> </div>
+			</div>
+			</div>
+		<div class="main">
+		</div>
+	</div>
+
+</body>
+</html>

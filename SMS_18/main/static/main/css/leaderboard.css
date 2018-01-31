@@ -1,0 +1,88 @@
+body{
+	margin: 0;
+	padding: 0;
+	background-color: white;
+}
+	
+.header{
+	position: fixed;
+	width: 100%;
+	height: 175px;
+	display: flex;
+	z-index: 2;
+}
+
+.profile{
+	height: 100px;
+	width: 100%;
+}
+
+.navbar{
+	position: absolute;
+	top: 100px;
+	width: 100%;
+	height: 75px;
+	background: #a0f7d7;
+	display: flex;
+	justify-content: space-around;
+}
+
+.user{
+	height: 100px;
+	width: 50%;
+	float: left;
+	background: white;
+	text-align: center;
+	line-height: 100px;
+	background: #17d891;
+}
+
+
+.nav{
+	padding: 0 5px;
+	margin-top: 2.5px;
+	height: 65px;
+	line-height: 65px;
+	text-align: center;
+	border-radius: 10%;
+	transition: background 300ms;
+	flex-basis: 30%;
+	cursor: pointer;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+a:hover {
+	color: black;
+}
+
+
+
+.nav:hover:not(.active){
+	background: rgba(24, 242, 162, 0.8);
+}
+
+.active{
+	background: #17d891;
+}
+
+
+.main{
+	padding-top: 175px;
+	width: 100%;
+	display: flex;
+	background: white;
+	flex-wrap: wrap;
+}
+
+.leader{
+	width: 100%;
+	height: 100px;
+	background: #e3e3e3;
+	border-radius: 10%;
+	margin: 0.5vh;
+	line-height: 100px;
+	padding-left: 2vw;
+}

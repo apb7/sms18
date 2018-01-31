@@ -1,4 +1,19 @@
 <h1>Hello World!</h1>
 <p>Welcome to the home page of SMS 18!</p>
 {% load socialaccount %}
-<a href="{% provider_login_url "google" method="oauth2" %}">Google OAuth2</a>
+<a href="{% provider_login_url 'google' method='oauth2' %}">Google OAuth2</a>
+<form method="POST" action="/register">
+	{% csrf_token %}
+	Register
+	<input type="text" name="username" placeholder="username" />
+	<input type="text" name="email" placeholder="email" />
+	<input type="password" name="password" placeholder="password" />
+	<input type="submit" />
+</form><br><br>
+<form method="POST" action="/login">
+	{% csrf_token %}
+	Login
+	<input type="text" name="username" placeholder="username" />
+	<input type="password" name="password" placeholder="password" />
+	<input type="submit" />
+</form>

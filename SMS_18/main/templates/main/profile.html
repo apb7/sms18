@@ -1,0 +1,39 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Profile</title>
+	<meta charset="utf-8" name="viewport" content=" width = device-width, initial-scale = 1.0">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/css/profile.css' %}">
+	<script type="text/javascript" src="{% static 'main/js/userDetails.js' %}"></script>
+	<script type="text/javascript" src="{% static 'main/js/profile.js' %}"></script>
+</head>
+<body>
+
+	<div class="container">
+			<div class="header">
+			<div class="profile">
+				<div class="user" id="userName"></div>
+				<div class="user">Balance: &#8377 <span id="userBalance"></span></div>
+			</div>
+			<a href="{% url 'main:logout' %}">Logout</a>
+			<div class="navbar">
+				<div class="nav active"> <a href="{% url 'main:profile' %}"><span>PROFILE</span></a> </div>
+				<div class="nav"> <a href="{% url 'main:game' %}"><span>HOME</span></a> </div>
+				<div class="nav"> <a href="{% url 'main:leaderboard' %}"><span>LEADERBOARD</span></a> </div>
+			</div>
+			</div>
+		<div class="main">
+
+			<div class="stock">
+					<div class="profile-details">Stock Name</div>
+					<div class="profile-details">Stocks Owned</div>
+					<div class="profile-details"> Price per Stock </div>
+					<div class="profile-details"> Total price </div>
+
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
