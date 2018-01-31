@@ -28,9 +28,6 @@ xhttp2.onreadystatechange = function() {
 	if (this.readyState == 4 && this.status == 200){
 		var data = JSON.parse(this.responseText);
 		remainingBalance = data.user_balance;
-		document.getElementById("number").value = number;
-		amount = costPerStock * number;
-		document.getElementById('amount').value  = amount;
 		document.getElementsByClassName("balance")[0].innerHTML = "&#8377" + " " + remainingBalance;
 	}
 }
