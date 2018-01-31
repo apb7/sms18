@@ -1,13 +1,13 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Leaderboard</title>
-<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
-
-<link rel="stylesheet" type="text/css" href="../../static/main/css/leaderboard.css">
-<script src="../../static/main/js/userDetails.js"></script>
-
+	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+	<link rel="stylesheet" type="text/css" href="{% static 'main/css/leaderboard.css' %}">
+	<script type="text/javascript" src="{% static 'main/js/userDetails.js' %}"></script>
+	<script type="text/javascript" src="{% static 'main/js/leaderboard.js' %}"></script>
 </head>
 <body>
 	<div class="container">
@@ -17,16 +17,13 @@
 				<div class="user">Balance: &#8377 <span id="userBalance"></span></div>
 			</div>
 			<div class="navbar">
-				<div class="nav"> <a href="/profile"><span>PROFILE</span></a> </div>
-				<div class="nav"> <a href="/game"><span>HOME</span></a> </div>
-				<div class="nav active"> <a href="#"><span>LEADERBOARD</span></a> </div>
+				<div class="nav"> <a href="{% url 'main:profile' %}"><span>PROFILE</span></a> </div>
+				<div class="nav"> <a href="{% url 'main:game' %}"><span>HOME</span></a> </div>
+				<div class="nav active"> <a href="{% url 'main:leaderboard' %}"><span>LEADERBOARD</span></a> </div>
 			</div>
 		</div>
 		<div class="main">
 		</div>
 	</div>
-
-<script src="../../static/main/js/leaderboard.js"></script>
-
 </body>
 </html>

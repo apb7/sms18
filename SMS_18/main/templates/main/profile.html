@@ -1,12 +1,13 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
+	<title>Profile</title>
 	<meta charset="utf-8" name="viewport" content=" width = device-width, initial-scale = 1.0">
-	<title></title>
-<link rel="stylesheet" type="text/css" href="../../static/main/css/profile.css">
+	<link rel="stylesheet" type="text/css" href="../../static/main/css/profile.css">
+	<script type="text/javascript" src="{% static 'main/js/userDetails.js' %}"></script>
+	<script type="text/javascript" src="{% static 'main/js/profile.js' %}"></script>
 </head>
-<script src="../../static/main/js/userDetails.js"></script>
-
 <body>
 
 	<div class="container">
@@ -15,10 +16,11 @@
 				<div class="user" id="userName"></div>
 				<div class="user">Balance: &#8377 <span id="userBalance"></span></div>
 			</div>
+			<a href="{% url 'main:logout' %}">Logout</a>
 			<div class="navbar">
-				<div class="nav active"> <a href="/profile"><span>PROFILE</span></a> </div>
-				<div class="nav"> <a href="/game"><span>HOME</span></a> </div>
-				<div class="nav"> <a href="/leaderboard"><span>LEADERBOARD</span></a> </div>
+				<div class="nav active"> <a href="{% url 'main:profile' %}"><span>PROFILE</span></a> </div>
+				<div class="nav"> <a href="{% url 'main:game' %}"><span>HOME</span></a> </div>
+				<div class="nav"> <a href="{% url 'main:leaderboard' %}"><span>LEADERBOARD</span></a> </div>
 			</div>
 			</div>
 		<div class="main">
@@ -32,8 +34,6 @@
 			</div>
 		</div>
 	</div>
-
-<script type="text/javascript" src="../../static/main/js/profile.js"></script>
 
 </body>
 </html>

@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, Http404 ,HttpResponseForbidden
 from .models import UserProfile, GameSwitch, Stock, StockPurchased
 from django.shortcuts import redirect, render_to_response
-from django.contrib.auth import authenticate, login, logout as django_logout
+from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from django.contrib import auth
 from django.db import IntegrityError
 from django.contrib.auth.models import User
@@ -15,37 +15,52 @@ from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
 
 def index(request):#just a render view
-    return render(request, 'main/index.html' )
+    return redirect('auth:form')
 
 def game(request):#just a render view
-    return render(request, 'main/gamepage.html' )
+    return render(request, 'main/gamepage.html')
 
 def leaderboard(request):#just a render view
     return render(request, 'main/leaderboard.html')
 
 def buy(request, id):#just a render view
-    return render(request, 'main/buy.html')
+    return render(request, 'main/buy.html', {'id':id})
 
 def sell(request, id):#just a render view
-    return render(request, 'main/sell.html')
+    return render(request, 'main/sell.html', {'id':id})
 
 def profile(request):#just a render view
     return render(request, 'main/profile.html')
 
-def register(request):#just a render view
+def register(request):
     if request.method == 'POST':
         data = request.POST
         try:
             obj = User.objects.get(username=data['username'])
-            return redirect('form')
+            return redirect('main:index')
         except User.DoesNotExist:
             user = User.objects.create_user(data['username'], data['email'], data['password'])
             user.save()
             userProf = UserProfile.objects.create(user=user, name=data['username'], balance=100)
             userProf.save()
-            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-            return redirect('/game')
+            django_login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+            return redirect('main:game')
+    return redirect('main:index')
 
+def login(request):
+    if request.method == 'POST':
+        data = request.POST
+        user = authenticate(username=data['username'], password=data['password'])
+        django_login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+        if user is None:
+            return redirect('main:index')
+        else:
+            return redirect('main:game')
+    return redirect('main:index')
+
+def logout(request):
+    django_logout(request)
+    return redirect('main:index')
 
 
 def createProfile(request):
@@ -53,7 +68,7 @@ def createProfile(request):
         userProf = UserProfile.objects.get(user=request.user)
     except:
         userProf = UserProfile.objects.create(user=request.user, name=request.user.username, balance=100)
-    return redirect('/game')
+    return redirect('main:game')
 
 
 
@@ -78,7 +93,7 @@ def BuyStocks(request, id):
 
         current_stock.number_of_stocks += int(data['units'])
         current_stock.save()
-        return redirect('/game')
+        return redirect('main:game')
 
 
 
@@ -101,7 +116,7 @@ def SellStocks(request, id):
             current_stock.delete()
         else:
             current_stock.save()
-        return redirect('/game')
+        return redirect('main:game')
 
 
 

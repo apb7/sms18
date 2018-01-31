@@ -8,9 +8,6 @@ var number = 0;
 var amount = 0;
 
 var urls = window.location.href.split("/");
-var idnum = urls[urls.length-1];
-document.getElementById("form").action += idnum;
-
 
 var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function() {
@@ -22,7 +19,7 @@ xhttp.onreadystatechange = function() {
 		if(urls[urls.length-2] == "sell") document.getElementById("stocksOwned").innerHTML = data.num;
 	}
 }
-xhttp.open('GET',url+idnum, true);
+xhttp.open('GET',url+urls[urls.length-1], true);
 xhttp.send();
 
 
