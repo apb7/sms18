@@ -16,13 +16,19 @@
 		</div>
 	</div>
 
-	<div class="nav-bar">
-		<div class=""><a href="/"> Home </a></div>
-		<div class=""> Profile </div>
-		<div class=""> Leaderboard </div>
+	<div class="navbar">
+		<div class="nav"> <a href="/profile"><span>PROFILE</span></a> </div>
+		<div class="nav"> <a href="/game"><span>HOME</span></a> </div>
+		<div class="nav"> <a href="/leaderboard"><span>LEADERBOARD</span></a> </div>
 	</div>
 
 	<form class="buy-stocks" method="POST" action="/buystocks/" id="form">
+		
+		<div class="stock-buy">
+			<div> Number of Stocks Owned </div>
+			<div class="stocksOwned" id="stocksOwned"> </div>
+		</div>
+
 		<div class="stock-buy">
 			<div class=""> Stocks to buy </div>
 
@@ -30,7 +36,7 @@
 
         		<div class="minus" onclick="minusClick()"> - </div>
         		<div class="number"> <input type="text" id="number" name="units"></div>
-        		<div class="plus" onclick="plusClick()"> + </div>
+        		<div class="plus" onclick="plusClick()">  + </div>
 
  			</div>
 
@@ -47,8 +53,8 @@
 		</div>
 
 		<div class="submit-btn">
-			<input type="Submit">
-			<button class="btn btn-primary btn-block"> Confirm </button>
+			<button class="btn btn-primary btn-block" type="Submit"> Buy! </button>
+			<!-- <button class="btn btn-primary btn-block"> Confirm </button> -->
 		</div>
 
 	</form>

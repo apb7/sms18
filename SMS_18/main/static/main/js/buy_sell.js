@@ -35,6 +35,7 @@ xhttp2.onreadystatechange = function() {
 		amount = costPerStock * number;
 		document.getElementById('amount').value  = amount;
 		document.getElementsByClassName("balance")[0].innerHTML = "&#8377" + " " + remainingBalance;
+		if(urls[urls.length-2] == "buy") document.getElementById("stocksOwned").innerHTML = data.num;
 	}
 }
 xhttp2.open('GET',url2, true);
