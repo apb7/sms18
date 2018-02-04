@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.urlresolvers import reverse
 from django.shortcuts import render
-from django.http import HttpResponse, Http404 ,HttpResponseForbidden
+from django.http import HttpResponse, Http404 ,HttpResponseForbidden, HttpResponseRedirect
 from .models import UserProfile, GameSwitch, Stock, StockPurchased
 from django.shortcuts import redirect, render_to_response
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
@@ -105,18 +105,32 @@ def SellStocks(request, id):
         }
         return HttpResponse(json.dumps(resp), content_type = "application/json")
     current_user = UserProfile.objects.get(user = request.user)
-    if request.method == 'POST':
+    stock_info = Stock.objects.get(id=id)
+    try:
+        current_stock = StockPurchased.objects.get(owner=current_user.id, stockid=stock_info)
+    except StockPurchased.DoesNotExist:
+        current_stock = None
+
+    if request.method == 'POST' and current_stock is not None:
         data = request.POST
         stock_info = Stock.objects.get(id=id)
         current_user.balance += int(data['units'])*stock_info.stock_price
         current_user.save()
-        current_stock = StockPurchased.objects.get(owner=current_user.id, stockid=stock_info)
+        #current_stock = StockPurchased.objects.get(owner=current_user.id, stockid=stock_info)
         current_stock.number_of_stocks -= int(data['units'])
         if current_stock.number_of_stocks is 0:
-            current_stock.delete()
+               current_stock.delete()
         else:
             current_stock.save()
         return redirect('main:game')
+
+    elif request.method == 'POST' and current_stock is None:
+        resp={
+            'you donot have any stocks to sell'
+        }
+        return HttpResponse(resp)
+
+
 
 
 
