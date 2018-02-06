@@ -76,15 +76,17 @@ body {
 	text-align: center;
 	border-radius: 10%;
 	transition: background 300ms;
-	flex-basis: 30%;
+	/*flex-basis: 30%;*/
 	cursor: pointer;
 }
 
-.nav a {
+
+.navbar a {
 	text-decoration: none;
 	color: black;
+	flex-basis: 30%;
 }
-.nav a:hover {
+.navbar a:hover {
 	color: black;
 	text-decoration: none;
 }
@@ -108,7 +110,7 @@ body {
 	display: flex;
 	flex-direction: row;
 	background-color: #f4f4f4;
-	border-radius: 10%;
+	border-radius: 15px;
 	margin: 1vh 0;
 	padding: 0 1vh;
 }
@@ -129,13 +131,15 @@ body {
 
 .counter {
 	background: white;
-	border-radius: 10%;
+	border-radius: 15px;
 	height: 5vh;
 	margin: auto;
 	width: 6vw;
 	display: flex;
 	position: relative;
+
 }
+
 
 .minus {
 	flex: 1;
@@ -154,11 +158,19 @@ body {
 	position: absolute;
 }
 
+.number input {
+	width: 50px;	
+}
+
 .plus {
-	color: green;
 	position: absolute;
+	color: green;
 	left: 140px;
 	top: -26px;
 	font-size: 40px;
 	cursor: pointer;
+}
+
+.amount input {
+	width: 100px;
 }
