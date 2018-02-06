@@ -79,7 +79,8 @@ def register(request):
             user.save()
             userProf = UserProfile.objects.create(user=user, name=data['username'], balance=100)
             userProf.save()
-            django_login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+            user.backend = 'django.contrib.auth.backends.ModelBackend'
+            django_login(request,user)
             return redirect('main:game')
     return redirect('main:index')
 
@@ -87,7 +88,7 @@ def login(request):
     if request.method == 'POST':
         data = request.POST
         user = authenticate(username=data['username'], password=data['password'])
-        django_login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+        django_login(request,user)
         if user is None:
             return redirect('main:index')
         else:

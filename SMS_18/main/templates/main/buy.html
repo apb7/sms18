@@ -7,6 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'main/css/buy-style.css' %}">
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script type="text/javascript" src="{% static 'main/js/buy_sell.js' %}"></script>
+	<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
 </head>
 <body>
 
@@ -20,8 +21,8 @@
 
 
 	<div class="navbar">
-		<a href="{% url 'main:profile' %}"> <div class="nav"><span>PROFILE</span> </div> </a>
-		<a href="{% url 'main:game' %}"><div class="nav "><span>HOME</span> </div> </a>
+		<a href="{% url 'main:profile' %}"> <div class="nav"><span>PORTFOLIO</span> </div> </a>
+		<a href="{% url 'main:game' %}"><div class="nav "><span>MARKET</span> </div> </a>
 		<a href="{% url 'main:leaderboard' %}"><div class="nav"><span>LEADERBOARD</span> </div> </a>
 	</div>
 
@@ -38,7 +39,7 @@
 			<div class="counter">
 
         		<div class="minus" onclick="minusClick()">-</div>
-        		<div class="number"> <input type="text" id="number" name="units" value=0></div>
+        		<div class="number"> <input type="number" id="number" name="units" value=0></div>
         		<div class="plus" onclick="plusClick()">+</div>
 
 

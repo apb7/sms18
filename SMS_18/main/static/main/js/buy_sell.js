@@ -16,7 +16,7 @@ xhttp.onreadystatechange = function() {
 		costPerStock = data.price;
 		document.getElementById("stockName").innerHTML = data.name;
 		document.getElementById("stockPrice").innerHTML = "&#8377" + " " + costPerStock;
-		if(urls[urls.length-2] == "sell") document.getElementById("stocksOwned").innerHTML = data.num;
+		document.getElementById("stocksOwned").innerHTML = data.num;
 	}
 }
 xhttp.open('GET',url+urls[urls.length-1], true);
@@ -29,7 +29,6 @@ xhttp2.onreadystatechange = function() {
 		var data = JSON.parse(this.responseText);
 		remainingBalance = data.user_balance;
 		document.getElementsByClassName("balance")[0].innerHTML = "&#8377" + " " + remainingBalance;
-		if(urls[urls.length-2] == "buy") document.getElementById("stocksOwned").innerHTML = data.num;
 	}
 }
 xhttp2.open('GET',url2, true);

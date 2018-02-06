@@ -2,6 +2,7 @@ body{
 	margin: 0;
 	padding: 0;
 	background-color: #e3e3e3;
+	font-family: 'Montserrat';
 }
 
 .header{
@@ -10,6 +11,7 @@ body{
 	height: 175px;
 	display: flex;
 	z-index: 2;
+	color: white;
 }
 
 .profile{
@@ -23,9 +25,10 @@ body{
 	top: 100px;
 	width: 100%;
 	height: 75px;
-	background: #a0f7d7;
+	background: #E1F5FE;
 	display: flex;
 	justify-content: space-around;
+	font-size: 14px;
 }
 
 .user{
@@ -35,18 +38,18 @@ body{
 	background: white;
 	text-align: center;
 	line-height: 100px;
-	background: #17d891;
-	flex-basis: 33%;
+	background: #0091EA;
+	flex-basis: 34%;
 }
 
 .user a {
 	text-decoration: none;
 	cursor: pointer;
-	color: black;
+	color: white;
 }
 .user a:hover {
 	text-decoration: none;
-	color: red;
+	color: #e3e3e3;
 }
 
 
@@ -74,11 +77,11 @@ body{
 }
 
 .nav:hover:not(.active){
-	background: rgba(24, 242, 162, 0.8);
+	background: rgba(0, 176, 255, 0.5);
 }
 
 .active{
-	background: #17d891;
+	background: #00B0FF;;
 }
 
 .main{
@@ -86,27 +89,29 @@ body{
 	top: 175px;
 	width: 100%;
 	/*height: 100%;*/
-	background: white;
+	background: #e3e3e3;
 	height: 100%;
-
-
+	font-size: 2vh;
 }
 
 .stock {
-	height: 100px;
-	background: #e3e3e3;
-	border-radius: 15px;
+	height: 15vh;
+	background: #ffffff;
+	border-radius: 0px;
 	margin: 0.5vh 0;
-	line-height: 100px;
+	line-height: 15vh;
 	transition: height 300ms;
 	display: flex;
 	justify-content: space-around;
 	text-align: center;
+	overflow: hidden;
+	max-width: 1200px;
+	margin: 1vh auto;
 }
 
 .profile-details {
 	flex-basis: 25%;
-	height: 100px;
+	height: 15vh;
 }
 
 

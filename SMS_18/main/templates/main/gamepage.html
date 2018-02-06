@@ -7,24 +7,27 @@
 	<link rel="stylesheet" type="text/css" href="../../static/main/css/home.css">
 	<script type="text/javascript" src="{% static 'main/js/stockDetails.js' %}"></script>
 	<script type="text/javascript" src="{% static 'main/js/userDetails.js' %}"></script>
+	<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
 </head>
 <body>
 	<div class="container">
 			<div class="header">
-			<div class="profile">
-				<div class="user" id="userName"></div>
-				<div class="user">Balance: &#8377 <span  id="userBalance"></span></div>
-			</div>
-			<div class="navbar">
+				<!-- <div class="title"> <span> STOCK MARKET SIMULATION </span> </div> -->
+				<div class="profile">
+					<div class="user" id="userName"></div>
+					<div class="user">Balance: &#8377 <span  id="userBalance"></span></div>
+				</div>
+				<div class="navbar">
 
-				<a href="{% url 'main:profile' %}"> <div class="nav"><span>PROFILE</span> </div> </a>
-		    <a href="{% url 'main:game' %}"><div class="nav active"><span>HOME</span> </div> </a>
-	    	<a href="{% url 'main:leaderboard' %}"><div class="nav"><span>LEADERBOARD</span> </div> </a>
+					<a href="{% url 'main:profile' %}"> <div class="nav"><span>PORTFOLIO</span> </div> </a>
+		  			<a href="{% url 'main:game' %}"><div class="nav active"><span>MARKET</span> </div> </a>
+	    			<a href="{% url 'main:leaderboard' %}"><div class="nav"><span>LEADERBOARD</span> </div> </a>
 
-			</div>
+				</div>
 			</div>
 		<div class="main">
 		</div>
+
 	</div>
 
 </body>

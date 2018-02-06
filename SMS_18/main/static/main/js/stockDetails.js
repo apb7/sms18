@@ -6,7 +6,7 @@ xhttp.onreadystatechange = function() {
 	if (this.readyState == 4 && this.status == 200){
 		var data = JSON.parse(this.responseText);
 		for (var i = 0; i < data.length; i++) {
-			document.getElementsByClassName('main')[0].innerHTML += '<div class="stock"><div class="shown"><div class="name" id="stockName">'+data[i].name+'</div><div class="price">&#8377 '+data[i].price+'</div></div><div class="hidden">					<div class="buy"><a href="/buy/'+data[i].id+'"><button>BUY</button></a></div><div class="sell"><a href="/sell/'+data[i].id+'"><button class="button">SELL</button></a></div></div></div>';
+			document.getElementsByClassName('main')[0].innerHTML += '<div class="stock"><div class="shown"><div class="name" id="stockName">'+data[i].name+'</div><div class="price">&#8377 '+data[i].price+'</div></div><div class="hidden"><div class="buy"><a href="/buy/'+data[i].id+'"><button>BUY</button></a></div><div class="sell"><a href="/sell/'+data[i].id+'"><button class="button">SELL</button></a></div></div></div>';
 		}
 		var j=0;
 		while (j<=data.length){
