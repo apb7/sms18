@@ -8,9 +8,6 @@ var number = 0;
 var amount = 0;
 
 var urls = window.location.href.split("/");
-var idnum = urls[urls.length-1];
-document.getElementById("form").action += idnum;
-
 
 var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function() {
@@ -22,7 +19,7 @@ xhttp.onreadystatechange = function() {
 		if(urls[urls.length-2] == "sell") document.getElementById("stocksOwned").innerHTML = data.num;
 	}
 }
-xhttp.open('GET',url+idnum, true);
+xhttp.open('GET',url+urls[urls.length-1], true);
 xhttp.send();
 
 
@@ -31,9 +28,6 @@ xhttp2.onreadystatechange = function() {
 	if (this.readyState == 4 && this.status == 200){
 		var data = JSON.parse(this.responseText);
 		remainingBalance = data.user_balance;
-		document.getElementById("number").value = number;
-		amount = costPerStock * number;
-		document.getElementById('amount').value  = amount;
 		document.getElementsByClassName("balance")[0].innerHTML = "&#8377" + " " + remainingBalance;
 		if(urls[urls.length-2] == "buy") document.getElementById("stocksOwned").innerHTML = data.num;
 	}
