@@ -15,6 +15,7 @@ body{
 .profile{
 	height: 100px;
 	width: 100%;
+	display: flex;
 }
 
 .navbar{
@@ -30,12 +31,25 @@ body{
 .user{
 	height: 100px;
 	width: 50%;
-	float: left;
+	/*float: left;*/
 	background: white;
 	text-align: center;
 	line-height: 100px;
 	background: #17d891;
+	flex-basis: 33%;
 }
+
+.user a {
+	text-decoration: none;
+	cursor: pointer;
+	color: black;
+}
+.user a:hover {
+	text-decoration: none;
+	color: red;
+}
+
+
 
 .nav{
 	padding: 0 5px;
@@ -71,8 +85,10 @@ body{
 	position: absolute;
 	top: 175px;
 	width: 100%;
-	height: 100%;
+	/*height: 100%;*/
 	background: white;
+	height: 100%;
+
 
 }
 
@@ -90,6 +106,7 @@ body{
 
 .profile-details {
 	flex-basis: 25%;
+	height: 100px;
 }
 
 
