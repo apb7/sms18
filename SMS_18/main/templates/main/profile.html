@@ -12,26 +12,26 @@
 
 	<div class="container">
 			<div class="header">
-			<div class="profile">
-				<div class="user" id="userName"></div>
-				<div class="user">Balance: &#8377 <span id="userBalance"></span></div>
-			</div>
-			<a href="{% url 'main:logout' %}">Logout</a>
-			<div class="navbar">
+				<div class="profile">
+					<div class="user" id="userName"></div>
+					<div class="user">Balance: &#8377 <span id="userBalance"></span></div>
+					<div class="user"> <a href="{% url 'main:logout' %}">Logout</a> </div>
+				</div>
+				<div class="navbar">
 
-		    <a href="{% url 'main:profile' %}"> <div class="nav"><span>PROFILE</span> </div> </a>
-		    <a href="{% url 'main:game' %}"><div class="nav active"><span>HOME</span> </div> </a>
-		    <a href="{% url 'main:leaderboard' %}"><div class="nav"><span>LEADERBOARD</span> </div> </a>
-
+		    		<a href="{% url 'main:profile' %}"> <div class="nav active"><span>PROFILE</span> </div> </a>
+		    		<a href="{% url 'main:game' %}"><div class="nav"><span>HOME</span> </div> </a>
+		    		<a href="{% url 'main:leaderboard' %}"><div class="nav"><span>LEADERBOARD</span> </div> </a>
+		    	</div>
 		
 			</div>
 		<div class="main">
 
 			<div class="stock">
-					<div class="profile-details">Stock Name</div>
-					<div class="profile-details">Stocks Owned</div>
-					<div class="profile-details"> Price per Stock </div>
-					<div class="profile-details"> Total price </div>
+					<div class="profile-details">STOCK NAME</div>
+					<div class="profile-details">STOCKS OWNED</div>
+					<div class="profile-details">PRICE PER STOCK</div>
+					<div class="profile-details">TOTAL PRICE</div>
 
 			</div>
 		</div>
