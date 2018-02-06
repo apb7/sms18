@@ -96,6 +96,7 @@ body{
 	justify-content: space-around;
 	max-width: 1200px;
 	margin: 1vh auto;
+	box-shadow: 2px 2px 2px 2px #9e9e9e;
 }
 
 .leader, .balance {

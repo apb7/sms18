@@ -86,7 +86,7 @@ body{
 
 .stock{
 	width: 100%;
-	height: 10vh;
+	height: 100%;
 	background: white;
 	/*border-radius: 15px;*/
 	margin: 1vh auto;
@@ -94,6 +94,7 @@ body{
 	transition: height 300ms;
 	overflow: hidden;
 	max-width: 1250px;
+	box-shadow: 2px 2px 2px 2px #9e9e9e;
 }
 
 .stock.show{
@@ -159,6 +160,10 @@ button {
 	opacity: 0.5;
 }
 
+
+.stock .formBuy, .stock .formSell {
+	display: none;
+}
 
 @media all and (max-width: 1500px) {
 	

@@ -3,6 +3,7 @@
 <html>
 <head>
 	<title>Stock Market Stimulation</title>
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" type="text/css" href="../../static/main/css/home.css">
 	<script type="text/javascript" src="{% static 'main/js/stockDetails.js' %}"></script>
@@ -26,6 +27,23 @@
 				</div>
 			</div>
 		<div class="main">
+			<div class="stock">
+				<div class="shown">
+					<div class="name" id="stockName">'+data[i].name+'</div>
+					<div class="price">&#8377 '+data[i].price+'</div>
+				</div><div class="hidden">
+					<div class="buy"><!-- <a href="/buy/'+data[i].id+'"> --><button onclick="openBuy()">BUY</button><!-- </a> --></div>
+					<div class="formBuy">
+						<div class=""> <span> Enter Stocks to buy </span> <input type="number" name="buyNum"> </div>
+						<div class=""> <button class="btn btn-primary btn-block">Buy</button> </div>
+					</div>
+					<div class="formSell">
+						<div class=""><span> Enter Stocks to Sell </span> <input type="number" name="sellNum"> </div>
+						<div class=""> <button class="btn btn-primary btn-block"> Sell </button> </div>
+					</div>
+					<div class="sell"><!-- <a href="/sell/'+data[i].id+'"> --><button class="button" onclick="openSell()">SELL</button><!-- </a> --></div>
+				</div>
+			</div>
 		</div>
 
 	</div>

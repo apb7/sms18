@@ -8,7 +8,7 @@ password : smsadmin
 * Design and implement the algo.
 * hamburger menu
 * buy-sell cards incorporated in market tab
-* make a table table for portfolio
+* make a table for portfolio
 * improve card design
 * responsive profile tab and buy-sell button
 * adding increase/decrease button
