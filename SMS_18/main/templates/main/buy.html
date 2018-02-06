@@ -18,21 +18,29 @@
 		</div>
 	</div>
 
-	<div class="nav-bar">
-		<div class=""><a href="{% url 'main:game' %}"> Home </a></div>
-		<div class=""><a href="{% url 'main:profile' %}"> Profile </a></div>
-		<div class=""><a href="{% url 'main:leaderboard' %}"> Leaderboard </a></div>
+
+	<div class="navbar">
+		<a href="{% url 'main:profile' %}"> <div class="nav"><span>PROFILE</span> </div> </a>
+		<a href="{% url 'main:game' %}"><div class="nav "><span>HOME</span> </div> </a>
+		<a href="{% url 'main:leaderboard' %}"><div class="nav"><span>LEADERBOARD</span> </div> </a>
 	</div>
 
 	<form class="buy-stocks" method="POST" action="{% url 'main:BuyStocks' id=id %}" id="form">
+		
+		<div class="stock-buy">
+			<div> Number of Stocks Owned </div>
+			<div class="stocksOwned" id="stocksOwned"> </div>
+		</div>
+
 		<div class="stock-buy">
 			<div class=""> Stocks to buy </div>
 
 			<div class="counter">
 
-        		<div class="minus" onclick="minusClick()"> - </div>
+        		<div class="minus" onclick="minusClick()">-</div>
         		<div class="number"> <input type="text" id="number" name="units" value=0></div>
-        		<div class="plus" onclick="plusClick()"> + </div>
+        		<div class="plus" onclick="plusClick()">+</div>
+
 
  			</div>
 
@@ -49,8 +57,8 @@
 		</div>
 
 		<div class="submit-btn">
-			<input type="Submit">
-			<button class="btn btn-primary btn-block"> Confirm </button>
+			<button class="btn btn-primary btn-block" type="Submit"> Buy! </button>
+			<!-- <button class="btn btn-primary btn-block"> Confirm </button> -->
 		</div>
 
 	</form>

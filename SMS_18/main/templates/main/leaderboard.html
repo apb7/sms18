@@ -17,9 +17,11 @@
 				<div class="user">Balance: &#8377 <span id="userBalance"></span></div>
 			</div>
 			<div class="navbar">
-				<div class="nav"> <a href="{% url 'main:profile' %}"><span>PROFILE</span></a> </div>
-				<div class="nav"> <a href="{% url 'main:game' %}"><span>HOME</span></a> </div>
-				<div class="nav active"> <a href="{% url 'main:leaderboard' %}"><span>LEADERBOARD</span></a> </div>
+
+				<a href="{% url 'main:profile' %}"> <div class="nav"><span>PROFILE</span> </div> </a>
+		    <a href="{% url 'main:game' %}"><div class="nav"><span>HOME</span> </div> </a>
+		    <a href="{% url 'main:leaderboard' %}"><div class="nav active"> <span>LEADERBOARD</span> </div> </a>
+
 			</div>
 		</div>
 		<div class="main">

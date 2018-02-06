@@ -18,10 +18,10 @@
 		</div>
 	</div>
 
-	<div class="nav-bar">
-		<div class=""><a href="{% url 'main:game' %}"> Home </a></div>
-		<div class=""><a href="{% url 'main:profile' %}"> Profile </a></div>
-		<div class=""><a href="{% url 'main:leaderboard' %}"> Leaderboard </a></div>
+	<div class="navbar">
+		<a href="{% url 'main:profile' %}"> <div class="nav"><span>PROFILE</span> </div> </a>
+		<a href="{% url 'main:game' %}"><div class="nav "><span>HOME</span> </div> </a>
+		<a href="{% url 'main:leaderboard' %}"><div class="nav"><span>LEADERBOARD</span> </div> </a>
 	</div>
 
 	<form class="buy-stocks" method="POST" action="{% url 'main:SellStocks' id=id %}" id="form">
@@ -54,8 +54,8 @@
 		</div>
 
 		<div class="submit-btn">
-			<input type="Submit">
-			<button class="btn btn-primary btn-block"> Confirm </button>
+			<button class="btn btn-primary btn-block" type="Submit"> Sell </button>
+			<!-- <button class="btn btn-primary btn-block"> Confirm </button> -->
 		</div>
 
 	</form>

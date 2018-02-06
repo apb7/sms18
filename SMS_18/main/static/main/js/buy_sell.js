@@ -29,6 +29,7 @@ xhttp2.onreadystatechange = function() {
 		var data = JSON.parse(this.responseText);
 		remainingBalance = data.user_balance;
 		document.getElementsByClassName("balance")[0].innerHTML = "&#8377" + " " + remainingBalance;
+		if(urls[urls.length-2] == "buy") document.getElementById("stocksOwned").innerHTML = data.num;
 	}
 }
 xhttp2.open('GET',url2, true);

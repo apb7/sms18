@@ -18,10 +18,12 @@
 			</div>
 			<a href="{% url 'main:logout' %}">Logout</a>
 			<div class="navbar">
-				<div class="nav active"> <a href="{% url 'main:profile' %}"><span>PROFILE</span></a> </div>
-				<div class="nav"> <a href="{% url 'main:game' %}"><span>HOME</span></a> </div>
-				<div class="nav"> <a href="{% url 'main:leaderboard' %}"><span>LEADERBOARD</span></a> </div>
-			</div>
+
+		    <a href="{% url 'main:profile' %}"> <div class="nav"><span>PROFILE</span> </div> </a>
+		    <a href="{% url 'main:game' %}"><div class="nav active"><span>HOME</span> </div> </a>
+		    <a href="{% url 'main:leaderboard' %}"><div class="nav"><span>LEADERBOARD</span> </div> </a>
+
+		
 			</div>
 		<div class="main">
 

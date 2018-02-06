@@ -43,18 +43,20 @@ body{
 	height: 65px;
 	line-height: 65px;
 	text-align: center;
-	border-radius: 10%;
+	border-radius: 15px;
 	transition: background 300ms;
 	flex-basis: 30%;
 	cursor: pointer;
 }
 
-.nav a {
+.navbar a {
 	text-decoration: none;
 	color: black;
+	flex-basis: 30%;
 }
-.nav a:hover {
+.navbar a:hover {
 	color: black;
+	text-decoration: none;
 }
 
 .nav:hover:not(.active){
@@ -77,8 +79,8 @@ body{
 .stock {
 	height: 100px;
 	background: #e3e3e3;
-	border-radius: 10%;
-	margin: 0.5vh;
+	border-radius: 15px;
+	margin: 0.5vh 0;
 	line-height: 100px;
 	transition: height 300ms;
 	display: flex;
