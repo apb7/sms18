@@ -8,14 +8,24 @@ xhttp.onreadystatechange = function() {
 		for (var i = 0; i < data.length; i++) {
 			document.getElementsByClassName('main')[0].innerHTML += '<div class="stock"><div class="shown"><div class="name" id="stockName">'+data[i].name+'</div><div class="price">&#8377 '+data[i].price+'</div></div><div class="hidden"><div class="buy"><a href="/buy/'+data[i].id+'"><button>BUY</button></a></div><div class="sell"><a href="/sell/'+data[i].id+'"><button class="button">SELL</button></a></div></div></div>';
 		}
-		var j=0;
+		/*var j=0;
 		while (j<=data.length){
 		document.getElementsByClassName("stock")[j].addEventListener("click", function(){
 			this.classList.toggle("show");
 		});
 		j=j+1;
-		}
+		}*/
 	}
+}
+
+function openBuy() {
+	document.getElementsByClassName("formBuy")[0].style.display = "block";
+	console.log("opened");
+}
+
+function openSell() {
+	document.getElementsByClassName("formSell")[0].style.display = "block";
+	console.log("opened");
 }
 
 xhttp.open('GET',url, true);
