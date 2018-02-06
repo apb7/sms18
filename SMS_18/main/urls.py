@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+    url(r'^test$', views.test, name='test'),
     url(r'^game$', views.game , name='game'),
     url(r'^buystocks/(?P<id>\d+)$', views.BuyStocks , name='BuyStocks'),
 	url(r'^buy/(?P<id>\d+)$', views.buy, name='buy'),

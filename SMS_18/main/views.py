@@ -13,9 +13,15 @@ import json
 from .forms import TransactionForm
 from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
+from algoscript import algo
+
 
 def index(request):#just a render view
     return redirect('auth:form')
+
+def test(request):
+	algo()
+	return HttpResponse("Cool")
 
 def game(request):#just a render view
     return render(request, 'main/gamepage.html')
