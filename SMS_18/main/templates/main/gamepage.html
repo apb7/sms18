@@ -29,24 +29,102 @@
 		<div class="main">
 			<div class="stock">
 				<div class="shown">
-					<div class="name" id="stockName">'+data[i].name+'</div>
-					<div class="price">&#8377 '+data[i].price+'</div>
-				</div><div class="hidden">
-					<div class="buy"><!-- <a href="/buy/'+data[i].id+'"> --><button onclick="openBuy()">BUY</button><!-- </a> --></div>
-					<div class="formBuy">
-						<div class=""> <span> Enter Stocks to buy </span> <input type="number" name="buyNum"> </div>
-						<div class=""> <button class="btn btn-primary btn-block">Buy</button> </div>
-					</div>
-					<div class="formSell">
-						<div class=""><span> Enter Stocks to Sell </span> <input type="number" name="sellNum"> </div>
-						<div class=""> <button class="btn btn-primary btn-block"> Sell </button> </div>
-					</div>
-					<div class="sell"><!-- <a href="/sell/'+data[i].id+'"> --><button class="button" onclick="openSell()">SELL</button><!-- </a> --></div>
+					<div class="name" id="stockName">Stock Name</div>
+					<div class="price">&#8377 Stock Price</div>
+				</div>
+				<div class="hidden">
+					<div class="buy" id="myBtn"><!-- <a href="/buy/'+data[i].id+'"> --><button onclick="modalOpen()">BUY</button><!-- </a> --></div>
+					
+					<div class="sell" id="myBtn"><!-- <a href="/sell/'+data[i].id+'"> --><button class="button" onclick="modalOpenS()">SELL</button><!-- </a> --></div>
+
+					<!-- <div class=""> <button id="myBtn" onclick="modalOpen()">Open Modal</button> </div> -->
 				</div>
 			</div>
 		</div>
 
+
+	
+	
+
+				 <!-- The Modal -->
+		<div id="myModal" class="modal">
+
+		  <!-- Modal content -->
+		 	<div class="modal-content">
+			    <div class="modal-header">
+			      	<span class="close" id="close">&times;</span>
+			      	<h2>Buy!</h2>
+			    </div>
+			    <div class="modal-body">
+			      	<p>Enter stocks to buy</p>
+			      	<p><input type="number" name=""></p>
+			    </div>
+			    <div class="modal-footer">
+			    	<button class="myButton"> Confirm Purchase </button>
+			    </div>
+			</div>
+
+		</div>
+
+
+		<!-- The Modal -->
+		<div id="myModals" class="modal">
+
+		  <!-- Modal content -->
+		 	<div class="modal-content">
+			    <div class="modal-header">
+			      	<span class="close" id="closes">&times;</span>
+			      	<h2>Sell</h2>
+			    </div>
+			    <div class="modal-body">
+			      	<p>Enter stocks to Sell</p>
+			      	<p><input type="number" name=""></p>
+			    </div>
+			    <div class="modal-footer">
+			    	<button class="myButton"> Confirm Sell </button>
+			    </div>
+			</div>
+
+		</div>
+
+
+
 	</div>
+<script type="text/javascript">
+	// Get the modal
+	var modal = document.getElementById('myModal');
+	var modals = document.getElementById('myModals');
+	// Get the button that opens the modal
+	var btn = document.getElementById("myBtn");
+
+	// Get the <span> element that closes the modal
+	var span = document.getElementById("close");
+	var spans = document.getElementById("closes");
+	// When the user clicks the button, open the modal 
+	function modalOpen() {
+	    modal.style.display = "block";
+	}
+
+	function modalOpenS() {
+		modals.style.display = "block";
+	}
+
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() {
+	    modal.style.display = "none";
+	}
+	spans.onclick = function() {
+	    modals.style.display = "none";
+	}
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+	    if (event.target == modal || event.target == modals) {
+	        modal.style.display = "none";
+	        modals.style.display = "none";
+	    }
+	}
+</script>	
 
 </body>
 </html>

@@ -8,7 +8,7 @@ body{
 .header{
 	position: fixed;
 	width: 100%;
-	height: 175px;
+	height: 126px;
 	display: flex;
 	z-index: 2;
 	color: white;
@@ -19,25 +19,27 @@ body{
 	width: 100%;
 	display: flex;
 }
+.profile:nth-child(1) {
+	font-size: 15px;
+}
 
 .navbar{
 	position: absolute;
-	top: 100px;
+	top: 75px;
 	width: 100%;
-	height: 75px;
+	height: 51px;
 	background: #E1F5FE;
 	display: flex;
 	justify-content: space-around;
-	font-size: 14px;
 }
 
 .user{
-	height: 100px;
+	height: 75px;
 	width: 50%;
 	/*float: left;*/
 	background: white;
 	text-align: center;
-	line-height: 100px;
+	line-height: 75px;
 	background: #0091EA;
 	flex-basis: 34%;
 }
@@ -57,8 +59,8 @@ body{
 .nav{
 	padding: 0 5px;
 	margin-top: 2.5px;
-	height: 65px;
-	line-height: 65px;
+	height: 45px;
+	line-height: 45px;
 	text-align: center;
 	border-radius: 15px;
 	transition: background 300ms;
@@ -70,6 +72,7 @@ body{
 	text-decoration: none;
 	color: black;
 	flex-basis: 30%;
+	font-size: 11px;
 }
 .navbar a:hover {
 	color: black;
@@ -86,13 +89,17 @@ body{
 
 .main{
 	position: absolute;
-	top: 175px;
+	top: 126px;
 	width: 100%;
 	/*height: 100%;*/
 	background: #e3e3e3;
 	height: 100%;
-	font-size: 2vh;
+	font-size: 2.2vh;
 }
+
+/*.main:nth-child(1) {
+	height: 200px;
+}*/
 
 .stock {
 	height: 15vh;

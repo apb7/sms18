@@ -8,7 +8,7 @@ body{
 .header{
 	position: fixed;
 	width: 100%;
-	height: 175px;
+	height: 126px;
 	display: flex;
 	z-index: 2;
 	color: white;
@@ -28,29 +28,29 @@ body{
 
 .navbar{
 	position: absolute;
-	top: 100px;
+	top: 75px;
 	width: 100%;
-	height: 75px;
+	height: 51px;
 	background: #E1F5FE;
 	display: flex;
 	justify-content: space-around;
 }
 
 .user{
-	height: 100px;
+	height: 75px;
 	width: 50%;
 	float: left;
 	background: white;
 	text-align: center;
-	line-height: 100px;
+	line-height: 75px;
 	background: #0091EA;
 }
 
 .nav{
 	padding: 0 5px;
 	margin-top: 2.5px;
-	height: 65px;
-	line-height: 65px;
+	height: 45px;
+	line-height: 45px;
 	text-align: center;
 	border-radius: 15px;
 	transition: background 300ms;
@@ -63,7 +63,7 @@ body{
 	text-decoration: none;
 	color: black;
 	flex-basis: 30%;
-	font-size: 14px;
+	font-size: 11px;
 }
 .navbar a:hover {
 	color: black;
@@ -79,17 +79,17 @@ body{
 
 .main{
 	position: absolute;
-	top: 175px;
+	top: 126px;
 	width: 100%;
 	background: #e3e3e3;
 }
 
 .stock{
 	width: 100%;
-	height: 100%;
+	height: 10vh;
 	background: white;
 	/*border-radius: 15px;*/
-	margin: 1vh auto;
+	margin: 0.5vh auto;
 	line-height: 10vh;
 	transition: height 300ms;
 	overflow: hidden;
@@ -98,7 +98,7 @@ body{
 }
 
 .stock.show{
-	height: 200px;
+	height: 22vh;
 }
 
 .shown, .hidden{
@@ -161,10 +161,134 @@ button {
 }
 
 
-.stock .formBuy, .stock .formSell {
-	display: none;
+
+
+
+
+
+
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 100; /* Sit on top */
+    padding-top: 0px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-@media all and (max-width: 1500px) {
-	
+/* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: 0 auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    margin-top: 154px;
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0px; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0px; opacity:1}
+}
+
+/* The Close Button */
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #0288D1;
+    color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+    padding: 15px 16px;
+    background-color: #ffffff;
+    color: white;
+}
+
+#myModals .modal-header {
+	background: #FF1744;
+}
+
+.modalSubmit {
+	height: 100%;
+	padding: 5px 0px;
+	background: #0091EA;
+	color: white;
+	border-radius: 0;
+	box-shadow: 0;
+	border: none;
+}
+
+
+.myButton {
+	-moz-box-shadow:inset 0px 1px 0px 0px #54a3f7;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #54a3f7;
+	box-shadow:inset 0px 1px 0px 0px #54a3f7;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #007dc1), color-stop(1, #0061a7));
+	background:-moz-linear-gradient(top, #007dc1 5%, #0061a7 100%);
+	background:-webkit-linear-gradient(top, #007dc1 5%, #0061a7 100%);
+	background:-o-linear-gradient(top, #007dc1 5%, #0061a7 100%);
+	background:-ms-linear-gradient(top, #007dc1 5%, #0061a7 100%);
+	background:linear-gradient(to bottom, #007dc1 5%, #0061a7 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#007dc1', endColorstr='#0061a7',GradientType=0);
+	background-color:#007dc1;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	border-radius:3px;
+	border:1px solid #124d77;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-size:13px;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #154682;
+}
+.myButton:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #0061a7), color-stop(1, #007dc1));
+	background:-moz-linear-gradient(top, #0061a7 5%, #007dc1 100%);
+	background:-webkit-linear-gradient(top, #0061a7 5%, #007dc1 100%);
+	background:-o-linear-gradient(top, #0061a7 5%, #007dc1 100%);
+	background:-ms-linear-gradient(top, #0061a7 5%, #007dc1 100%);
+	background:linear-gradient(to bottom, #0061a7 5%, #007dc1 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#0061a7', endColorstr='#007dc1',GradientType=0);
+	background-color:#0061a7;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
 }
