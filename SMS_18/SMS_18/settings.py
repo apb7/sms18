@@ -129,8 +129,8 @@ SITE_ID = 1
 
 LOGIN_REDIRECT_URL = "/createProfile"
 
-#SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '302498660628-4chhqekh9ve5b41enkcms9t78rqmfl9e'
-#SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '99p3P4qfWsPuLQ9UlGyHomEc'
+#Google allauth Client ID = '342867399654-adle9emvldiheig8l2gt5atmku7m3fbb.apps.googleusercontent.com'
+#Google allauth Secret Key = 'Gaety92nolGsDtHvOHbgm7A5'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
