@@ -17,6 +17,11 @@ from algoscript import algo
 
 
 def index(request):#just a render view
+    if not request.user.is_authenticated():
+        resp={
+            'error':'The user is not registered yet.'
+        }
+        return HttpResponse(json.dumps(resp), content_type = "application/json")
     return redirect('auth:form')
 
 def test(request):
@@ -24,18 +29,43 @@ def test(request):
 	return HttpResponse("Cool")
 
 def game(request):#just a render view
+    if not request.user.is_authenticated():
+        resp={
+            'error':'The user is not registered yet.'
+        }
+        return HttpResponse(json.dumps(resp), content_type = "application/json")
     return render(request, 'main/gamepage.html')
 
 def leaderboard(request):#just a render view
+    if not request.user.is_authenticated():
+        resp={
+            'error':'The user is not registered yet.'
+        }
+        return HttpResponse(json.dumps(resp), content_type = "application/json")
     return render(request, 'main/leaderboard.html')
 
 def buy(request, id):#just a render view
+    if not request.user.is_authenticated():
+        resp={
+            'error':'The user is not registered yet.'
+        }
+        return HttpResponse(json.dumps(resp), content_type = "application/json")
     return render(request, 'main/buy.html', {'id':id})
 
 def sell(request, id):#just a render view
+    if not request.user.is_authenticated():
+        resp={
+            'error':'The user is not registered yet.'
+        }
+        return HttpResponse(json.dumps(resp), content_type = "application/json")
     return render(request, 'main/sell.html', {'id':id})
 
 def profile(request):#just a render view
+    if not request.user.is_authenticated():
+        resp={
+            'error':'The user is not registered yet.'
+        }
+        return HttpResponse(json.dumps(resp), content_type = "application/json")
     return render(request, 'main/profile.html')
 
 def register(request):
