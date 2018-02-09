@@ -109,6 +109,8 @@ def createProfile(request):
 
 
 ### (apb7, priyankjairaj100): Do not change these view functions.
+
+# TODO(priyankjairaj100): Implement a check on balance (>=0)
 @csrf_exempt
 def BuyStocks(request, id):
     if not request.user.is_authenticated():
@@ -154,29 +156,35 @@ def SellStocks(request, id):
     if request.method == 'POST' and current_stock is not None:
         data = request.POST
         stock_info = Stock.objects.get(id=id)
-        current_user.balance += int(data['units'])*stock_info.stock_price
-        current_user.save()
-        #current_stock = StockPurchased.objects.get(owner=current_user.id, stockid=stock_info)
-        current_stock.number_of_stocks -= int(data['units'])
-        if current_stock.number_of_stocks is 0:
-               current_stock.delete()
+        if current_stock.number_of_stocks >= int(data['units']):
+            current_user.balance += int(data['units'])*stock_info.stock_price
+            current_user.save()
+            #current_stock = StockPurchased.objects.get(owner=current_user.id, stockid=stock_info)
+            current_stock.number_of_stocks -= int(data['units'])
+            if current_stock.number_of_stocks is 0:
+                current_stock.delete()
+            else:
+                current_stock.save()
+            resp = {
+                'message': 'SUCCESS: The user sold the stock.'
+            }
+            return HttpResponse(json.dumps(resp), content_type="application/json")
         else:
-            current_stock.save()
-        resp = {
-            'message': 'SUCCESS: The user sold the stock.'
-        }
-        return HttpResponse(json.dumps(resp), content_type="application/json")    
+            resp = {
+                'message': 'FAILURE: The user does not have enough stocks to sell.'
+            }
+            return HttpResponse(json.dumps(resp), content_type="application/json")
         #return redirect('main:game')
     elif request.method == 'POST' and current_stock is None:
         resp={
-            'you do not have any stocks to sell'
+            'error': 'The user does not have any stocks to sell'
         }
-        return HttpResponse(resp)
+        return HttpResponse(json.dumps(resp), content_type="application/json")
 
 
 # This view will provide details of the user. No template rendered.
 @csrf_exempt
-def UserPrimaryDetails(request): 
+def UserPrimaryDetails(request):
     if not request.user.is_authenticated():
         resp={
             'error':'The user is not registered yet.'
@@ -210,7 +218,7 @@ def UserStockDetails(request):
         #this will send the name of the stock along with the number of units the user is currently owning
         StocksData.append(stock_data)
 
-    return HttpResponse(json.dumps(StocksData), content_type = "application/json")
+    return HttpResponse(json.dumps(StocksData), content_type="application/json")
 
 @csrf_exempt
 def StocksPrimaryData(request):
@@ -310,7 +318,7 @@ def userLogin(request):
                 'message': 'SUCCESS: The user has been registered.'
             }
             return HttpResponse(json.dumps(msg), content_type="application/json")
-    else: 
+    else:
         msg = {
                 'message': 'FAILURE: Please make a POST request.'
             }
@@ -319,4 +327,4 @@ def userLogin(request):
 
 @csrf_exempt
 def userLogout(request):
-    pass 
+    pass
