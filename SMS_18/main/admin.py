@@ -7,4 +7,3 @@ admin.site.register(StockPurchased)
 admin.site.register(Stock)
 admin.site.register(GameSwitch)
 admin.site.register(StockPriceVariation)
-

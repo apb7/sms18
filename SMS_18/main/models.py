@@ -6,7 +6,7 @@ class UserProfile(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE) #extending user model
 	name = models.CharField(max_length=100)	#username as per the db
 	mail_id=models.CharField(max_length=100) #will get from app so no checks are required
-	balance=models.IntegerField(default=0) #this will contain the current balance throughout 
+	balance=models.IntegerField(default=100) #this will contain the current balance throughout 
 	net_worth=models.IntegerField(default=0)
 
 	def __str__(self):
