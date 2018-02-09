@@ -13,3 +13,13 @@ xhttp.onreadystatechange = function() {
 
 xhttp.open('GET',url, true);
 xhttp.send();
+
+
+
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}	

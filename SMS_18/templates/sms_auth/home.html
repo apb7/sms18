@@ -3,29 +3,121 @@
 <head lang="en">
 	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Login</title>
+	
+	<!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+	
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css" integrity="sha256-uHu2MAd1LvCOVEAhvMld4LpJi7dUGS7GVzvG/5B3hlo=" crossorigin="anonymous">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+	<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+	<link rel="stylesheet" type="text/css" href="../../static/main/css/login.css">
 </head>
 <body>
 
 
-	<h1>Hello World!</h1>
-	<p>Welcome to the home page of SMS 18!</p>
 	{% load socialaccount %}
-	<a href="{% provider_login_url 'google' method='oauth2' %}">Google OAuth2</a>
-	<form method="POST" action="/register">
+	
+
+	<!-- <a href="{% provider_login_url 'google' method='oauth2' %}">Google OAuth2</a> -->
+	
+
+
+	<!-- <form method="POST" action="/register">
 		{% csrf_token %}
 		Register
 		<input type="text" name="username" placeholder="username" />
 		<input type="text" name="email" placeholder="email" />
 		<input type="password" name="password" placeholder="password" />
-		<input type="submit" />l
-	</form><br><br>
+		<input type="submit" />
+	</form>
+	
+
+
 	<form method="POST" action="/login">
 		{% csrf_token %}
 		Login
 		<input type="text" name="username" placeholder="username" />
 		<input type="password" name="password" placeholder="password" />
 		<input type="submit" />
-	</form>
+	</form> -->
+
+	<!-- <div class="title"> <span> <img src="../main/media/img/stock_market.png">  STOCK MARKET SIMULATION </span> </div>
+ -->
+  <div class="login-box">
+    
+
+    <div class="lb-header">
+      <a href="#" class="active" id="login-box-link">Login</a>
+      <a href="#" id="signup-box-link">Sign Up</a>
+    </div>
+    
+
+    <div class="social-login">
+      <div class="loginBtn"><a href="{% provider_login_url 'google' method='oauth2' %}">
+        <i class="fa fa-google-plus fa-lg"></i>
+        log in with Google 
+      </a> </div>
+    </div>
+    
+    
+
+    <form class="email-login" method="POST" action="/login">
+    	{% csrf_token %}
+      <div class="u-form-group">
+        <input type="text" placeholder="username" name="username" />
+      </div>
+      <div class="u-form-group">
+        <input type="password" placeholder="password" name="password" />
+      </div>
+      <div class="u-form-group">
+        <button type="submit" class="submitBtn">Login</button>
+      </div>
+    </form>
+    
+
+
+    <form class="email-signup" method="POST" action="/register">
+    	{% csrf_token %}
+      <div class="u-form-group">
+        <input type="text" placeholder="username" name="username" />
+      </div>
+      <div class="u-form-group">
+        <input type="email" placeholder="email" name="email" />
+      </div>
+      <div class="u-form-group">
+        <input type="password" placeholder="password" name="password" />
+      </div>
+      <!-- <div class="u-form-group">
+        <input type="password" placeholder="Confirm Password"/>
+      </div> -->
+      <div class="u-form-group">
+        <button type="submit" class="submitBtn">Register</button>
+      </div>
+    </form>
+ 
+
+  </div>
+
+<script type="text/javascript">
+	$(".email-signup").hide();
+$("#signup-box-link").click(function(){
+  $(".email-login").fadeOut(100);
+  $(".email-signup").delay(100).fadeIn(100);
+  $("#login-box-link").removeClass("active");
+  $("#signup-box-link").addClass("active");
+});
+$("#login-box-link").click(function(){
+  $(".email-login").delay(100).fadeIn(100);;
+  $(".email-signup").fadeOut(100);
+  $("#login-box-link").addClass("active");
+  $("#signup-box-link").removeClass("active");
+});
+</script>
+
+
+
+
+
 
 </body>
 </html>

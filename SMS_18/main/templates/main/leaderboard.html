@@ -6,6 +6,7 @@
 	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 	<link rel="stylesheet" type="text/css" href="{% static 'main/css/leaderboard.css' %}">
+	<link rel="stylesheet" type="text/css" href="../../static/main/css/template.css">
 	<script type="text/javascript" src="{% static 'main/js/userDetails.js' %}"></script>
 	<script type="text/javascript" src="{% static 'main/js/leaderboard.js' %}"></script>
 	<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
@@ -13,20 +14,36 @@
 <body>
 	<div class="container">
 		<div class="header">
-			<div class="profile">
-				<div class="user" id="userName"></div>
-				<div class="user">Balance: &#8377 <span id="userBalance"></span></div>
-			</div>
-			<div class="navbar">
+				<!-- <div class="title"> <span> STOCK MARKET SIMULATION </span> </div> -->
+				<div class="profile">
+					<div class="user user1" id="userName"></div>
+					<div class="user user2">Balance: &#8377 <span  id="userBalance"></span> <span class="hamburgerIcon"onclick="openNav()">&#9776;</span></div>
+				</div>
+				<div class="navbar">
 
-				<a href="{% url 'main:profile' %}"> <div class="nav"><span>PORTFOLIO</span> </div> </a>
-		    <a href="{% url 'main:game' %}"><div class="nav"><span>MARKET</span> </div> </a>
-		    <a href="{% url 'main:leaderboard' %}"><div class="nav active"> <span>LEADERBOARD</span> </div> </a>
+					<a href="./international.html"> <div class="nav"><span>International</span> </div> </a>
+		  			<a href="{% url 'main:game' %}"><div class="nav"><span>Indian</span> </div> </a>
 
+				</div>
 			</div>
-		</div>
 		<div class="main">
 		</div>
+
+		<div id="mySidenav" class="sidenav">
+
+			<div class="closebtndiv"> 
+				<span>SMS</span>
+				<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> 
+			</div>
+			<div> 
+				<a class="links" href="{% url 'main:profile' %}">Portfolio</a> <hr>
+				<a class="links" href="{% url 'main:game' %}">Market</a> <hr>
+				<a class="links" href="{% url 'main:leaderboard' %}">Leaderboard</a> <hr>
+				<a class="links" href="{% url 'main:logout' %}">Logout</a> <hr> 
+			</div>
+		</div>
+
+
 	</div>
 </body>
 </html>
