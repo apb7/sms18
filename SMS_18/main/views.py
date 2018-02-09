@@ -15,6 +15,7 @@ from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
 from algoscript import algo
 
+key = "9bBo*3Y;}mH}?ufz!vSYWjbt|+kURd" 
 
 def index(request):#just a render view
     if not request.user.is_authenticated():
@@ -68,6 +69,7 @@ def profile(request):#just a render view
         return HttpResponse(json.dumps(resp), content_type = "application/json")
     return render(request, 'main/profile.html')
 
+# Register and login functions not working!
 def register(request):
     if request.method == 'POST':
         data = request.POST
@@ -99,7 +101,7 @@ def logout(request):
     django_logout(request)
     return redirect('main:index')
 
-
+# TODO: Usage??
 def createProfile(request):
     try:
         userProf = UserProfile.objects.get(user=request.user)
@@ -109,12 +111,13 @@ def createProfile(request):
 
 
 ### (apb7, priyankjairaj100): Do not change these view functions.
+# TODO: Setup a POST method with a key and email_id for user verification.
 
 # TODO(priyankjairaj100): Implement a check on balance (>=0)
 @csrf_exempt
 def BuyStocks(request, id):
     if not request.user.is_authenticated():
-        resp={
+        resp = {
             'error':'The user is not registered yet.'
         }
         return HttpResponse(json.dumps(resp), content_type="application/json")
@@ -142,11 +145,11 @@ def BuyStocks(request, id):
 @csrf_exempt
 def SellStocks(request, id):
     if not request.user.is_authenticated():
-        resp={
+        resp = {
             'error':'The user is not registered yet.'
         }
-        return HttpResponse(json.dumps(resp), content_type = "application/json")
-    current_user = UserProfile.objects.get(user = request.user)
+        return HttpResponse(json.dumps(resp), content_type="application/json")
+    current_user = UserProfile.objects.get(user=request.user)
     stock_info = Stock.objects.get(id=id)
     try:
         current_stock = StockPurchased.objects.get(owner=current_user.id, stockid=stock_info)
@@ -217,7 +220,6 @@ def UserStockDetails(request):
         }
         #this will send the name of the stock along with the number of units the user is currently owning
         StocksData.append(stock_data)
-
     return HttpResponse(json.dumps(StocksData), content_type="application/json")
 
 @csrf_exempt
@@ -299,8 +301,8 @@ def userLogin(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         email = request.POST.get('email')
-        password = request.POST.get('password')
-        print (username)
+        #password = request.POST.get('password')
+        #print (username)
         try:
             obj = User.objects.get(username=username)
             msg = {
@@ -308,6 +310,8 @@ def userLogin(request):
             }
             return HttpResponse(json.dumps(msg), content_type="application/json")
         except User.DoesNotExist:
+            # This line fills up random password for the user in the backend.
+            password = User.objects.make_random_password()
             user = User.objects.create_user(username, email, password)
             user.save()
             userProf = UserProfile.objects.create(user=user, name=username, mail_id=email)
