@@ -68,6 +68,15 @@ def profile(request):#just a render view
         return HttpResponse(json.dumps(resp), content_type = "application/json")
     return render(request, 'main/profile.html')
 
+def international(request):#just a render view
+    if not request.user.is_authenticated():
+        resp={
+            'error':'The user is not registered yet.'
+        }
+        return HttpResponse(json.dumps(resp), content_type = "application/json")
+    return render(request, 'main/international.html')
+
+
 def register(request):
     if request.method == 'POST':
         data = request.POST

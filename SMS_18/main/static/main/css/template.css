@@ -1,0 +1,180 @@
+.header{
+	position: fixed;
+	width: 100%;
+	height: 126px;
+	display: flex;
+	z-index: 2;
+	color: white;
+}
+.profile:nth-child(1) {
+	font-size: 20px;
+}
+
+.title {
+	width: 100%;
+	height: 100px;
+}
+.profile{
+	height: 100px;
+	width: 100%;
+	background: #0091EA;
+}
+
+.navbar{
+	position: absolute;
+	top: 75px;
+	width: 100%;
+	height: 51px;
+	background: #E1F5FE;
+	display: flex;
+	justify-content: space-around;
+}
+
+.user{
+	height: 75px;
+	float: left;
+	background: white;
+	text-align: center;
+	line-height: 75px;
+	background: #0091EA;
+}
+
+.user1 {
+	width: 30%;
+}
+.user2{
+	width: 70%;
+}
+
+.nav{
+	padding: 0 5px;
+	margin-top: 2.5px;
+	height: 45px;
+	line-height: 45px;
+	text-align: center;
+	border-radius: 15px;
+	transition: background 300ms;
+	/*flex-basis: 30%;*/
+	cursor: pointer;
+}
+
+.hamburgerIcon {
+	cursor: pointer;
+	font-size: 30px;
+	/*position: absolute;
+	right: 1.5vw;*/
+	position: absolute;
+	right: 1.5vw;
+	top: -3px;
+}
+
+.navbar a {
+	text-decoration: none;
+	color: black;
+	flex-basis: 50%;
+	font-size: 15px;
+	flex-basis: 25%;
+}
+.navbar a:hover {
+	color: black;
+}
+
+.nav:hover:not(.active){
+	background: rgba(0, 176, 255, 0.5);
+}
+
+.active{
+	background: #00B0FF;
+}
+
+.navbar .a {
+	width: 10vw;
+}
+
+
+.closebtndiv span {
+	position: absolute;
+	left: 15px;
+	top: 16px;
+	font-size: 23px;
+}
+
+
+
+
+
+
+
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: black;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    z-index: 10;
+    background: white;
+    color: black;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    /*color: #818181;*/
+    display: block;
+    transition: 0.3s;
+    color: black;
+}
+
+.sidenav a:hover {
+    /*color: #f1f1f1;*/
+}
+
+.sidenav .closebtndiv {
+	height: 60px;
+	text-align: right;
+	margin-top: -60px;
+	background: #1A237E;
+	color: white;
+}
+.sidenav .closebtn {
+    /*position: absolute;
+    top: 0;
+    right: 25px;*/
+    font-size: 36px;
+    margin-left: 50px;	
+    color: white;
+}
+
+/*@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}*/
+
+hr {
+	width: 80%;
+	background: black;
+}
+
+.links {
+	margin-top: 4vh;
+}
+
+.links:hover {
+	color: #818181;
+}
+
+
+@media all and (max-width: 768px) {
+	.navbar a {
+		flex-basis: 50%;
+	}
+}
+
+

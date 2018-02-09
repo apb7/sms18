@@ -6,6 +6,7 @@
 	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 	<link rel="stylesheet" type="text/css" href="{% static 'main/css/leaderboard.css' %}">
+	<link rel="stylesheet" type="text/css" href="../../static/main/css/template.css">
 	<script type="text/javascript" src="{% static 'main/js/userDetails.js' %}"></script>
 	<script type="text/javascript" src="{% static 'main/js/leaderboard.js' %}"></script>
 	<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
@@ -29,12 +30,19 @@
 		</div>
 
 		<div id="mySidenav" class="sidenav">
-			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-			<a href="{% url 'main:profile' %}">Portfolio</a>
-			<a href="{% url 'main:game' %}">Market</a>
-			<a href="{% url 'main:leaderboard' %}">Leaderboard</a>
-			<a href="{% url 'main:logout' %}">Logout</a>
+
+			<div class="closebtndiv"> 
+				<span>SMS</span>
+				<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> 
+			</div>
+			<div> 
+				<a class="links" href="{% url 'main:profile' %}">Portfolio</a> <hr>
+				<a class="links" href="{% url 'main:game' %}">Market</a> <hr>
+				<a class="links" href="{% url 'main:leaderboard' %}">Leaderboard</a> <hr>
+				<a class="links" href="{% url 'main:logout' %}">Logout</a> <hr> 
+			</div>
 		</div>
+
 
 	</div>
 </body>
