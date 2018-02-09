@@ -116,12 +116,16 @@ def createProfile(request):
 # TODO(priyankjairaj100): Implement a check on balance (>=0)
 @csrf_exempt
 def BuyStocks(request, id):
-    if not request.user.is_authenticated():
+    global key
+    user_key = request.POST.get('key')
+    if user_key != key:
         resp = {
             'error':'The user is not registered yet.'
         }
         return HttpResponse(json.dumps(resp), content_type="application/json")
-    current_user = UserProfile.objects.get(user=request.user)
+    email = request.POST.get('email')
+    current_user = UserProfile.objects.get(mail_id=email)
+    # TODO(apb7): Remove the POST check here and put it at the top.
     if request.method == 'POST':
         data = request.POST
         stock_info = Stock.objects.get(id=id)
@@ -144,12 +148,15 @@ def BuyStocks(request, id):
 
 @csrf_exempt
 def SellStocks(request, id):
-    if not request.user.is_authenticated():
+    global key
+    user_key = request.POST.get('key')
+    if user_key != key:
         resp = {
             'error':'The user is not registered yet.'
         }
         return HttpResponse(json.dumps(resp), content_type="application/json")
-    current_user = UserProfile.objects.get(user=request.user)
+    email = request.POST.get('email')
+    current_user = UserProfile.objects.get(mail_id=email)
     stock_info = Stock.objects.get(id=id)
     try:
         current_stock = StockPurchased.objects.get(owner=current_user.id, stockid=stock_info)
@@ -179,7 +186,7 @@ def SellStocks(request, id):
             return HttpResponse(json.dumps(resp), content_type="application/json")
         #return redirect('main:game')
     elif request.method == 'POST' and current_stock is None:
-        resp={
+        resp = {
             'error': 'The user does not have any stocks to sell'
         }
         return HttpResponse(json.dumps(resp), content_type="application/json")
@@ -207,12 +214,15 @@ def UserPrimaryDetails(request):
 
 @csrf_exempt
 def UserStockDetails(request):
-    if not request.user.is_authenticated():
+    global key
+    user_key = request.POST.get('key')
+    if user_key != key:
         resp = {
             'error':'The user is not registered yet.'
         }
         return HttpResponse(json.dumps(resp), content_type="application/json")
-    current_user = UserProfile.objects.get(user=request.user)
+    email = request.POST.get('email')
+    current_user = UserProfile.objects.get(mail_id=email)
     UserStocks = StockPurchased.objects.filter(owner=current_user)
     StocksData = []
     for this_stock in UserStocks:
@@ -228,8 +238,9 @@ def UserStockDetails(request):
 
 @csrf_exempt
 def StocksPrimaryData(request):
-
-    if not request.user.is_authenticated():
+    global key
+    user_key = request.POST.get('key')
+    if user_key != key:
         resp={
             'error':'The user is not registered yet.'
         }
@@ -249,8 +260,9 @@ def StocksPrimaryData(request):
 
 @csrf_exempt
 def StockData(request, id):
-
-    if not request.user.is_authenticated():
+    global key
+    user_key = request.POST.get('key')
+    if user_key != key:
         resp={
             'error':'The user is not registered yet.'
         }
@@ -259,7 +271,7 @@ def StockData(request, id):
     this_stock = Stock.objects.get(id = id)
     num = 0
     try:
-        current_stock = StockPurchased.objects.get(owner=UserProfile.objects.get(user = request.user), stockid=this_stock)
+        current_stock = StockPurchased.objects.get(owner=UserProfile.objects.get(mail_id = request.POST.get('email'), stockid=this_stock))
         num = current_stock.number_of_stocks
     except:
         pass
@@ -273,7 +285,9 @@ def StockData(request, id):
 
 @csrf_exempt
 def LBdata(request):
-    if not request.user.is_authenticated():
+    global key
+    user_key = request.POST.get('key')
+    if user_key != key:
         resp={
             'error':'The user is not registered yet.'
         }
