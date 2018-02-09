@@ -15,6 +15,7 @@ from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
 from algoscript import algo
 
+key = "9bBo3YmHufzvSYWjbtkURd" 
 
 def index(request):#just a render view
     if not request.user.is_authenticated():
@@ -77,6 +78,9 @@ def international(request):#just a render view
     return render(request, 'main/international.html')
 
 
+
+# Register and login functions not working!
+
 def register(request):
     if request.method == 'POST':
         data = request.POST
@@ -108,7 +112,7 @@ def logout(request):
     django_logout(request)
     return redirect('main:index')
 
-
+# TODO: Usage??
 def createProfile(request):
     try:
         userProf = UserProfile.objects.get(user=request.user)
@@ -118,16 +122,21 @@ def createProfile(request):
 
 
 ### (apb7, priyankjairaj100): Do not change these view functions.
+# TODO: Setup a POST method with a key and email_id for user verification.
 
 # TODO(priyankjairaj100): Implement a check on balance (>=0)
 @csrf_exempt
 def BuyStocks(request, id):
-    if not request.user.is_authenticated():
-        resp={
+    global key
+    user_key = request.POST.get('key')
+    if user_key != key:
+        resp = {
             'error':'The user is not registered yet.'
         }
         return HttpResponse(json.dumps(resp), content_type="application/json")
-    current_user = UserProfile.objects.get(user=request.user)
+    email = request.POST.get('email')
+    current_user = UserProfile.objects.get(mail_id=email)
+    # TODO(apb7): Remove the POST check here and put it at the top.
     if request.method == 'POST':
         data = request.POST
         stock_info = Stock.objects.get(id=id)
@@ -150,12 +159,15 @@ def BuyStocks(request, id):
 
 @csrf_exempt
 def SellStocks(request, id):
-    if not request.user.is_authenticated():
-        resp={
+    global key
+    user_key = request.POST.get('key')
+    if user_key != key:
+        resp = {
             'error':'The user is not registered yet.'
         }
-        return HttpResponse(json.dumps(resp), content_type = "application/json")
-    current_user = UserProfile.objects.get(user = request.user)
+        return HttpResponse(json.dumps(resp), content_type="application/json")
+    email = request.POST.get('email')
+    current_user = UserProfile.objects.get(mail_id=email)
     stock_info = Stock.objects.get(id=id)
     try:
         current_stock = StockPurchased.objects.get(owner=current_user.id, stockid=stock_info)
@@ -185,7 +197,7 @@ def SellStocks(request, id):
             return HttpResponse(json.dumps(resp), content_type="application/json")
         #return redirect('main:game')
     elif request.method == 'POST' and current_stock is None:
-        resp={
+        resp = {
             'error': 'The user does not have any stocks to sell'
         }
         return HttpResponse(json.dumps(resp), content_type="application/json")
@@ -194,12 +206,15 @@ def SellStocks(request, id):
 # This view will provide details of the user. No template rendered.
 @csrf_exempt
 def UserPrimaryDetails(request):
-    if not request.user.is_authenticated():
+    global key
+    user_key = request.POST.get('key')
+    if user_key != key:
         resp={
             'error':'The user is not registered yet.'
         }
         return HttpResponse(json.dumps(resp), content_type = "application/json")
-    current_user = UserProfile.objects.get(user = request.user)
+    email = request.POST.get('email')
+    current_user = UserProfile.objects.get(mail_id = email)
     resp={
         'username': current_user.name ,
         'email-id': current_user.mail_id ,
@@ -207,14 +222,18 @@ def UserPrimaryDetails(request):
     }
     return HttpResponse(json.dumps(resp), content_type="application/json")
 
+
 @csrf_exempt
 def UserStockDetails(request):
-    if not request.user.is_authenticated():
+    global key
+    user_key = request.POST.get('key')
+    if user_key != key:
         resp = {
             'error':'The user is not registered yet.'
         }
         return HttpResponse(json.dumps(resp), content_type="application/json")
-    current_user = UserProfile.objects.get(user=request.user)
+    email = request.POST.get('email')
+    current_user = UserProfile.objects.get(mail_id=email)
     UserStocks = StockPurchased.objects.filter(owner=current_user)
     StocksData = []
     for this_stock in UserStocks:
@@ -226,13 +245,13 @@ def UserStockDetails(request):
         }
         #this will send the name of the stock along with the number of units the user is currently owning
         StocksData.append(stock_data)
-
     return HttpResponse(json.dumps(StocksData), content_type="application/json")
 
 @csrf_exempt
 def StocksPrimaryData(request):
-
-    if not request.user.is_authenticated():
+    global key
+    user_key = request.POST.get('key')
+    if user_key != key:
         resp={
             'error':'The user is not registered yet.'
         }
@@ -252,8 +271,9 @@ def StocksPrimaryData(request):
 
 @csrf_exempt
 def StockData(request, id):
-
-    if not request.user.is_authenticated():
+    global key
+    user_key = request.POST.get('key')
+    if user_key != key:
         resp={
             'error':'The user is not registered yet.'
         }
@@ -262,7 +282,7 @@ def StockData(request, id):
     this_stock = Stock.objects.get(id = id)
     num = 0
     try:
-        current_stock = StockPurchased.objects.get(owner=UserProfile.objects.get(user = request.user), stockid=this_stock)
+        current_stock = StockPurchased.objects.get(owner=UserProfile.objects.get(mail_id = request.POST.get('email'), stockid=this_stock))
         num = current_stock.number_of_stocks
     except:
         pass
@@ -276,7 +296,9 @@ def StockData(request, id):
 
 @csrf_exempt
 def LBdata(request):
-    if not request.user.is_authenticated():
+    global key
+    user_key = request.POST.get('key')
+    if user_key != key:
         resp={
             'error':'The user is not registered yet.'
         }
@@ -307,9 +329,9 @@ def LBdata(request):
 def userLogin(request):
     if request.method == 'POST':
         username = request.POST.get('username')
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        print (username)
+        email = request.POST.get('email')        
+        #password = request.POST.get('password')
+        #print (username)
         try:
             obj = User.objects.get(username=username)
             msg = {
@@ -317,6 +339,8 @@ def userLogin(request):
             }
             return HttpResponse(json.dumps(msg), content_type="application/json")
         except User.DoesNotExist:
+            # This line fills up random password for the user in the backend.
+            password = User.objects.make_random_password()
             user = User.objects.create_user(username, email, password)
             user.save()
             userProf = UserProfile.objects.create(user=user, name=username, mail_id=email)
