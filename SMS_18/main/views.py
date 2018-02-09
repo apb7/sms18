@@ -77,7 +77,7 @@ def register(request):
         except User.DoesNotExist:
             user = User.objects.create_user(data['username'], data['email'], data['password'])
             user.save()
-            userProf = UserProfile.objects.create(user=user, name=data['username'], balance=100)
+            userProf = UserProfile.objects.create(user=user, name=data['username'])
             userProf.save()
             user.backend = 'django.contrib.auth.backends.ModelBackend'
             django_login(request,user)
@@ -104,7 +104,7 @@ def createProfile(request):
     try:
         userProf = UserProfile.objects.get(user=request.user)
     except:
-        userProf = UserProfile.objects.create(user=request.user, name=request.user.username, balance=100)
+        userProf = UserProfile.objects.create(user=request.user, name=request.user.username)
     return redirect('main:game')
 
 
@@ -170,7 +170,7 @@ def SellStocks(request, id):
 
 
 
-
+@csrf_exempt
 def UserPrimaryDetails(request): #this view will give you all info of the user! Check out the fields.
 
     if not request.user.is_authenticated():
@@ -191,7 +191,7 @@ def UserPrimaryDetails(request): #this view will give you all info of the user! 
 
 def UserStockDetails(request):
     if not request.user.is_authenticated():
-        resp={
+        resp = {
             'error':'The user is not registered yet.'
         }
         return HttpResponse(json.dumps(resp), content_type = "application/json")
@@ -284,3 +284,34 @@ def LBdata(request):
                 'net_worth':i.net_worth
                 })
     return HttpResponse(json.dumps(d), content_type = "application/json")
+
+# This function will be used to login the user via the app. No template rendered.
+@csrf_exempt
+def userLogin(request):
+    if request.method == 'POST':
+        data = request.POST
+        username = data.get('username', 'default')
+        email = data.get('email', 'default@default.com')
+        password = data.get('password', 'defaultPassword')
+        try:
+            obj = User.objects.get(username=username)
+            msg = {
+                'message': 'The user is already registered.'
+            }
+            return HttpResponse(json.dumps(msg), content_type="application/json")
+        except User.DoesNotExist:
+            user = User.objects.create_user(username, email, password)
+            user.save()
+            userProf = UserProfile.objects.create(user=user, name=username)
+            userProf.save()
+            user.backend = 'django.contrib.auth.backends.ModelBackend'
+            django_login(request,user)
+            msg = {
+                'message': 'SUCCESS: The user has been registered.'
+            }
+            return HttpResponse(json.dumps(msg), content_type="application/json")
+    else: 
+        msg = {
+                'message': 'FAILURE: Please make a POST request.'
+            }
+        return HttpResponse(json.dumps(msg), content_type="application/json")
