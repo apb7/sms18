@@ -15,7 +15,7 @@ from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
 from algoscript import algo
 
-key = "9bBo*3Y;}mH}?ufz!vSYWjbt|+kURd" 
+key = "9bBo3YmHufzvSYWjbtkURd" 
 
 def index(request):#just a render view
     if not request.user.is_authenticated():
@@ -188,18 +188,22 @@ def SellStocks(request, id):
 # This view will provide details of the user. No template rendered.
 @csrf_exempt
 def UserPrimaryDetails(request):
-    if not request.user.is_authenticated():
+    global key
+    user_key = request.POST.get('key')
+    if user_key != key:
         resp={
             'error':'The user is not registered yet.'
         }
         return HttpResponse(json.dumps(resp), content_type = "application/json")
-    current_user = UserProfile.objects.get(user = request.user)
+    email = request.POST.get('email')
+    current_user = UserProfile.objects.get(mail_id = email)
     resp={
         'username': current_user.name ,
         'email-id': current_user.mail_id ,
         'user_balance': current_user.balance ,
     }
     return HttpResponse(json.dumps(resp), content_type="application/json")
+
 
 @csrf_exempt
 def UserStockDetails(request):
@@ -300,7 +304,7 @@ def LBdata(request):
 def userLogin(request):
     if request.method == 'POST':
         username = request.POST.get('username')
-        email = request.POST.get('email')
+        email = request.POST.get('email')        
         #password = request.POST.get('password')
         #print (username)
         try:
