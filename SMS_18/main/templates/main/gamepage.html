@@ -27,7 +27,7 @@
 				</div>
 			</div>
 		<div class="main">
-			<!-- <div class="stock">
+			<div class="stock">
 				<div class="shown">
 					<div class="name" id="stockName">Stock Name</div>
 					<div class="price">&#8377 Stock Price</div>
@@ -39,7 +39,7 @@
 
 					 <div class=""> <button id="myBtn" onclick="modalOpen()">Open Modal</button> </div>
 				</div>
-			</div> -->
+			</div>
 		</div>
 
 		
@@ -72,7 +72,7 @@
 			    </div>
 			    <div class="modal-body">
 			      	<p>Enter stocks to buy</p>
-			      	<p><input type="number" min="0" value="0" class="counter" name=""></p>
+			      	<p><input type="number" min="0" value="0" class="counter" id="purchaseAmount"></p>
 			    </div>
 			    <div class="modal-footer">
 			    	<button class="myButton"> Confirm Purchase </button>
@@ -93,7 +93,7 @@
 			    </div>
 			    <div class="modal-body">
 			      	<p>Enter stocks to Sell</p>
-			      	<p><input type="number" min="0" value="0" class="counter" name=""></p>
+			      	<p><input type="number" min="0" value="0" class="counter"  id="sellAmount"></p>
 			    </div>
 			    <div class="modal-footer">
 			    	<button class="myButton"> Confirm Sell </button>
@@ -117,13 +117,16 @@
 	// Get the <span> element that closes the modal
 	var span = document.getElementById("close");
 	var spans = document.getElementById("closes");
-	// When the user clicks the button, open the modal 
-	function modalOpen() {
+	// When the user clicks the button, open the modal
+	var stockId;
+	function modalOpen(id) {
 	    modal.style.display = "block";
+	    stockId = id;
 	}
 
-	function modalOpenS() {
+	function modalOpenS(id) {
 		modals.style.display = "block";
+	    stockId = id;
 	}
 
 	// When the user clicks on <span> (x), close the modal
@@ -141,6 +144,64 @@
 	        modals.style.display = "none";
 	    }
 	}
+
+
+//sidenav
+
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
+
+//form submit
+
+var purchaseButton = document.getElementsByClassName("myButton")[0];
+purchaseButton.onclick = function(e) {
+	var http = new XMLHttpRequest();
+	e.preventDefault();
+	var data = "key=9bBo3YmHufzvSYWjbtkURd&email="+sessionStorage.getItem("email");
+	data += "&units="+document.getElementById("purchaseAmount").value;
+	http.onreadystatechange = function() {
+	 	if(http.readyState == 4 && http.status == 200) {
+	 		data = JSON.parse(http.responseText);
+			if ('error' in data){
+				alert(data.error);
+			}else{
+		 		alert(data.message);
+		 	}
+		}
+	}	
+	http.open("POST", '/buystocks/'+stockId, true);
+	http.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	http.send(data);
+
+}
+
+var sellButton = document.getElementsByClassName("myButton")[1];
+sellButton.onclick = function(e) {
+	var http = new XMLHttpRequest();
+	e.preventDefault();
+	var data = "key=9bBo3YmHufzvSYWjbtkURd&email="+sessionStorage.getItem("email");
+	data += "&units="+document.getElementById("sellAmount").value;
+	http.onreadystatechange = function() {
+	 	if(http.readyState == 4 && http.status == 200) {
+	 		data = JSON.parse(http.responseText);
+			if ('error' in data){
+				alert(data.error);
+			}else{
+		 		alert(data.message);
+		 	}
+		}
+	}	
+	http.open("POST", '/sellstocks/'+stockId, true);
+	http.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	http.send(data);
+
+}
+
 </script>
 
 </body>
