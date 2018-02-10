@@ -292,7 +292,8 @@ def LBdata(request):
             'error':'The user is not registered yet.'
         }
         return HttpResponse(json.dumps(resp), content_type = "application/json")
-
+    email = request.POST.get('email')
+    current_user = UserProfile.objects.get(mail_id = email)
     for this_user in UserProfile.objects.all():
         this_user.net_worth=0
         for this_stock in StockPurchased.objects.filter(owner=this_user):
@@ -300,9 +301,6 @@ def LBdata(request):
         this_user.net_worth+=this_user.balance
         this_user.save()
     up = UserProfile.objects.order_by('-net_worth')
-    x = 20
-    n = len(up)
-    up = up[:abs(x-n)]
     d=[]
     for i in up:
         if i.net_worth>0:
@@ -310,6 +308,11 @@ def LBdata(request):
                 'name':i.name,
                 'net_worth':i.net_worth
                 })
+            my_pos = d.index({'name':current_user.name,'net_worth':current_user.net_worth}) + 1
+    x=20
+    n=len(d)
+    d = d[:abs(x-n)]
+    d.append({'Rank of current_user':my_pos})
     return HttpResponse(json.dumps(d), content_type = "application/json")
 
 
