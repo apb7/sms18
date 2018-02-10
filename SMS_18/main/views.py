@@ -18,12 +18,14 @@ from algoscript import algo
 key = "9bBo3YmHufzvSYWjbtkURd" 
 
 def index(request):#just a render view
-    if not request.user.is_authenticated():
-        resp={
-            'error':'The user is not registered yet.'
-        }
-        return HttpResponse(json.dumps(resp), content_type = "application/json")
-    return redirect('auth:form')
+    if request.user.is_authenticated():
+        return redirect('main:game')
+    else:
+        return redirect('auth:form')
+        # resp={
+        #     'error':'The user is not registered yet.'
+        # }
+        # return HttpResponse(json.dumps(resp), content_type = "application/json")
 
 def test(request):
 	algo()
@@ -81,12 +83,13 @@ def international(request):#just a render view
 
 # Register and login functions not working!
 
+@csrf_exempt
 def register(request):
     if request.method == 'POST':
-        data = request.POST
+        data = json.loads(request.POST.items()[0][0])
         try:
             obj = User.objects.get(username=data['username'])
-            return redirect('main:index')
+            return HttpResponse(json.dumps({"status":"fail", "url":reverse('main:index')}), content_type="application/json")
         except User.DoesNotExist:
             user = User.objects.create_user(data['username'], data['email'], data['password'])
             user.save()
@@ -94,18 +97,19 @@ def register(request):
             userProf.save()
             user.backend = 'django.contrib.auth.backends.ModelBackend'
             django_login(request,user)
-            return redirect('main:game')
+            return HttpResponse(json.dumps({"status":"success", "email":user.email, "url":reverse('main:game')}), content_type="application/json")
     return redirect('main:index')
 
+@csrf_exempt
 def login(request):
     if request.method == 'POST':
-        data = request.POST
+        data = json.loads(request.POST.items()[0][0])
         user = authenticate(username=data['username'], password=data['password'])
         django_login(request, user)
         if user is None:
-            return redirect('main:index')
+            return HttpResponse(json.dumps({"status":"fail", "url":reverse('main:index')}), content_type="application/json")
         else:
-            return redirect('main:game')
+            return HttpResponse(json.dumps({"status":"success", "email":user.email, "url":reverse('main:game')}), content_type="application/json")
     return redirect('main:index')
 
 def logout(request):
@@ -117,8 +121,8 @@ def createProfile(request):
     try:
         userProf = UserProfile.objects.get(user=request.user)
     except:
-        userProf = UserProfile.objects.create(user=request.user, name=request.user.username, mail_id=request.user.email)
-    return redirect('main:game')
+        userProf = UserProfile.objects.create(user=request.user, name=request.user.get_full_name(), mail_id=request.user.email)
+    return render(request, 'main/profileCreate.html', {'email': request.user.email, 'url':reverse('main:game')})
 
 
 ### (apb7, priyankjairaj100): Do not change these view functions.
@@ -141,6 +145,12 @@ def BuyStocks(request, id):
         data = request.POST
         stock_info = Stock.objects.get(id=id)
         current_user.balance -= int(data['units'])*stock_info.stock_price
+        if current_user.balance < 0:
+            resp = {
+                'error': 'Not enough balance.'
+            }
+            return HttpResponse(json.dumps(resp), content_type="application/json")
+
         current_user.save()
 
         try:
@@ -192,7 +202,7 @@ def SellStocks(request, id):
             return HttpResponse(json.dumps(resp), content_type="application/json")
         else:
             resp = {
-                'message': 'FAILURE: The user does not have enough stocks to sell.'
+                'error': 'FAILURE: The user does not have enough stocks to sell.'
             }
             return HttpResponse(json.dumps(resp), content_type="application/json")
         #return redirect('main:game')
@@ -212,6 +222,7 @@ def UserPrimaryDetails(request):
         resp={
             'error':'The user is not registered yet.'
         }
+        print("error")
         return HttpResponse(json.dumps(resp), content_type = "application/json")
     email = request.POST.get('email')
     current_user = UserProfile.objects.get(mail_id = email)
@@ -353,7 +364,7 @@ def userLogin(request):
             return HttpResponse(json.dumps(msg), content_type="application/json")
     else:
         msg = {
-                'message': 'FAILURE: Please make a POST request.'
+                'error': 'FAILURE: Please make a POST request.'
             }
         return HttpResponse(json.dumps(msg), content_type="application/json")
 

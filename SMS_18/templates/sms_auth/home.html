@@ -11,6 +11,7 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
 	<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
 	<link rel="stylesheet" type="text/css" href="../../static/main/css/login.css">
+	
 </head>
 <body>
 
@@ -61,7 +62,7 @@
     
     
 
-    <form class="email-login" method="POST" action="/login">
+    <form class="email-login" id="email-login" method="POST" action="/login">
     	{% csrf_token %}
       <div class="u-form-group">
         <input type="text" placeholder="username" name="username" />
@@ -98,20 +99,95 @@
 
   </div>
 
-<script type="text/javascript">
-	$(".email-signup").hide();
-$("#signup-box-link").click(function(){
-  $(".email-login").fadeOut(100);
-  $(".email-signup").delay(100).fadeIn(100);
-  $("#login-box-link").removeClass("active");
-  $("#signup-box-link").addClass("active");
-});
-$("#login-box-link").click(function(){
-  $(".email-login").delay(100).fadeIn(100);;
-  $(".email-signup").fadeOut(100);
-  $("#login-box-link").addClass("active");
-  $("#signup-box-link").removeClass("active");
-});
+<script type="text/javascript" >
+
+		$(".email-signup").hide();
+		$("#signup-box-link").click(function(){
+	  	$(".email-login").fadeOut(100);
+	  	$(".email-signup").delay(100).fadeIn(100);
+	  	$("#login-box-link").removeClass("active");
+	  	$("#signup-box-link").addClass("active");
+	});
+		$("#login-box-link").click(function(){
+	 	$(".email-login").delay(100).fadeIn(100);;
+	  	$(".email-signup").fadeOut(100);
+	  	$("#login-box-link").addClass("active");
+	  	$("#signup-box-link").removeClass("active");
+
+	});
+
+		var loginForm = document.getElementsByClassName("email-login")[0];
+	
+		loginForm.onsubmit = function(e) {
+			var http = new XMLHttpRequest();
+			e.preventDefault();
+			var data = { 'username': loginForm.username.value, 'password': loginForm.password.value };
+			
+			http.onreadystatechange = function() {
+		   	 	if(http.readyState == 4 && http.status == 200) {
+	   	 			var received = JSON.parse(http.responseText);
+	   	 			if(received.status == "success"){
+		   	 			sessionStorage.setItem("email", received['email']);
+		   	 		}
+	       			window.location = received['url'];
+	    		}
+	    	}	
+			http.open("POST", '/login', true);
+			http.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+			http.send(JSON.stringify(data));
+
+		}
+
+
+		var regForm = document.getElementsByClassName("email-signup")[0];
+	
+		regForm.onsubmit = function(e) {
+			var http = new XMLHttpRequest();
+			e.preventDefault();
+			var data = { 'username': regForm.username.value, 'password': regForm.password.value, 'email': regForm.email.value };
+			http.onreadystatechange = function() {
+		   	 	if(http.readyState == 4 && http.status == 200) {
+	   	 			var received = JSON.parse(http.responseText);
+	   	 			if(received.status == "success"){
+		   	 			sessionStorage.setItem("email", received['email']);
+		   	 		}
+	       			window.location = received['url'];
+		    	}
+		    }
+			http.open("POST", '/register', true);
+			http.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+			http.send(JSON.stringify(data));
+		}
+
+
+		/*var frm = $('#email-login');
+
+		
+    	frm.submit(function (e) {
+
+        e.preventDefault();
+        
+		var formdata = { 
+			'username': frm[0].username.value,
+			'password': frm[0].password.value
+		};
+
+        $.ajax({
+            type: frm.attr('method'),
+            url: frm.attr('action'),
+  			data: formdata,
+            success: function (data) {
+                console.log('Submission was successful.');
+                console.log(data);
+            },
+            error: function (data) {
+                console.log('An error occurred.');
+                console.log(data);
+            },
+        });
+    });*/
+
+		
 </script>
 
 
