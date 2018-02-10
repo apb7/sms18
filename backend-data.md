@@ -6,6 +6,7 @@
 **VIEW(main/views.py):** BuyStocks
 					
 **json data:** in case the user is not authenticated:	resp = {'error':'The user is not registered yet.'}
+				in case user doesn't have sufficient balance: resp = {'error':'Not sufficient balance to proceed the transaction'}
 
 if method = POST(i.e. when the query is submitted.)
 	resp = {'message': 'SUCCESS: The user purchased the stock.'}

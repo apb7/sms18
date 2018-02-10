@@ -140,7 +140,13 @@ def BuyStocks(request, id):
     if request.method == 'POST':
         data = request.POST
         stock_info = Stock.objects.get(id=id)
-        current_user.balance -= int(data['units'])*stock_info.stock_price
+        transaction_cost = int(data['units'])*stock_info.stock_price
+        if( current_user.balance < transaction_cost ):
+            resp={
+                'error':'Not sufficient balance to proceed the transaction'
+            }
+            return HttpResponse(json.dumps(resp), content_type="application/json")
+        current_user.balance -= transaction_cost
         current_user.save()
 
         try:
