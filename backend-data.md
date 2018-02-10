@@ -52,7 +52,8 @@ Returned data contains a list with all stock's details like this:
 
              {"id" : this_stock.id,
             "name" : this_stock.product_name,
-            "price" : this_stock.stock_price,}
+            "price" : this_stock.stock_price,
+			"market_type" : this_stock.market_type}
 	
 If the key doesn't match then: {'error':'The user is not registered yet.'}
 

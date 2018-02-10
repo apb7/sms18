@@ -17,6 +17,7 @@ class Stock(models.Model):
 	stock_price = models.IntegerField(default=0) #Stock price at any instant
 	initial_price = models.IntegerField(default=0)
 	final_price = models.IntegerField(default=0)
+	market_type = models.CharField(max_length=10, null=False, choices=(("BSE",'"BSE"'),("NYM",'"NYM"'),("Both",'"Both"')),default = "Both")
 
 	def __str__(self):
 		return self.product_name

@@ -242,6 +242,7 @@ def UserStockDetails(request):
         "name" : current_stock.product_name,
         "num" : this_stock.number_of_stocks,
         "price" : current_stock.stock_price,
+        "market_type":current_stock.market_type
         }
         #this will send the name of the stock along with the number of units the user is currently owning
         StocksData.append(stock_data)
