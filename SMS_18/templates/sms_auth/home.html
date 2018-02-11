@@ -8,9 +8,10 @@
 	
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css" integrity="sha256-uHu2MAd1LvCOVEAhvMld4LpJi7dUGS7GVzvG/5B3hlo=" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="../../static/main/css/login.css">
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
 	<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
-	<link rel="stylesheet" type="text/css" href="../../static/main/css/login.css">
+
 	
 </head>
 <body>
@@ -101,7 +102,7 @@
 
 <script type="text/javascript" >
 
-		$(".email-signup").hide();
+		/*$(".email-signup").hide();
 		$("#signup-box-link").click(function(){
 	  	$(".email-login").fadeOut(100);
 	  	$(".email-signup").delay(100).fadeIn(100);
@@ -114,14 +115,14 @@
 	  	$("#login-box-link").addClass("active");
 	  	$("#signup-box-link").removeClass("active");
 
-	});
+	});*/
 
 		var loginForm = document.getElementsByClassName("email-login")[0];
 	
 		loginForm.onsubmit = function(e) {
 			var http = new XMLHttpRequest();
 			e.preventDefault();
-			var data = { 'username': loginForm.username.value, 'password': loginForm.password.value };
+			var data =  'username='+loginForm.username.value + '&password='+loginForm.password.value ;
 			
 			http.onreadystatechange = function() {
 		   	 	if(http.readyState == 4 && http.status == 200) {
@@ -134,7 +135,7 @@
 	    	}	
 			http.open("POST", '/login', true);
 			http.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-			http.send(JSON.stringify(data));
+			http.send(data);
 
 		}
 
@@ -144,7 +145,7 @@
 		regForm.onsubmit = function(e) {
 			var http = new XMLHttpRequest();
 			e.preventDefault();
-			var data = { 'username': regForm.username.value, 'password': regForm.password.value, 'email': regForm.email.value };
+			var data =  "username="+regForm.username.value+"&password="+regForm.password.value +"&email=" + regForm.email.value ;
 			http.onreadystatechange = function() {
 		   	 	if(http.readyState == 4 && http.status == 200) {
 	   	 			var received = JSON.parse(http.responseText);
@@ -156,7 +157,8 @@
 		    }
 			http.open("POST", '/register', true);
 			http.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-			http.send(JSON.stringify(data));
+			/*http.send(JSON.stringify(data));*/
+			http.send(data);
 		}
 
 

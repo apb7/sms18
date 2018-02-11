@@ -6,7 +6,7 @@
 	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 	<link rel="stylesheet" type="text/css" href="{% static 'main/css/leaderboard.css' %}">
-	<link rel="stylesheet" type="text/css" href="../../static/main/css/template.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/css/template.css' %}">
 	<script type="text/javascript" src="{% static 'main/js/userDetails.js' %}"></script>
 	<script type="text/javascript" src="{% static 'main/js/leaderboard.js' %}"></script>
 	<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
@@ -21,7 +21,7 @@
 				</div>
 				<div class="navbar">
 
-					<a href="./international.html"> <div class="nav"><span>International</span> </div> </a>
+					<a href="{% url 'main:international' %}"> <div class="nav"><span>International</span> </div> </a>
 		  			<a href="{% url 'main:game' %}"><div class="nav"><span>Indian</span> </div> </a>
 
 				</div>

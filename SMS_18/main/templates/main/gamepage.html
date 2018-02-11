@@ -5,10 +5,11 @@
 	<title>Stock Market Stimulation</title>
 	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="../../static/main/css/home.css">
-	<link rel="stylesheet" type="text/css" href="../../static/main/css/template.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/css/home.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/css/template.css' %}">
 	<script type="text/javascript" src="{% static 'main/js/stockDetails.js' %}"></script>
 	<script type="text/javascript" src="{% static 'main/js/userDetails.js' %}"></script>
+	<script type="text/javascript" src="{% static 'main/js/market.js' %}" ></script>
 	<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
 </head>
 <body>
@@ -32,13 +33,13 @@
 					<div class="name" id="stockName">Stock Name</div>
 					<div class="price">&#8377 Stock Price</div>
 				</div>
-				<div class="hidden">
+				<!-- <div class="hidden">
 					<div class="buy" id="myBtn"><button onclick="modalOpen()">BUY</button> </div>
 					
 					<div class="sell" id="myBtn"><button class="button" onclick="modalOpenS()">SELL</button></div>
 
 					 <div class=""> <button id="myBtn" onclick="modalOpen()">Open Modal</button> </div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 
@@ -146,61 +147,6 @@
 	}
 
 
-//sidenav
-
-function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
-}
-
-function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-}
-
-//form submit
-
-var purchaseButton = document.getElementsByClassName("myButton")[0];
-purchaseButton.onclick = function(e) {
-	var http = new XMLHttpRequest();
-	e.preventDefault();
-	var data = "key=9bBo3YmHufzvSYWjbtkURd&email="+sessionStorage.getItem("email");
-	data += "&units="+document.getElementById("purchaseAmount").value;
-	http.onreadystatechange = function() {
-	 	if(http.readyState == 4 && http.status == 200) {
-	 		data = JSON.parse(http.responseText);
-			if ('error' in data){
-				alert(data.error);
-			}else{
-		 		alert(data.message);
-		 	}
-		}
-	}	
-	http.open("POST", '/buystocks/'+stockId, true);
-	http.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-	http.send(data);
-
-}
-
-var sellButton = document.getElementsByClassName("myButton")[1];
-sellButton.onclick = function(e) {
-	var http = new XMLHttpRequest();
-	e.preventDefault();
-	var data = "key=9bBo3YmHufzvSYWjbtkURd&email="+sessionStorage.getItem("email");
-	data += "&units="+document.getElementById("sellAmount").value;
-	http.onreadystatechange = function() {
-	 	if(http.readyState == 4 && http.status == 200) {
-	 		data = JSON.parse(http.responseText);
-			if ('error' in data){
-				alert(data.error);
-			}else{
-		 		alert(data.message);
-		 	}
-		}
-	}	
-	http.open("POST", '/sellstocks/'+stockId, true);
-	http.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-	http.send(data);
-
-}
 
 </script>
 
