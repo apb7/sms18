@@ -86,14 +86,14 @@ def international(request):#just a render view
 @csrf_exempt
 def register(request):
     if request.method == 'POST':
-        data = json.loads(request.POST)
+        data = request.POST
         try:
-            obj = User.objects.get(username=data['username'])
+            obj = User.objects.get(username=data.get('username'))
             return HttpResponse(json.dumps({"status":"fail", "url":reverse('main:index')}), content_type="application/json")
         except User.DoesNotExist:
-            user = User.objects.create_user(data['username'], data['email'], data['password'])
+            user = User.objects.create_user(data.get('username'), data.get('email'), data.get('password'))
             user.save()
-            userProf = UserProfile.objects.create(user=user, name=data['username'], mail_id=data['email'])
+            userProf = UserProfile.objects.create(user=user, name=data.get('username'), mail_id=data.get('email'))
             userProf.save()
             user.backend = 'django.contrib.auth.backends.ModelBackend'
             django_login(request,user)
@@ -104,8 +104,10 @@ def register(request):
 def login(request):
     if request.method == 'POST':
         data = request.POST
+        print(data.get('username'))
+        print(data.get('password'))
         print(data)
-        user = authenticate(username=data['username'], password=data['password'])
+        user = authenticate(username=data.get('username'), password=data.get('password'))
         django_login(request, user)
         if user is None:
             return HttpResponse(json.dumps({"status":"fail", "url":reverse('main:index')}), content_type="application/json")
