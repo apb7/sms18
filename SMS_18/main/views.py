@@ -118,6 +118,7 @@ def login(request):
 def logout(request):
     django_logout(request)
     return redirect('main:index')
+    del request.session['email']
 
 # TODO: Usage??
 def createProfile(request):
