@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.core.urlresolvers import reverse
 from django.shortcuts import render
 from django.http import HttpResponse, Http404 ,HttpResponseForbidden, HttpResponseRedirect
-from .models import UserProfile, GameSwitch, Stock, StockPurchased
+from .models import UserProfile, GameSwitch, Stock, StockPurchased, NewsPost, StoredNews
 from django.shortcuts import redirect, render_to_response
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from django.contrib import auth
@@ -334,7 +334,7 @@ def LBdata(request):
                 'name':i.name,
                 'net_worth':i.net_worth
                 })
-            my_pos = d.index({'name':current_user.name,'net_worth':current_user.net_worth}) + 1
+    my_pos = d.index({'name':current_user.name,'net_worth':current_user.net_worth}) + 1
     x=20
     n=len(d)
     d = d[:abs(x-n)]
@@ -379,3 +379,21 @@ def userLogin(request):
 @csrf_exempt
 def userLogout(request):
     pass
+
+def getnewspost(request):
+    global key
+    user_key = request.POST.get('key')
+    if user_key != key:
+        resp={
+            'error':'The user is not registered yet.'
+        }
+        return HttpResponse(json.dumps(resp), content_type = "application/json")
+    newsposts = NewsPost.objects.all()
+    d=[]
+    for this_post in newsposts:
+        d.append({
+            'time_of_post':this_post.time_of_post,
+            'Stock':this_post.corresponding_stock.product_name,
+            'post_text':this_post.post_text,
+            })
+    return HttpResponse(json.dumps(d), content_type="application/json")

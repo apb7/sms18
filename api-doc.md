@@ -99,3 +99,16 @@ Returned data contains a list of top 10 users, followed by rank  of current user
 If the key doesn't match then: {'error':'The user is not registered yet.'}
 
 	
+7: **URLS(main/urls.py):** '/getnewspost'
+
+**VIEW(main/views.py):** getnewspost
+
+Variables to be sent through POST request: 'key'  
+
+	If the key doesn't match then: {'error':'The user is not registered yet.'}
+
+Returned data is a list of details of news
+
+            'time_of_post':this_post.time_of_post,
+            'Stock':this_post.corresponding_stock.product_name,
+            'post_text':this_post.post_text,
