@@ -10,10 +10,10 @@ function closeNav() {
 
 //form submit
 
-var purchaseButton = document.getElementsByClassName("myButton")[0];
-purchaseButton.onclick = function(e) {
+function buyStocks() {
+
 	var http = new XMLHttpRequest();
-	e.preventDefault();
+	/*e.preventDefault();*/
 	var data = "key=9bBo3YmHufzvSYWjbtkURd&email="+sessionStorage.getItem("email");
 	data += "&units="+document.getElementById("purchaseAmount").value;
 	http.onreadystatechange = function() {
@@ -30,12 +30,11 @@ purchaseButton.onclick = function(e) {
 	http.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 	http.send(data);
 
-}
+};
 
-var sellButton = document.getElementsByClassName("myButton")[1];
-sellButton.onclick = function(e) {
+function sellStocks() {
 	var http = new XMLHttpRequest();
-	e.preventDefault();
+	/*e.preventDefault();*/
 	var data = "key=9bBo3YmHufzvSYWjbtkURd&email="+sessionStorage.getItem("email");
 	data += "&units="+document.getElementById("sellAmount").value;
 	http.onreadystatechange = function() {

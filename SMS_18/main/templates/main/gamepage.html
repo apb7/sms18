@@ -76,7 +76,7 @@
 			      	<p><input type="number" min="0" value="0" class="counter" id="purchaseAmount"></p>
 			    </div>
 			    <div class="modal-footer">
-			    	<button class="myButton"> Confirm Purchase </button>
+			    	<button onclick="buyStocks()" class="myButton"> Confirm Purchase </button>
 			    </div>
 			</div>
 
@@ -97,7 +97,7 @@
 			      	<p><input type="number" min="0" value="0" class="counter"  id="sellAmount"></p>
 			    </div>
 			    <div class="modal-footer">
-			    	<button class="myButton"> Confirm Sell </button>
+			    	<button onclick="sellStocks()" class="myButton"> Confirm Sell </button>
 			    </div>
 			</div>
 
@@ -145,6 +145,8 @@
 	        modals.style.display = "none";
 	    }
 	}
+
+
 
 
 
