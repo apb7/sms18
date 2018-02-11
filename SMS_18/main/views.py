@@ -86,7 +86,7 @@ def international(request):#just a render view
 @csrf_exempt
 def register(request):
     if request.method == 'POST':
-        data = json.loads(request.POST.items()[0][0])
+        data = json.loads(request.POST)
         try:
             obj = User.objects.get(username=data['username'])
             return HttpResponse(json.dumps({"status":"fail", "url":reverse('main:index')}), content_type="application/json")
@@ -103,7 +103,8 @@ def register(request):
 @csrf_exempt
 def login(request):
     if request.method == 'POST':
-        data = json.loads(request.POST.items()[0][0])
+        data = request.POST
+        print(data)
         user = authenticate(username=data['username'], password=data['password'])
         django_login(request, user)
         if user is None:

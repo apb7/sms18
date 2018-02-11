@@ -17,7 +17,7 @@ xhttp.onreadystatechange = function() {
 
 xhttp.open('POST',url, true);
 xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
-xhttp.send("key=9bBo3YmHufzvSYWjbtkURd");
+xhttp.send("key=9bBo3YmHufzvSYWjbtkURd&email="+sessionStorage.getItem("email"));
 
 
 
