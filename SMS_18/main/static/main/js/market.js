@@ -22,14 +22,15 @@ function buyStocks() {
 			if ('error' in data){
 				alert(data.error);
 			}else{
-		 		alert(data.message);
+		 		/*alert(data.message);*/
+		 		setTimeout(function(){window.location.reload();},10)
 		 	}
 		}
 	}	
 	http.open("POST", '/buystocks/'+stockId, true);
 	http.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 	http.send(data);
-
+	
 };
 
 function sellStocks() {
@@ -43,7 +44,8 @@ function sellStocks() {
 			if ('error' in data){
 				alert(data.error);
 			}else{
-		 		alert(data.message);
+		 		/*alert(data.message);*/
+		 		setTimeout(function(){window.location.reload();},10)
 		 	}
 		}
 	}	
