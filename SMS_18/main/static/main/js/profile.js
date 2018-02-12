@@ -13,7 +13,7 @@ xhttp.onreadystatechange = function() {
 		}else{
 			for (var i = 0; i < data.length; i++) {
 				if(data[i].market_type == "BSE" || data[i].market_type == "Both") {
-					document.getElementsByClassName('main')[0].innerHTML += '<div class="stock"><div class="profile-details">'+data[i].name+'</div><div class="profile-details">'+data[i].num+'</div><div class="profile-details">'+data[i].price+'</div><div class="profile-details">'+data[i].price*data[i].num+'</div></div>';
+					document.getElementsByClassName('main')[0].innerHTML += '<div class="stock"><div class="profile-details">'+data[i].name+'</div><div class="profile-details">'+data[i].num+'</div><div class="profile-details">&#8377 <span>'+data[i].price+'</span></div><div class="profile-details">&#8377 <span>'+data[i].price*data[i].num+'</span></div></div>';
 				}
 				else
 					document.getElementsByClassName('main')[0].innerHTML += '<div class="stock"><div class="profile-details">'+data[i].name+'</div><div class="profile-details">'+data[i].num+'</div><div class="profile-details">$'+(data[i].price/conversionRate).toFixed(1)+'</div><div class="profile-details">$'+(data[i].price*data[i].num/conversionRate).toFixed(1)+'</div></div>';

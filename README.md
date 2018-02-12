@@ -6,13 +6,11 @@ password : smsadmin
 * Complete Gameswitch functionality.
 * Implement the time functionality.
 * Design and implement the algo.
-* hamburger menu
-* buy-sell cards incorporated in market tab
-* make a table for portfolio
-* improve card design
-* responsive profile tab and buy-sell button
-* adding increase/decrease button
-* adding markets ?
+* make a profile table
+* show increase/decrease percentage on clicking the stock, also add green and red indicators
+* fade background on clicking on sidenav, and close sidenav on clicking anywhere else on page
+* add css effects like drop shadow on navbar
+* add favicons on all pages
 
 ## Allauth Setup:  
 * Add a new `Social application` from the admin page.  

@@ -192,5 +192,7 @@ hr {
 /* Conversion Rate display */
 .conversionRate {
 	font-size: 14px;
+	display: block;
 	color: yellow;
+	margin-top: -55px;
 }
