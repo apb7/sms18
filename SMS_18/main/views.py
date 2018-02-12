@@ -309,7 +309,8 @@ def StockData(request, id):
     stock_data = {
         "name" : this_stock.product_name,
         "price" : this_stock.stock_price,
-        "num" : num
+        "num" : num,
+        "market_type": this_stock.market_type
     }
     return HttpResponse(json.dumps(stock_data), content_type = "application/json")
 
@@ -388,6 +389,7 @@ def userLogin(request):
 def userLogout(request):
     pass
 
+@csrf_exempt
 def getnewspost(request):
     global key
     user_key = request.POST.get('key')
