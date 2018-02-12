@@ -20,7 +20,8 @@ function buyStocks() {
 	 	if(http.readyState == 4 && http.status == 200) {
 	 		data = JSON.parse(http.responseText);
 			if ('error' in data){
-				alert(data.error);
+				document.getElementsByClassName('errorText')[0].innerHTML = data.error;
+				setTimeout(function(){window.location.reload();},500)
 			}else{
 		 		/*alert(data.message);*/
 		 		setTimeout(function(){window.location.reload();},10)
@@ -42,7 +43,8 @@ function sellStocks() {
 	 	if(http.readyState == 4 && http.status == 200) {
 	 		data = JSON.parse(http.responseText);
 			if ('error' in data){
-				alert(data.error);
+				document.getElementsByClassName('errorText')[1].innerHTML = data.error;
+				setTimeout(function(){window.location.reload();},500)
 			}else{
 		 		/*alert(data.message);*/
 		 		setTimeout(function(){window.location.reload();},10)

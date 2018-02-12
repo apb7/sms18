@@ -66,10 +66,10 @@
     <form class="email-login" id="email-login" method="POST" action="/login">
     	{% csrf_token %}
       <div class="u-form-group">
-        <input type="text" placeholder="username" name="username" />
+        <input type="text" placeholder="Username" name="username" />
       </div>
       <div class="u-form-group">
-        <input type="password" placeholder="password" name="password" />
+        <input type="password" placeholder="Password" name="password" />
       </div>
       <div class="u-form-group">
         <button type="submit" class="submitBtn">Login</button>
@@ -81,13 +81,13 @@
     <form class="email-signup" method="POST" action="/register">
     	{% csrf_token %}
       <div class="u-form-group">
-        <input type="text" placeholder="username" name="username" />
+        <input type="text" placeholder="Username" name="username" />
       </div>
       <div class="u-form-group">
-        <input type="email" placeholder="email" name="email" />
+        <input type="email" placeholder="Email" name="email" />
       </div>
       <div class="u-form-group">
-        <input type="password" placeholder="password" name="password" />
+        <input type="password" placeholder="Password" name="password" />
       </div>
       <!-- <div class="u-form-group">
         <input type="password" placeholder="Confirm Password"/>

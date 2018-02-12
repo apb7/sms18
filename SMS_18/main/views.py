@@ -282,7 +282,8 @@ def StocksPrimaryData(request):
             "id" : this_stock.id,
             "name" : this_stock.product_name,
             "price" : this_stock.stock_price,
-            "market_type": this_stock.market_type
+            "market_type": this_stock.market_type,
+            "change": this_stock.stock_price-this_stock.initial_price
         }
         StocksData.append(stock_data)
     return HttpResponse(json.dumps(StocksData), content_type="application/json")
@@ -341,9 +342,12 @@ def LBdata(request):
                 })
     my_pos = d.index({'name':current_user.name,'net_worth':current_user.net_worth}) + 1
     x=20
-    n=len(d)
-    d = d[:abs(x-n)]
-    d.append({'Rank of current_user':my_pos})
+    d = d[:x]
+    d.append({
+        'rank':my_pos, 
+        'name':current_user.name,
+        'net_worth':current_user.net_worth
+    })
     return HttpResponse(json.dumps(d), content_type = "application/json")
 
 

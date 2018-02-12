@@ -7,6 +7,7 @@ xhttp.onreadystatechange = function() {
 	if (this.readyState == 4 && this.status == 200){
 		var data = JSON.parse(this.responseText);
 		var conversionRate = 64;
+		document.getElementById('conversionRate').innerHTML = conversionRate;
 		if ('error' in data){
 			alert(data.error);
 		}else{
@@ -19,12 +20,17 @@ xhttp.onreadystatechange = function() {
 					}
 				}	
 			for (var i = 0; i < dataNYM.length; i++) {
-				document.getElementsByClassName('main')[0].innerHTML += '<div class="stock"><div class="shown"><div class="name" id="stockName">'+dataNYM[i].name+'</div><div class="price">&#36 '+dataNYM[i].price/64+'</div></div><div class="hidden"><div class="buy" id="myBtn"> <button onclick="modalOpen('+dataNYM[i].id+')">BUY</button> </div><div class="sell" id="myBtn"> <button class="button" onclick="modalOpenS('+dataNYM[i].id+')">SELL</button></div></div></div>';
-				console.log(dataNYM[i].market_type);
+				document.getElementsByClassName('main')[0].innerHTML += '<div class="stock"><div class="shown"><div class="name" id="stockName">'+dataNYM[i].name+'</div><div class="price"> <span>' + (dataNYM[i].price/conversionRate).toFixed(2) + ' </span><span class="increasePrice"> &#x25B2; </span><span class="decreasePrice"> &#x25BC; </span></div></div><div class="hidden"><div class="buy" id="myBtn"> <button onclick="modalOpen('+dataNYM[i].id+')">BUY</button> </div><div class="sell" id="myBtn"> <button class="button" onclick="modalOpenS('+dataNYM[i].id+')">SELL</button></div></div></div>';
+				if(dataNYM[i].change>0) {	
+					document.getElementsByClassName("increasePrice")[i].style.display = "inline";
+				}
+				else if (data[Indian[i]]<0) {
+					document.getElementsByClassName("decreasePrice")[i].style.display = "inline";
+				}
 			}
 				
 				
-			var j=0;
+			var j=1;
 			while (j<=dataNYM.length){
 			document.getElementsByClassName("stock")[j].addEventListener("click", function(){
 				this.classList.toggle("show");
