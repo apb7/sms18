@@ -8,11 +8,22 @@ xhttp.onreadystatechange = function() {
 		if ('error' in data){
 			alert(data.error);
 		}else{
-			for (var i = 0; i < data.length; i++) {
-				document.getElementsByClassName('main')[0].innerHTML += '<div class="stock"><div class="shown"><div class="name" id="stockName">'+data[i].name+'</div><div class="price">&#8377 '+data[i].price+'</div></div><div class="hidden"><div class="buy" id="myBtn"> <button onclick="modalOpen('+data[i].id+')">BUY</button> </div><div class="sell" id="myBtn"> <button class="button" onclick="modalOpenS('+data[i].id+')">SELL</button></div></div></div>';
+			var k=0;
+			var dataIndian = [];
+			for (var c=0; c<data.length; c++) {
+				if(data[c].market_type == "BSE" || data[c].market_type == "Both") {
+					dataIndian[k] = data[c];
+					k++;
+					}
+				}	
+			for (var i = 0; i < dataIndian.length; i++) {
+				document.getElementsByClassName('main')[0].innerHTML += '<div class="stock"><div class="shown"><div class="name" id="stockName">'+dataIndian[i].name+'</div><div class="price">&#8377 '+dataIndian[i].price+'</div></div><div class="hidden"><div class="buy" id="myBtn"> <button onclick="modalOpen('+dataIndian[i].id+')">BUY</button> </div><div class="sell" id="myBtn"> <button class="button" onclick="modalOpenS('+dataIndian[i].id+')">SELL</button></div></div></div>';
+				console.log(dataIndian[i].market_type);
 			}
+				
+				
 			var j=0;
-			while (j<=data.length){
+			while (j<=dataIndian.length){
 			document.getElementsByClassName("stock")[j].addEventListener("click", function(){
 				this.classList.toggle("show");
 			});
