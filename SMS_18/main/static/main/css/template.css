@@ -177,4 +177,20 @@ hr {
 	}
 }
 
+/* INCREASE AND DECREASE MARKERS */ 
+.increasePrice, .decreasePrice {
+	display: none;
+}
 
+/* ERROR MESSAGE ON SELL */
+.errorText {
+	color: red;
+	font-size: 18px;
+}
+
+
+/* Conversion Rate display */
+.conversionRate {
+	font-size: 14px;
+	color: yellow;
+}

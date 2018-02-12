@@ -18,7 +18,10 @@
 				<!-- <div class="title"> <span> STOCK MARKET SIMULATION </span> </div> -->
 				<div class="profile">
 					<div class="user user1" id="userName"></div>
-					<div class="user user2">Balance: &#8377 <span  id="userBalance"></span> <span class="hamburgerIcon"onclick="openNav()">&#9776;</span></div>
+					<div class="user user2">Balance: &#8377 
+						<span  id="userBalance"></span>
+						<span class="conversionRate"> (&#8377 1 = &#36 <span id="conversionRate"></span>)</span>
+						<span class="hamburgerIcon"onclick="openNav()">&#9776;</span></div>
 				</div>
 				<div class="navbar">
 
@@ -30,8 +33,11 @@
 		<div class="main">
 			<div class="stock">
 				<div class="shown">
-					<div class="name" id="stockName">Stock Name</div>
-					<div class="price">&#8377 Stock Price</div>
+					<div class="name">Stock Name</div>
+					<div class="price"> <span> Stock Price </span>
+										<!-- <span id="increasePrice"> &#x25B2; </span>
+										<span id="decreasePrice"> &#x25BC; </span> -->
+					</div>
 				</div>
 				<!-- <div class="hidden">
 					<div class="buy" id="myBtn"><button onclick="modalOpen()">BUY</button> </div>
@@ -74,6 +80,7 @@
 			    <div class="modal-body">
 			      	<p>Enter stocks to buy</p>
 			      	<p><input type="number" min="0" value="0" class="counter" id="purchaseAmount"></p>
+			      	<p class="errorText"></p>
 			    </div>
 			    <div class="modal-footer">
 			    	<button onclick="buyStocks()" class="myButton"> Confirm Purchase </button>
@@ -95,6 +102,7 @@
 			    <div class="modal-body">
 			      	<p>Enter stocks to Sell</p>
 			      	<p><input type="number" min="0" value="0" class="counter"  id="sellAmount"></p>
+			      	<p class="errorText"></p>
 			    </div>
 			    <div class="modal-footer">
 			    	<button onclick="sellStocks()" class="myButton"> Confirm Sell </button>

@@ -11,7 +11,7 @@ xhttp.onreadystatechange = function() {
 			alert(data.error);
 		}else{
 			document.getElementById("userName").innerHTML ='<b>' + data.username + '</b>';
-			document.getElementById("userBalance").innerHTML = data.user_balance/conversionRate;
+			document.getElementById("userBalance").innerHTML = (data.user_balance/conversionRate).toFixed(2);
 		}
 	}
 }
