@@ -23,7 +23,7 @@ xhttp.onreadystatechange = function() {
 				if(dataIndian[i].change>0) {
 					document.getElementsByClassName("increasePrice")[i].style.display = "inline";
 				}
-				else if (data[Indian[i]]<0) {
+				else if (dataIndian[i].change<0) {
 					document.getElementsByClassName("decreasePrice")[i].style.display = "inline";
 				}
 			}

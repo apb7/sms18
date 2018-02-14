@@ -24,7 +24,7 @@ xhttp.onreadystatechange = function() {
 				if(dataNYM[i].change>0) {	
 					document.getElementsByClassName("increasePrice")[i].style.display = "inline";
 				}
-				else if (data[Indian[i]]<0) {
+				else if (dataNYM[i].change<0) {
 					document.getElementsByClassName("decreasePrice")[i].style.display = "inline";
 				}
 			}
