@@ -267,7 +267,8 @@ def UserStockDetails(request):
         "name" : current_stock.product_name,
         "num" : this_stock.number_of_stocks,
         "price" : current_stock.stock_price,
-        "market_type":current_stock.market_type
+        "market_type":current_stock.market_type,
+        "price_trend":current_stock.price_trend
         }
         #this will send the name of the stock along with the number of units the user is currently owning
         StocksData.append(stock_data)
@@ -291,7 +292,7 @@ def StocksPrimaryData(request):
             "name" : this_stock.product_name,
             "price" : this_stock.stock_price,
             "market_type": this_stock.market_type,
-            "change": this_stock.stock_price-this_stock.initial_price
+            "price_trend": this_stock.price_trend
         }
         StocksData.append(stock_data)
     return HttpResponse(json.dumps(StocksData), content_type="application/json")
@@ -318,7 +319,8 @@ def StockData(request, id):
         "name" : this_stock.product_name,
         "price" : this_stock.stock_price,
         "num" : num,
-        "market_type": this_stock.market_type
+        "market_type": this_stock.market_type,
+        "price_trend": this_stock.price_trend
     }
     return HttpResponse(json.dumps(stock_data), content_type = "application/json")
 
