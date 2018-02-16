@@ -6,6 +6,9 @@ from main.models import NewsPost,StoredNews
 import time
 import datetime
 import random
+import pause
+
+#pause.until(datetime(2015, 8, 12, 2))
 #this function is needed to be called when the event starts!
 def news_timer():
 	time_total = 1000000

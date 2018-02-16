@@ -44,7 +44,7 @@ class NewsPost(models.Model):#this will be populated only when the time comes, s
 	time_of_post=models.DateTimeField(default=datetime.now(), blank=True)
 
 	def __str__(self):
-		return self.corresponding_stock+":"+self.id
+		return self.corresponding_stock
 
 
 class StoredNews(models.Model):#this is for backend purpose only, to populate NewsPost at the right time
