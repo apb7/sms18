@@ -15,9 +15,9 @@ class UserProfile(models.Model):
 class Stock(models.Model):
 	product_name = models.CharField(max_length=100) #from manforce to mrf, anything in between xD
 	stock_price = models.IntegerField(default=0) #Stock price at any instant
-	initial_price = models.IntegerField(default=0)
-	final_price = models.IntegerField(default=0)
 	market_type = models.CharField(max_length=10, null=False, choices=(("BSE",'"BSE"'),("NYM",'"NYM"'),("Both",'"Both"')),default = "Both")
+	price_trend = models.DecimalField(default = 0.0, max_digits=19, decimal_places=3)
+
 
 	def __str__(self):
 		return self.product_name
@@ -44,7 +44,7 @@ class NewsPost(models.Model):#this will be populated only when the time comes, s
 	time_of_post=models.DateTimeField(default=datetime.now(), blank=True)
 
 	def __str__(self):
-		return self.corresponding_stock+":"+self.id
+		return self.corresponding_stock
 
 
 class StoredNews(models.Model):#this is for backend purpose only, to populate NewsPost at the right time

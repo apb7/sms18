@@ -54,7 +54,8 @@ Returned data contains a list with all stock's details like this:
              {"id" : this_stock.id,
             "name" : this_stock.product_name,
             "price" : this_stock.stock_price,
-			"market_type" : this_stock.market_type}
+			"market_type" : this_stock.market_type,
+            "price_trend" : this_stock.price_trend}
 	
 If the key doesn't match then: {'error':'The user is not registered yet.'}
 
@@ -68,7 +69,8 @@ Returned data contains a list with all stocks info purchased by the given user, 
 
         {"name" : current_stock.product_name,
         "num" : this_stock.number_of_stocks,
-        "price" : current_stock.stock_price,}
+        "price" : current_stock.stock_price,
+        "price_trend" : this_stock.price_trend}
 	
 If the key doesn't match then: {'error':'The user is not registered yet.'}
 
@@ -82,7 +84,8 @@ Returned data contains info of the stock corresponding to the id, like this:
 
         {"name" : current_stock.product_name,
         "num" : this_stock.number_of_stocks,
-        "price" : current_stock.stock_price,}
+        "price" : current_stock.stock_price,
+        "price_trend" : this_stock.price_trend}
 
 If the key doesn't match then: {'error':'The user is not registered yet.'}
 
