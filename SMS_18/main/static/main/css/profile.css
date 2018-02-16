@@ -117,11 +117,11 @@ body{
 }*/
 
 .stock {
-	height: 15vh;
+	height: 10vh;
 	background: #ffffff;
 	border-radius: 0px;
 	margin: 0.5vh 0;
-	line-height: 15vh;
+	line-height: 10vh;
 	transition: height 300ms;
 	display: flex;
 	justify-content: space-around;
@@ -134,7 +134,7 @@ body{
 
 .profile-details {
 	flex-basis: 25%;
-	height: 15vh;
+	height: 10vh;
 }
 
 

@@ -25,16 +25,15 @@
 				</div>
 				<div class="navbar">
 
-					<a href="./international.html"> <div class="nav active" ><span>International</span> </div> </a>
 		  			<a href="{% url 'main:game' %}"><div class="nav"><span>Indian</span> </div> </a>
-
+		  			<a href="./international.html"> <div class="nav active" ><span>International</span> </div> </a>
 				</div>
 			</div>
 		<div class="main">
 			<div class="stock">
 				<div class="shown">
-					<div class="name" id="stockName">Stock Name</div>
-					<div class="price">Stock Price</div>
+					<div class="name" id="stockName"><b>Stock Name</b></div>
+					<div class="price"><b>Stock Price</b></div>
 				</div>
 				<!-- <div class="hidden">
 					<div class="buy" id="myBtn"><button onclick="modalOpen()">BUY</button></div>
@@ -56,9 +55,10 @@
 				</div>
 				<div> 
 					<a class="links" href="{% url 'main:profile' %}">Portfolio</a> <hr>
-					<a class="links" href="{% url 'main:game' %}">Market</a> <hr>
-					<a class="links" href="{% url 'main:leaderboard' %}">Leaderboard</a> <hr>
-					<a class="links" href="{% url 'main:logout' %}">Logout</a> <hr> 
+				<a class="links" href="{% url 'main:game' %}">Market</a> <hr>
+				<a class="links" href="{% url 'main:leaderboard' %}">Leaderboard</a> <hr> 
+				<a class="links" href="{% url 'main:news' %}">News </a> <hr>
+				<a class="links" href="{% url 'main:logout' %}">Logout</a> <hr>
 				</div>
 			</div>
 		</div>

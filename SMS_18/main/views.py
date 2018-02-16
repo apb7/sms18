@@ -79,6 +79,14 @@ def international(request):#just a render view
         return HttpResponse(json.dumps(resp), content_type = "application/json")
     return render(request, 'main/international.html')
 
+def news(request):#just a render view
+    if not request.user.is_authenticated():
+        resp={
+            'error':'The user is not registered yet.'
+        }
+        return HttpResponse(json.dumps(resp), content_type = "application/json")
+    return render(request, 'main/news.html')    
+
 
 
 # Register and login functions not working!
