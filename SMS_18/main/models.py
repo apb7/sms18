@@ -53,5 +53,5 @@ class StoredNews(models.Model):#this is for backend purpose only, to populate Ne
 	minute_interval=models.IntegerField(null=False,default=0)
 
 	def __str__(self):
-		return self.corresponding_stock+":"+self.id
+		return self.corresponding_stock
 		
