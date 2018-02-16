@@ -7,10 +7,12 @@ password : smsadmin
 * Implement the time functionality.
 * Design and implement the algo.
 * make a profile table
-* show increase/decrease percentage on clicking the stock, also add green and red indicators
+* show increase/decrease percentage on clicking the stock
 * fade background on clicking on sidenav, and close sidenav on clicking anywhere else on page
 * add css effects like drop shadow on navbar
 * add favicons on all pages
+* improvise display of error message on selling more stocks than owned
+* add error on entering wrong login credentials
 
 ## Allauth Setup:  
 * Add a new `Social application` from the admin page.  

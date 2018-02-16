@@ -120,6 +120,7 @@
     z-index: 10;
     background: white;
     color: black;
+    background: #ECEFF1;
 }
 
 .sidenav a {
@@ -140,7 +141,7 @@
 	height: 60px;
 	text-align: right;
 	margin-top: -60px;
-	background: #1A237E;
+	background: #01579B;
 	color: white;
 }
 .sidenav .closebtn {
@@ -180,6 +181,14 @@ hr {
 /* INCREASE AND DECREASE MARKERS */ 
 .increasePrice, .decreasePrice {
 	display: none;
+	text-align: right;
+}
+
+.increasePrice {
+	color: green;
+}
+.decreasePrice {
+	color: red;
 }
 
 /* ERROR MESSAGE ON SELL */
@@ -195,4 +204,17 @@ hr {
 	display: block;
 	color: yellow;
 	margin-top: -55px;
+}
+
+
+/* NON NAVBAR DESIGN */
+.profile1 {
+	height: 85px;
+}	
+.header1 {
+	height: 87px;
+}
+
+.main1 {
+	top: 90px;
 }

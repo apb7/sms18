@@ -5,6 +5,7 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^test$', views.test, name='test'),
     url(r'^game$', views.game , name='game'),
+    url(r'^news$', views.news , name='news'),
     url(r'^buystocks/(?P<id>\d+)$', views.BuyStocks , name='BuyStocks'),
 	url(r'^buy/(?P<id>\d+)$', views.buy, name='buy'),
     url(r'^sellstocks/(?P<id>\d+)$', views.SellStocks , name='SellStocks'),
