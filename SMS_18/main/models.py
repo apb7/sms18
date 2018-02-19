@@ -16,8 +16,8 @@ class Stock(models.Model):
 	product_name = models.CharField(max_length=100) #from manforce to mrf, anything in between xD
 	stock_price = models.IntegerField(default=0) #Stock price at any instant
 	market_type = models.CharField(max_length=10, null=False, choices=(("BSE",'"BSE"'),("NYM",'"NYM"'),("Both",'"Both"')),default = "Both")
-	price_trend = models.DecimalField(default = 0.0, max_digits=19, decimal_places=3)
-
+	price_trend = models.IntegerField(default = 0)
+	#first two digits will be ones and tens represent... others decimal
 
 	def __str__(self):
 		return self.product_name
@@ -33,7 +33,7 @@ class StockPurchased(models.Model):
 
 class GameSwitch(models.Model):
 	switch_name=models.CharField(null=False,max_length=10) #We will have only one switch called 'Main'
-	game_status= models.IntegerField(null=False, choices=((0,'0'),(1,'1'),(2,'2')),default = 0) #0 for before start, 1 fr during game,2 for after game ends
+	game_status= models.IntegerField(null=False, choices=(("before_start",'before_start'),("live",'live'),("closed",'closed')),default = "before_start") #0 for before start, 1 fr during game,2 for after game ends
 
 	def __str__(self):
 		return self.switch_name
@@ -55,3 +55,5 @@ class StoredNews(models.Model):#this is for backend purpose only, to populate Ne
 	def __str__(self):
 		return self.corresponding_stock
 		
+#class ConversionRate(models.Model):
+#	conversion_rate = models.I
