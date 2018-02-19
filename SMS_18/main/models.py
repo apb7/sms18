@@ -55,5 +55,8 @@ class StoredNews(models.Model):#this is for backend purpose only, to populate Ne
 	def __str__(self):
 		return self.corresponding_stock
 		
-#class ConversionRate(models.Model):
-#	conversion_rate = models.I
+class ConversionRate(models.Model):
+	conversion_rate = models.IntegerField(default=0)
+
+	def __str__(self):
+		return self.conversion_rate
