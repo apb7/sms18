@@ -33,7 +33,7 @@ class StockPurchased(models.Model):
 
 class GameSwitch(models.Model):
 	switch_name=models.CharField(null=False,max_length=10) #We will have only one switch called 'Main'
-	game_status= models.IntegerField(null=False, choices=(("before_start",'before_start'),("live",'live'),("closed",'closed')),default = "before_start") #0 for before start, 1 fr during game,2 for after game ends
+	game_status= models.CharField(null=False, choices=(("before_start",'"before_start"'),("live",'"live"'),("closed",'"closed"')),max_length=100) #0 for before start, 1 fr during game,2 for after game ends
 
 	def __str__(self):
 		return self.switch_name
