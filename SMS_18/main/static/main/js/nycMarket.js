@@ -7,6 +7,7 @@ xhttp.onreadystatechange = function() {
 	if (this.readyState == 4 && this.status == 200){
 		var data = JSON.parse(this.responseText);
 		var conversionRate = 64;
+		console.log(data);
 		document.getElementById('conversionRate').innerHTML = conversionRate;
 		if ('error' in data){
 			alert(data.error);
