@@ -417,3 +417,32 @@ def getnewspost(request):
             'post_text':this_post.post_text,
             })
     return HttpResponse(json.dumps(d), content_type="application/json")
+
+def gameswitchstatus(request):
+    global key
+    user_key = request.POST.get('key')
+    if user_key != key:
+        resp={
+            'error':'The user is not registered yet.'
+        }
+        return HttpResponse(json.dumps(resp), content_type = "application/json")
+        gs = GameSwitch.objects.get(switch_name="main")
+        resp={
+        "status_of_game":gs.game_status,#add to doc
+        }
+        return HttpResponse(json.dumps(resp), content_type="application/json")
+
+def getconversionrate(request):
+    cr = conversion_rate.objects.all()
+    global key
+    user_key = request.POST.get('key')
+    if user_key != key:
+        resp={
+            'error':'The user is not registered yet.'
+        }
+    return HttpResponse(json.dumps(resp), content_type = "application/json")
+    resp={
+    'conversion_rate': cr.conversion_rate,
+    }
+    return HttpResponse(json.dumps(resp), content_type = "application/json")
+    
