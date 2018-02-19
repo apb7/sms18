@@ -17,7 +17,7 @@ class Stock(models.Model):
 	stock_price = models.IntegerField(default=0) #Stock price at any instant
 	market_type = models.CharField(max_length=10, null=False, choices=(("BSE",'"BSE"'),("NYM",'"NYM"'),("Both",'"Both"')),default = "Both")
 	price_trend = models.IntegerField(default = 0)
-	#first two digits will be ones and tens represent... others decimal
+	#first two digits will be ones and tens representatives... others decimal
 
 	def __str__(self):
 		return self.product_name
@@ -56,7 +56,8 @@ class StoredNews(models.Model):#this is for backend purpose only, to populate Ne
 		return self.corresponding_stock
 		
 class ConversionRate(models.Model):
+	var_name = models.CharField(null=False,max_length=100,default="main")
 	conversion_rate = models.IntegerField(default=0)
 
 	def __str__(self):
-		return self.conversion_rate
+		return self.var_name

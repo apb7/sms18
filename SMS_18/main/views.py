@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.core.urlresolvers import reverse
 from django.shortcuts import render
 from django.http import HttpResponse, Http404 ,HttpResponseForbidden, HttpResponseRedirect
-from .models import UserProfile, GameSwitch, Stock, StockPurchased, NewsPost, StoredNews
+from .models import UserProfile, GameSwitch, Stock, StockPurchased, NewsPost, StoredNews, ConversionRate
 from django.shortcuts import redirect, render_to_response
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from django.contrib import auth
@@ -418,6 +418,7 @@ def getnewspost(request):
             })
     return HttpResponse(json.dumps(d), content_type="application/json")
 
+@csrf_exempt
 def gameswitchstatus(request):
     global key
     user_key = request.POST.get('key')
@@ -426,23 +427,25 @@ def gameswitchstatus(request):
             'error':'The user is not registered yet.'
         }
         return HttpResponse(json.dumps(resp), content_type = "application/json")
-        gs = GameSwitch.objects.get(switch_name="main")
-        resp={
-        "status_of_game":gs.game_status,#add to doc
-        }
-        return HttpResponse(json.dumps(resp), content_type="application/json")
+    gs = GameSwitch.objects.get(switch_name="main")
+    resp={
+    "status_of_game":gs.game_status,#add to doc
+    }
+    print("***")
+    return HttpResponse(json.dumps(resp), content_type="application/json")
 
+@csrf_exempt
 def getconversionrate(request):
-    cr = conversion_rate.objects.all()
+    cr = ConversionRate.objects.get(var_name="main")
     global key
     user_key = request.POST.get('key')
     if user_key != key:
         resp={
             'error':'The user is not registered yet.'
         }
-    return HttpResponse(json.dumps(resp), content_type = "application/json")
+        return HttpResponse(json.dumps(resp), content_type = "application/json")
     resp={
     'conversion_rate': cr.conversion_rate,
     }
+    print("****")
     return HttpResponse(json.dumps(resp), content_type = "application/json")
-    
