@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^test$', views.test, name='test'),
+    url(r'^gameswitchstatus$', views.gameswitchstatus, name='gameswitchstatus'),
     url(r'^game$', views.game , name='game'),
     url(r'^news$', views.news , name='news'),
     url(r'^buystocks/(?P<id>\d+)$', views.BuyStocks , name='BuyStocks'),
