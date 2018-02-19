@@ -20,10 +20,10 @@ xhttp.onreadystatechange = function() {
 				}	
 			for (var i = 0; i < dataIndian.length; i++) {
 				document.getElementsByClassName('main')[0].innerHTML += '<div class="stock"><div class="shown"><div class="name" id="stockName">'+dataIndian[i].name+'</div><div class="price">&#8377 <span>' + dataIndian[i].price + ' </span><span class="increasePrice"> &#x25B2; </span><span class="decreasePrice"> &#x25BC; </span></div></div><div class="hidden"><div class="buy" id="myBtn"> <button onclick="modalOpen('+dataIndian[i].id+')">BUY</button> </div><div class="sell" id="myBtn"> <button class="button" onclick="modalOpenS('+dataIndian[i].id+')">SELL</button></div></div></div>';
-				if(dataIndian[i].change>0) {
+				if(dataIndian[i].price_trend>0) {
 					document.getElementsByClassName("increasePrice")[i].style.display = "inline";
 				}
-				else if (dataIndian[i].change<0) {
+				else if (dataIndian[i].price_trend<0) {
 					document.getElementsByClassName("decreasePrice")[i].style.display = "inline";
 				}
 			}

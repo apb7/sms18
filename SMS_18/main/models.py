@@ -26,7 +26,7 @@ class StockPurchased(models.Model):
 	owner = models.ForeignKey('UserProfile' , on_delete=models.CASCADE) #stock purchased by which user
 	stockid = models.ForeignKey('Stock' , on_delete=models.CASCADE) #which stock purchased by user
 	number_of_stocks = models.IntegerField(default=0) #how many stocks were purchased
-
+	# TODO: Average stock price: Call the Stock with stock_id, calculate the total and then avg. price.
 	def __str__(self):
 		return self.number_of_stocks
 
@@ -41,7 +41,7 @@ class GameSwitch(models.Model):
 class NewsPost(models.Model):#this will be populated only when the time comes, see newspost.py for reference! This model will be populated from admin
 	corresponding_stock=models.ForeignKey('Stock',on_delete=models.CASCADE)
 	post_text=models.CharField(null=False,max_length=4000)
-	time_of_post=models.DateTimeField(default=datetime.now(), blank=True)
+	time_of_post=models.DateTimeField(default=datetime.now, blank=True)
 
 	def __str__(self):
 		return self.corresponding_stock
