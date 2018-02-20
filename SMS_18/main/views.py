@@ -172,7 +172,9 @@ def BuyStocks(request, id):
         except:
             current_stock = StockPurchased.objects.create(owner_id=current_user.id, stockid=stock_info)
 
-        current_stock.number_of_stocks += int(data['units'])
+        new_number = current_stock.number_of_stocks+int(data['units'])
+        current_stock.average_price = (current_stock.average_price*current_stock.number_of_stocks+ transaction_cost)/new_number 
+        current_stock.number_of_stocks = new_number
         current_stock.save()
         resp = {
             'message': 'SUCCESS: The user purchased the stock.'
@@ -202,14 +204,18 @@ def SellStocks(request, id):
         data = request.POST
         stock_info = Stock.objects.get(id=id)
         if current_stock.number_of_stocks >= int(data['units']):
-            current_user.balance += int(data['units'])*stock_info.stock_price
+            transaction_cost = int(data['units'])*stock_info.stock_price
+            current_user.balance += transaction_cost
             current_user.save()
             #current_stock = StockPurchased.objects.get(owner=current_user.id, stockid=stock_info)
-            current_stock.number_of_stocks -= int(data['units'])
+            new_number = current_stock.number_of_stocks - int(data['units'])
             if current_stock.number_of_stocks is 0:
                 current_stock.delete()
             else:
                 current_stock.save()
+                new_number = current_stock.number_of_stocks+int(data['units'])
+                current_stock.average_price = (current_stock.average_price*current_stock.number_of_stocks+ transaction_cost)/new_number 
+                current_stock.number_of_stocks = new_number
             resp = {
                 'message': 'SUCCESS: The user sold the stock.'
             }
@@ -219,7 +225,7 @@ def SellStocks(request, id):
                 'error': 'FAILURE: The user does not have enough stocks to sell.'
             }
             return HttpResponse(json.dumps(resp), content_type="application/json")
-        #return redirect('main:game')
+        
     elif request.method == 'POST' and current_stock is None:
         resp = {
             'error': 'The user does not have any stocks to sell'
@@ -269,7 +275,7 @@ def UserStockDetails(request):
         "price" : current_stock.stock_price,
         "market_type":current_stock.market_type,
         "price_trend":current_stock.price_trend,
-        "average_price":100, #todo
+        "average_price":current_stock.average_price, #todo
         "id": current_stock.id,
         }
         #this will send the name of the stock along with the number of units the user is currently owning
@@ -373,8 +379,6 @@ def userLogin(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         email = request.POST.get('email')        
-        #password = request.POST.get('password')
-        #print (username)
         try:
             obj = User.objects.get(username=username)
             msg = {
@@ -437,7 +441,6 @@ def gameswitchstatus(request):
     resp={
     "status_of_game":gs.game_status,
     }
-    print("***")
     return HttpResponse(json.dumps(resp), content_type="application/json")
 
 @csrf_exempt
@@ -453,5 +456,4 @@ def getconversionrate(request):
     resp={
     'conversion_rate': cr.conversion_rate,
     }
-    print("****")
     return HttpResponse(json.dumps(resp), content_type = "application/json")
