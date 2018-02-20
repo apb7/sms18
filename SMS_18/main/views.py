@@ -293,7 +293,7 @@ def StocksPrimaryData(request):
             "name" : this_stock.product_name,
             "price" : this_stock.stock_price,
             "market_type": this_stock.market_type,
-            "price_trend": this_stock.price_trend
+            "price_trend": this_stock.price_trend,
         }
         StocksData.append(stock_data)
     return HttpResponse(json.dumps(StocksData), content_type="application/json")

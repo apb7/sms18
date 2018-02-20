@@ -7,6 +7,7 @@ xhttp.onreadystatechange = function() {
 	if (this.readyState == 4 && this.status == 200){
 		var data = JSON.parse(this.responseText);
 		var conversionRate = 64;
+		console.log(data);
 		document.getElementById('conversionRate').innerHTML = conversionRate;
 		if ('error' in data){
 			alert(data.error);
@@ -21,10 +22,10 @@ xhttp.onreadystatechange = function() {
 				}	
 			for (var i = 0; i < dataNYM.length; i++) {
 				document.getElementsByClassName('main')[0].innerHTML += '<div class="stock"><div class="shown"><div class="name" id="stockName">'+dataNYM[i].name+'</div><div class="price">&#36 <span>' + (dataNYM[i].price/conversionRate).toFixed(2) + ' </span><span class="increasePrice"> &#x25B2; </span><span class="decreasePrice"> &#x25BC; </span></div></div><div class="hidden"><div class="buy" id="myBtn"> <button onclick="modalOpen('+dataNYM[i].id+')">BUY</button> </div><div class="sell" id="myBtn"> <button class="button" onclick="modalOpenS('+dataNYM[i].id+')">SELL</button></div></div></div>';
-				if(dataNYM[i].change>0) {	
+				if(dataNYM[i].price_trend>0) {	
 					document.getElementsByClassName("increasePrice")[i].style.display = "inline";
 				}
-				else if (dataNYM[i].change<0) {
+				else if (dataNYM[i].price_trend<0) {
 					document.getElementsByClassName("decreasePrice")[i].style.display = "inline";
 				}
 			}
