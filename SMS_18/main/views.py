@@ -348,9 +348,10 @@ def LBdata(request):
         for this_stock in StockPurchased.objects.filter(owner=this_user):
             stock_temp = this_stock.stockid
             if(stock_temp.market_type=="NYM"):
-                this_user.net_worth+=this_stock.number_of_stocks * (this_stock.stockid).stock_price * ConversionRate.conversion_rate
+                crx=ConversionRate.objects.get(var_name="main")
+                this_user.net_worth+=(this_stock.number_of_stocks * (this_stock.stockid).stock_price * crx.conversion_rate)
             else:
-                this_user.net_worth+=this_stock.number_of_stocks * (this_stock.stockid).stock_price
+                this_user.net_worth+=(this_stock.number_of_stocks * (this_stock.stockid).stock_price)
         this_user.net_worth+=this_user.balance
         this_user.save()
     up = UserProfile.objects.order_by('-net_worth')
