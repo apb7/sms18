@@ -12,7 +12,7 @@ xhttp.onreadystatechange = function() {
 			alert('Market is currently down');
 			window.location = '/profile';		
 		}
-	}
+	}	
 }
 
 xhttp.open('POST',url, true);
