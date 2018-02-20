@@ -5,9 +5,9 @@ var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function() {
 	if (this.readyState == 4 && this.status == 200){
 		var data = JSON.parse(this.responseText);
-		var conversionRate = 64;
+		/*var conversionRate = 64;*/
 		var el = document.getElementsByClassName('main')[0];	
-		document.getElementById('conversionRate').innerHTML = conversionRate;
+		/*document.getElementById('conversionRate').innerHTML = conversionRate;*/
 		if ('error' in data){
 			alert(data.error);
 		}else{
