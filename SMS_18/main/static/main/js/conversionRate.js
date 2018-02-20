@@ -7,7 +7,6 @@ xhttp.onreadystatechange = function() {
 		var data = JSON.parse(this.responseText);
 		console.log(data);
 		document.getElementById('conversionRate').innerHTML = data.conversion_rate;
-		alert(conversion_rate);	
 }
 
 xhttp.open('POST',url, true);

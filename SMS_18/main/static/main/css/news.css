@@ -29,8 +29,3 @@ body {
 	max-width: 1200px;
 	box-shadow: 2px 2px 2px 2px #9e9e9e;
 }
-
-.leader, .balance {
-	flex-basis: 50%;
-	text-align: center;
-}

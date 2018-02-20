@@ -12,6 +12,7 @@ xhttp.onreadystatechange = function() {
 		}
 		else {
 			console.log(data);
+			document.getElementsByClassName('main')[0].innerHTML = '<div class="profileLeader>' + data + '</div'
 		}
 	}
 }
