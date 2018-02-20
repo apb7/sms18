@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.core.urlresolvers import reverse
 from django.shortcuts import render
 from django.http import HttpResponse, Http404 ,HttpResponseForbidden, HttpResponseRedirect
-from .models import UserProfile, GameSwitch, Stock, StockPurchased, NewsPost, StoredNews, ConversionRate
+from .models import UserProfile, GameSwitch, Stock, StockPurchased, NewsPost, ConversionRate
 from django.shortcuts import redirect, render_to_response
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from django.contrib import auth
@@ -268,7 +268,8 @@ def UserStockDetails(request):
         "num" : this_stock.number_of_stocks,
         "price" : current_stock.stock_price,
         "market_type":current_stock.market_type,
-        "price_trend":current_stock.price_trend
+        "price_trend":current_stock.price_trend,
+        "average_price":100#todo
         }
         #this will send the name of the stock along with the number of units the user is currently owning
         StocksData.append(stock_data)
