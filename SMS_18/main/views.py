@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.core.urlresolvers import reverse
 from django.shortcuts import render
 from django.http import HttpResponse, Http404 ,HttpResponseForbidden, HttpResponseRedirect
-from .models import UserProfile, GameSwitch, Stock, StockPurchased, NewsPost, StoredNews
+from .models import UserProfile, GameSwitch, Stock, StockPurchased, NewsPost, ConversionRate
 from django.shortcuts import redirect, render_to_response
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from django.contrib import auth
@@ -268,7 +268,9 @@ def UserStockDetails(request):
         "num" : this_stock.number_of_stocks,
         "price" : current_stock.stock_price,
         "market_type":current_stock.market_type,
-        "price_trend":current_stock.price_trend
+        "price_trend":current_stock.price_trend,
+        "average_price":100, #todo
+        "id": current_stock.id,
         }
         #this will send the name of the stock along with the number of units the user is currently owning
         StocksData.append(stock_data)
@@ -339,7 +341,11 @@ def LBdata(request):
     for this_user in UserProfile.objects.all():
         this_user.net_worth=0
         for this_stock in StockPurchased.objects.filter(owner=this_user):
-            this_user.net_worth+=this_stock.number_of_stocks * (this_stock.stockid).stock_price
+            stock_temp = this_stock.stockid
+            if(stock_temp.market_type=="NYM"):
+                this_user.net_worth+=this_stock.number_of_stocks * (this_stock.stockid).stock_price * ConversionRate.conversion_rate
+            else:
+                this_user.net_worth+=this_stock.number_of_stocks * (this_stock.stockid).stock_price
         this_user.net_worth+=this_user.balance
         this_user.save()
     up = UserProfile.objects.order_by('-net_worth')
@@ -351,7 +357,7 @@ def LBdata(request):
                 'net_worth':i.net_worth
                 })
     my_pos = d.index({'name':current_user.name,'net_worth':current_user.net_worth}) + 1
-    x=20
+    x=10
     d = d[:x]
     d.append({
         'rank':my_pos, 
@@ -418,6 +424,7 @@ def getnewspost(request):
             })
     return HttpResponse(json.dumps(d), content_type="application/json")
 
+@csrf_exempt
 def gameswitchstatus(request):
     global key
     user_key = request.POST.get('key')
@@ -426,23 +433,25 @@ def gameswitchstatus(request):
             'error':'The user is not registered yet.'
         }
         return HttpResponse(json.dumps(resp), content_type = "application/json")
-        gs = GameSwitch.objects.get(switch_name="main")
-        resp={
-        "status_of_game":gs.game_status,#add to doc
-        }
-        return HttpResponse(json.dumps(resp), content_type="application/json")
+    gs = GameSwitch.objects.get(switch_name="main")
+    resp={
+    "status_of_game":gs.game_status,
+    }
+    print("***")
+    return HttpResponse(json.dumps(resp), content_type="application/json")
 
+@csrf_exempt
 def getconversionrate(request):
-    cr = conversion_rate.objects.all()
+    cr = ConversionRate.objects.get(var_name="main")
     global key
     user_key = request.POST.get('key')
     if user_key != key:
         resp={
             'error':'The user is not registered yet.'
         }
-    return HttpResponse(json.dumps(resp), content_type = "application/json")
+        return HttpResponse(json.dumps(resp), content_type = "application/json")
     resp={
     'conversion_rate': cr.conversion_rate,
     }
+    print("****")
     return HttpResponse(json.dumps(resp), content_type = "application/json")
-    
