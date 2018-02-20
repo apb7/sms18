@@ -275,10 +275,9 @@ def UserStockDetails(request):
         "price" : current_stock.stock_price,
         "market_type":current_stock.market_type,
         "price_trend":current_stock.price_trend,
-        "average_price":current_stock.average_price, #todo
+        "average_price":this_stock.average_price, #todo
         "id": current_stock.id,
         }
-        #this will send the name of the stock along with the number of units the user is currently owning
         StocksData.append(stock_data)
     return HttpResponse(json.dumps(StocksData), content_type="application/json")
 
@@ -349,9 +348,10 @@ def LBdata(request):
         for this_stock in StockPurchased.objects.filter(owner=this_user):
             stock_temp = this_stock.stockid
             if(stock_temp.market_type=="NYM"):
-                this_user.net_worth+=this_stock.number_of_stocks * (this_stock.stockid).stock_price * ConversionRate.conversion_rate
+                crx=ConversionRate.objects.get(var_name="main")
+                this_user.net_worth+=(this_stock.number_of_stocks * (this_stock.stockid).stock_price * crx.conversion_rate)
             else:
-                this_user.net_worth+=this_stock.number_of_stocks * (this_stock.stockid).stock_price
+                this_user.net_worth+=(this_stock.number_of_stocks * (this_stock.stockid).stock_price)
         this_user.net_worth+=this_user.balance
         this_user.save()
     up = UserProfile.objects.order_by('-net_worth')
