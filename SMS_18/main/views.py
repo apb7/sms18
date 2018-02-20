@@ -350,7 +350,7 @@ def LBdata(request):
             stock_temp = this_stock.stockid
             if(stock_temp.market_type=="NYM"):
                 crx=ConversionRate.objects.get(var_name="main")
-                this_user.net_worth+=(this_stock.number_of_stocks * (this_stock.stockid).stock_price * crx.conversion_rate)
+                this_user.net_worth+=(this_stock.number_of_stocks * (this_stock.stockid).stock_price * (crx.conversion_rate/100))
             else:
                 this_user.net_worth+=(this_stock.number_of_stocks * (this_stock.stockid).stock_price)
         this_user.net_worth+=this_user.balance
