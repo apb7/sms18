@@ -422,8 +422,7 @@ def getnewspost(request):
     d=[]
     for this_post in newsposts:
         d.append({
-            'time_of_post':this_post.time_of_post,
-            'Stock':this_post.corresponding_stock.product_name,
+            'time_of_post':str(this_post.time_of_post),
             'post_text':this_post.post_text,
             })
     return HttpResponse(json.dumps(d), content_type="application/json")

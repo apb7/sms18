@@ -8,7 +8,7 @@ body {
 
 .main{
 	position: absolute;
-	top: 126px;
+	top: 90px;
 /*	padding-top: 152px;*/
 	width: 100%;
 	display: flex;
@@ -28,4 +28,13 @@ body {
 	justify-content: space-around;
 	max-width: 1200px;
 	box-shadow: 2px 2px 2px 2px #9e9e9e;
+}
+
+.balance1 {
+	flex-basis: 60%;
+	text-align: center;
+}
+.balance2 {
+	flex-basis: 40%;
+	text-align: center;
 }
