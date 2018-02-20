@@ -1,4 +1,4 @@
-var url = '/getconversionrate';
+var url = '/gameswitchstatus';
 
 var xhttp = new XMLHttpRequest();
 
@@ -6,7 +6,15 @@ xhttp.onreadystatechange = function() {
 	if(this.readyState == 4 && this.status == 200)
 		var data = JSON.parse(this.responseText);
 		console.log(data);
-		document.getElementById('conversionRate').innerHTML = data.conversion_rate;
+		var i=0;
+		if(data.status_of_game = 'closed') {
+			while(i<100) {
+				function modalOpen() {
+					alert('Market is currently down');
+			}
+			i++;
+		}
+	}
 }
 
 xhttp.open('POST',url, true);
