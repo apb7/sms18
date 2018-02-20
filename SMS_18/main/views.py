@@ -275,10 +275,9 @@ def UserStockDetails(request):
         "price" : current_stock.stock_price,
         "market_type":current_stock.market_type,
         "price_trend":current_stock.price_trend,
-        "average_price":current_stock.average_price, #todo
+        "average_price":this_stock.average_price, #todo
         "id": current_stock.id,
         }
-        #this will send the name of the stock along with the number of units the user is currently owning
         StocksData.append(stock_data)
     return HttpResponse(json.dumps(StocksData), content_type="application/json")
 
