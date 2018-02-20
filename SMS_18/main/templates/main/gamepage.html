@@ -158,6 +158,11 @@
 	    }
 	}
 
+	var timeout = setTimeout("location.reload(true);",60000);
+  function resetTimeout() {
+    clearTimeout(timeout);
+    timeout = setTimeout("location.reload(true);",60000);
+  }
 
 
 
