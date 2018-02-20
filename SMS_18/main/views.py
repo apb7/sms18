@@ -430,7 +430,7 @@ def gameswitchstatus(request):
         return HttpResponse(json.dumps(resp), content_type = "application/json")
     gs = GameSwitch.objects.get(switch_name="main")
     resp={
-    "status_of_game":gs.game_status,#add to doc
+    "status_of_game":gs.game_status,
     }
     print("***")
     return HttpResponse(json.dumps(resp), content_type="application/json")
