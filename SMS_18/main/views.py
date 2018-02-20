@@ -269,7 +269,8 @@ def UserStockDetails(request):
         "price" : current_stock.stock_price,
         "market_type":current_stock.market_type,
         "price_trend":current_stock.price_trend,
-        "average_price":100#todo
+        "average_price":100, #todo
+        "id": current_stock.id,
         }
         #this will send the name of the stock along with the number of units the user is currently owning
         StocksData.append(stock_data)
@@ -356,7 +357,7 @@ def LBdata(request):
                 'net_worth':i.net_worth
                 })
     my_pos = d.index({'name':current_user.name,'net_worth':current_user.net_worth}) + 1
-    x=20
+    x=10
     d = d[:x]
     d.append({
         'rank':my_pos, 

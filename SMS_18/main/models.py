@@ -27,8 +27,9 @@ class StockPurchased(models.Model):
 	stockid = models.ForeignKey('Stock' , on_delete=models.CASCADE) #which stock purchased by user
 	number_of_stocks = models.IntegerField(default=0) #how many stocks were purchased
 	# TODO: Average stock price: Call the Stock with stock_id, calculate the total and then avg. price.
+	#average_price = models.IntegerField(default)
 	def __str__(self):
-		return self.number_of_stocks
+		return str(self.number_of_stocks)
 
 
 class GameSwitch(models.Model):
