@@ -20,9 +20,9 @@ xhttp.onreadystatechange = function() {
 					}
 				else {
 					if((data[i].average_price-data[i].price) >= 0 ) 
-						document.getElementsByClassName('main')[0].innerHTML += '<div class="stock"><div class="profile-details">'+data[i].name+'</div><div class="profile-details">'+data[i].num+'</div><div class="profile-details"><div><span>$'+(data[i].average_price/conversionRate).toFixed(1)+'</span><span class="percentChange"> '+((data[i].price-data[i].average_price)/data[i].price).toFixed(0)*100+'%</div></div><div class="profile-details">$'+(data[i].average_price*data[i].num/conversionRate).toFixed(1)+'</div></div>';
+						document.getElementsByClassName('main')[0].innerHTML += '<div class="stock"><div class="profile-details">'+data[i].name+'</div><div class="profile-details">'+data[i].num+'</div><div class="profile-details"><div><span>$'+data[i].average_price+'</span><span class="percentChange"> '+((data[i].price-data[i].average_price)/data[i].price).toFixed(0)*100+'%</div></div><div class="profile-details">$'+(data[i].average_price*data[i].num).toFixed(1)+'</div></div>';
 					else
-					document.getElementsByClassName('main')[0].innerHTML += '<div class="stock"><div class="profile-details">'+data[i].name+'</div><div class="profile-details">'+data[i].num+'</div><div class="profile-details"><div><span>$'+(data[i].average_price/conversionRate).toFixed(1)+'</span><span class="percentChangeDown"> '+((data[i].price-data[i].average_price)/data[i].price).toFixed(0)*100+'%</div></div><div class="profile-details">$'+(data[i].average_price*data[i].num/conversionRate).toFixed(1)+'</div></div>';
+					document.getElementsByClassName('main')[0].innerHTML += '<div class="stock"><div class="profile-details">'+data[i].name+'</div><div class="profile-details">'+data[i].num+'</div><div class="profile-details"><div><span>$'+data[i].average_price+'</span><span class="percentChangeDown"> '+((data[i].price-data[i].average_price)/data[i].price).toFixed(0)*100+'%</div></div><div class="profile-details">$'+(data[i].average_price*data[i].num).toFixed(1)+'</div></div>';
 				}
 			}
 		}

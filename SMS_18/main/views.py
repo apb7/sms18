@@ -176,6 +176,7 @@ def BuyStocks(request, id):
         current_stock.average_price = (current_stock.average_price*current_stock.number_of_stocks+ transaction_cost)/new_number 
         current_stock.number_of_stocks = new_number
         current_stock.save()
+        print(current_stock)
         resp = {
             'message': 'SUCCESS: The user purchased the stock.'
         }
