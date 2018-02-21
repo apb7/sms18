@@ -213,9 +213,9 @@ def SellStocks(request, id):
             if new_number is 0:
                 current_stock.delete()
             else:
-                current_stock.save()
+                #current_stock.save()
                 # new_number = current_stock.number_of_stocks+int(data['units'])
-                current_stock.average_price = (current_stock.average_price * current_stock.number_of_stocks + transaction_cost)/new_number 
+                #current_stock.average_price = ((current_stock.average_price * current_stock.number_of_stocks) + transaction_cost)/new_number 
                 current_stock.number_of_stocks = new_number
                 current_stock.save()
             resp = {
