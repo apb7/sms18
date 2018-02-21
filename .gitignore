@@ -1,6 +1,9 @@
 # Database
 SMS_18/db.sqlite3
 
+# Settings
+SMS_18/SMS_18/settings.py
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
