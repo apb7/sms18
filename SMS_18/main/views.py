@@ -210,13 +210,14 @@ def SellStocks(request, id):
             current_user.save()
             #current_stock = StockPurchased.objects.get(owner=current_user.id, stockid=stock_info)
             new_number = current_stock.number_of_stocks - int(data['units'])
-            if current_stock.number_of_stocks is 0:
+            if new_number is 0:
                 current_stock.delete()
             else:
                 current_stock.save()
-                new_number = current_stock.number_of_stocks+int(data['units'])
-                current_stock.average_price = (current_stock.average_price*current_stock.number_of_stocks+ transaction_cost)/new_number 
+                # new_number = current_stock.number_of_stocks+int(data['units'])
+                current_stock.average_price = (current_stock.average_price * current_stock.number_of_stocks + transaction_cost)/new_number 
                 current_stock.number_of_stocks = new_number
+                current_stock.save()
             resp = {
                 'message': 'SUCCESS: The user sold the stock.'
             }
