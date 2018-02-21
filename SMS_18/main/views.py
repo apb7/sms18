@@ -435,6 +435,7 @@ def gameswitchstatus(request):
     global key
     user_key = request.POST.get('key')
     if user_key != key:
+        
         resp={
             'error':'The user is not registered yet.'
         }
@@ -458,4 +459,27 @@ def getconversionrate(request):
     resp={
     'conversion_rate': cr.conversion_rate,
     }
+    return HttpResponse(json.dumps(resp), content_type = "application/json")
+
+#key for efa = "sms20188593"
+@csrf_exempt
+def apiforefa(request):
+    key_value = "sms20188593" 
+    user_key = request.POST.get('key')
+    if user_key != key_value:
+        
+        resp={
+            'error':'The API was requested with an invalid key'
+        }
+        return HttpResponse(json.dumps(resp), content_type = "application/json")
+    try:
+        email_id = request.POST.get('email')
+    except:
+        resp={'code':'no such user with the given mail'}
+        return HttpResponse(json.dumps(resp), content_type = "application/json")
+    current_user = UserProfile.objects.get(mail_id = email)
+    balance_change = request.POST.get('balance_change')
+    current_user.balance += balance_change
+    current_user.save()
+    resp={'code':'The User balance was modified'}
     return HttpResponse(json.dumps(resp), content_type = "application/json")
