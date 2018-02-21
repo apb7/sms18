@@ -270,6 +270,7 @@ def UserStockDetails(request):
     StocksData = []
     for this_stock in UserStocks:
         current_stock = Stock.objects.get(id=this_stock.stockid.id)
+        print(current_stock.price_trend)
         stock_data = {
         "name" : current_stock.product_name,
         "num" : this_stock.number_of_stocks,

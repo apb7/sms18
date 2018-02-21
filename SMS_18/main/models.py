@@ -16,7 +16,8 @@ class Stock(models.Model):
 	product_name = models.CharField(max_length=100) #from manforce to mrf, anything in between xD
 	stock_price = models.IntegerField(default=0) #Stock price at any instant
 	market_type = models.CharField(max_length=10, null=False, choices=(("BSE",'"BSE"'),("NYM",'"NYM"')),default="BSE")
-	price_trend = models.IntegerField(default = 0)
+	price_trend = models.IntegerField(default=0)
+	initial_price = models.IntegerField(default = 0)
 	#first two digits will be ones and tens representatives... others decimal
 
 	def __str__(self):
