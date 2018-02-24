@@ -12,7 +12,7 @@ xhttp.onreadystatechange = function() {
 		}
 		else {
 			for (var i=0; i<data.length; i++) {
-					console.log(data);
+					/*console.log(data);*/
 					document.getElementsByClassName('main')[0].innerHTML += '<div class="profileLeader"><span class="balance1">' +  data[i].post_text + '</span><span class="balance2">'+data[i].time_of_post+'</div';
 			}
 		}
@@ -21,7 +21,7 @@ xhttp.onreadystatechange = function() {
 
 xhttp.open('POST',url, true);
 xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
-xhttp.send("key=9bBo3YmHufzvSYWjbtkURd&email="+sessionStorage.getItem("email"));
+xhttp.send("key=9bBo3YmHufzvSYWjbtkURd&email="+localStorage.getItem("email"));
 
 
 function openNav() {
@@ -30,4 +30,4 @@ function openNav() {
 
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
-}	
+}

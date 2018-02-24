@@ -26,7 +26,7 @@ SECRET_KEY = '%vwq+a$pa3@h)5y@ftjs^+acgv#-&#ri0gqwp2s3*59%2t%-pf'
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['172.17.56.191','127.0.0.1','192.168.43.139']
+ALLOWED_HOSTS = ['172.17.56.191','127.0.0.1','192.168.43.139','sms18.pythonanywhere.com']
 
 
 # Application definition
@@ -59,6 +59,8 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# CORS_ORIGIN_ALLOW_ALL = True
+
 ROOT_URLCONF = 'SMS_18.urls'
 
 TEMPLATES = [
@@ -83,13 +85,21 @@ WSGI_APPLICATION = 'SMS_18.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
+#DATABASES = {
+ #   'default': {
+  #      'ENGINE': 'django.db.backends.sqlite3',
+   #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+   # }
+#}
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'sms18$sms2018db_2',
+            'USER': 'sms18',
+            'PASSWORD': 'nowyouseemetoo',
+            'HOST':'sms18.mysql.pythonanywhere-services.com',
+            }
+        }
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -126,7 +136,7 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-SITE_ID = 1
+SITE_ID = 2
 
 LOGIN_REDIRECT_URL = "/createProfile"
 
@@ -151,7 +161,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_ROOT = "/home/sms18/sms18/SMS_18/main/static"
 
 
 MEDIA_URL = '/media/'

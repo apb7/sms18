@@ -4,7 +4,7 @@ body{
 	background-color: white;
 	font-family: 'Montserrat';
 	background: #e3e3e3;
-}	
+}
 /*.header{
 	position: fixed;
 	width: 100%;
@@ -124,7 +124,7 @@ body{
 }
 
 .leader, .balance {
-	flex-basis: 50%;
+	flex-basis: 100%%;
 	text-align: center;
 }
 

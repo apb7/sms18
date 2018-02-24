@@ -3,7 +3,7 @@ import datetime
 import json
 import random
 
-with open('Day1.csv',"r") as csvfile:
+with open('Day3.csv',"r") as csvfile:
     mycsv=csv.reader(csvfile,delimiter=',', quotechar='"')
     timelist=[]
     #stocks=mycsv[0]

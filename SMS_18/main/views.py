@@ -15,7 +15,9 @@ from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
 from algoscript import algo
 
-key = "9bBo3YmHufzvSYWjbtkURd" 
+key = "9bBo3YmHufzvSYWjbtkURd"
+factor = 0.0000005
+tax_factor = 0.0001
 
 def index(request):#just a render view
     if request.user.is_authenticated():
@@ -85,7 +87,7 @@ def news(request):#just a render view
             'error':'The user is not registered yet.'
         }
         return HttpResponse(json.dumps(resp), content_type = "application/json")
-    return render(request, 'main/news.html')    
+    return render(request, 'main/news.html')
 
 
 
@@ -156,26 +158,39 @@ def BuyStocks(request, id):
     if request.method == 'POST':
         data = request.POST
         stock_info = Stock.objects.get(id=id)
-        
-        transaction_cost = int(data['units'])*stock_info.stock_price
+
+        if stock_info.market_type == "NYM" or stock_info.market_type == '"NYM"':
+            crx=ConversionRate.objects.get(var_name="main")
+            transaction_cost = int(data['units'])*stock_info.stock_price * (crx.conversion_rate/100) * (1 + tax_factor)
+        else:
+            transaction_cost = int(data['units'])*stock_info.stock_price * (1 + tax_factor)
+
         if( current_user.balance < transaction_cost ):
             resp={
                 'error':'Not sufficient balance to proceed the transaction'
             }
             return HttpResponse(json.dumps(resp), content_type="application/json")
+
         current_user.balance -= transaction_cost
 
         current_user.save()
 
         try:
-            current_stock = StockPurchased.objects.get(owner_id=current_user.id, stockid=stock_info)
+            current_stock = StockPurchased.objects.get(owner=current_user, stockid=stock_info)
         except:
-            current_stock = StockPurchased.objects.create(owner_id=current_user.id, stockid=stock_info)
-
+            current_stock = StockPurchased.objects.create(owner=current_user, stockid=stock_info)
+        crx = ConversionRate.objects.get(var_name = "main")
         new_number = current_stock.number_of_stocks+int(data['units'])
-        current_stock.average_price = (current_stock.average_price*current_stock.number_of_stocks+ transaction_cost)/new_number 
-        current_stock.number_of_stocks = new_number
+#        if current_stock.stockid.market_type == "NYM":
+#            current_stock.average_price = (current_stock.average_price*current_stock.number_of_stocks+ transaction_cost)/(new_number*crx.conversion_rate)
+#        else:
+#            current_stock.average_price = (current_stock.average_price*current_stock.number_of_stocks+ transaction_cost)/new_number
+        current_stock.number_of_stocks += int(data['units'])
         current_stock.save()
+        #current_user.save()
+        # FINAL ROUND
+        stock_info.stock_price += round(stock_info.initial_price * factor * int(data['units']), 3)
+        stock_info.save()
         print(current_stock)
         resp = {
             'message': 'SUCCESS: The user purchased the stock.'
@@ -197,15 +212,22 @@ def SellStocks(request, id):
     current_user = UserProfile.objects.get(mail_id=email)
     stock_info = Stock.objects.get(id=id)
     try:
-        current_stock = StockPurchased.objects.get(owner=current_user.id, stockid=stock_info)
+        current_stock = StockPurchased.objects.get(owner=current_user, stockid=stock_info)
     except StockPurchased.DoesNotExist:
         current_stock = None
 
     if request.method == 'POST' and current_stock is not None:
         data = request.POST
-        stock_info = Stock.objects.get(id=id)
+        # stock_info = Stock.objects.get(id=id)
         if current_stock.number_of_stocks >= int(data['units']):
-            transaction_cost = int(data['units'])*stock_info.stock_price
+            stock_info = Stock.objects.get(id=id)
+            if stock_info.market_type == "NYM" or stock_info.market_type == '"NYM"':
+                crx=ConversionRate.objects.get(var_name="main")
+                transaction_cost = int(data['units'])*stock_info.stock_price * (crx.conversion_rate/100)
+            else:
+                transaction_cost = int(data['units'])*stock_info.stock_price
+
+            #transaction_cost = int(data['units'])*stock_info.stock_price
             current_user.balance += transaction_cost
             current_user.save()
             #current_stock = StockPurchased.objects.get(owner=current_user.id, stockid=stock_info)
@@ -215,9 +237,14 @@ def SellStocks(request, id):
             else:
                 #current_stock.save()
                 # new_number = current_stock.number_of_stocks+int(data['units'])
-                #current_stock.average_price = ((current_stock.average_price * current_stock.number_of_stocks) + transaction_cost)/new_number 
+                #current_stock.average_price = ((current_stock.average_price * current_stock.number_of_stocks) + transaction_cost)/new_number
                 current_stock.number_of_stocks = new_number
                 current_stock.save()
+            # FINAL ROUND
+            stock_info.stock_price -= round(stock_info.initial_price * factor * int(data['units']), 3)
+            stock_info.save()
+            #current_user.save()
+
             resp = {
                 'message': 'SUCCESS: The user sold the stock.'
             }
@@ -227,7 +254,7 @@ def SellStocks(request, id):
                 'error': 'FAILURE: The user does not have enough stocks to sell.'
             }
             return HttpResponse(json.dumps(resp), content_type="application/json")
-        
+
     elif request.method == 'POST' and current_stock is None:
         resp = {
             'error': 'The user does not have any stocks to sell'
@@ -275,11 +302,12 @@ def UserStockDetails(request):
         stock_data = {
         "name" : current_stock.product_name,
         "num" : this_stock.number_of_stocks,
-        "price" : current_stock.stock_price,
+        "price" : str(current_stock.stock_price),
         "market_type":current_stock.market_type,
-        "price_trend":current_stock.price_trend,
-        "average_price":this_stock.average_price, #todo
+        "price_trend":int(current_stock.stock_price - current_stock.initial_price),
+        "average_price":current_stock.stock_price, #todo
         "id": current_stock.id,
+        #"initial": str(current_stock.initial_price),
         }
         StocksData.append(stock_data)
     return HttpResponse(json.dumps(StocksData), content_type="application/json")
@@ -300,9 +328,10 @@ def StocksPrimaryData(request):
         stock_data = {
             "id" : this_stock.id,
             "name" : this_stock.product_name,
-            "price" : this_stock.stock_price,
+            "price" : str(this_stock.stock_price),
             "market_type": this_stock.market_type,
-            "price_trend": this_stock.price_trend,
+            "price_trend": int(this_stock.stock_price - this_stock.initial_price),
+            "initial": str(this_stock.initial_price),
         }
         StocksData.append(stock_data)
     return HttpResponse(json.dumps(StocksData), content_type="application/json")
@@ -327,10 +356,10 @@ def StockData(request, id):
         pass
     stock_data = {
         "name" : this_stock.product_name,
-        "price" : this_stock.stock_price,
+        "price" : str(this_stock.stock_price),
         "num" : num,
         "market_type": this_stock.market_type,
-        "price_trend": this_stock.price_trend
+        "price_trend": int(this_stock.stock_price - this_stock.intial_price)
     }
     return HttpResponse(json.dumps(stock_data), content_type = "application/json")
 
@@ -369,7 +398,7 @@ def LBdata(request):
     x=10
     d = d[:x]
     d.append({
-        'rank':my_pos, 
+        'rank':my_pos,
         'name':current_user.name,
         'net_worth':current_user.net_worth
     })
@@ -381,17 +410,17 @@ def LBdata(request):
 def userLogin(request):
     if request.method == 'POST':
         username = request.POST.get('username')
-        email = request.POST.get('email')        
+        email = request.POST.get('email')
         try:
-            obj = User.objects.get(username=username)
+            obj = UserProfile.objects.get(mail_id=email)
             msg = {
                 'message': 'The user is already registered.'
             }
             return HttpResponse(json.dumps(msg), content_type="application/json")
-        except User.DoesNotExist:
+        except:
             # This line fills up random password for the user in the backend.
             password = User.objects.make_random_password()
-            user = User.objects.create_user(username, email, password)
+            user = User.objects.create_user(email, email, password)
             user.save()
             userProf = UserProfile.objects.create(user=user, name=username, mail_id=email)
             userProf.save()
@@ -458,4 +487,30 @@ def getconversionrate(request):
     resp={
     'conversion_rate': cr.conversion_rate,
     }
+    return HttpResponse(json.dumps(resp), content_type = "application/json")
+
+#key for efa = "sms20188593"
+@csrf_exempt
+def apiforefa(request):
+    key_value = "sms20188593"
+    user_key = request.POST.get('key')
+    if user_key != key_value:
+        resp={
+            'error':'The API was requested with an invalid key'
+        }
+        return HttpResponse(json.dumps(resp), content_type = "application/json")
+#    print(request.POST)
+#    print(request.POST.key)
+#    print(request.POST.email)
+#    print("*")
+    email_id = request.POST.get('email')
+    try:
+        current_user = UserProfile.objects.get(mail_id = email_id)
+    except:
+        resp={'code':'no such user with the given mail'}
+        return HttpResponse(json.dumps(resp), content_type = "application/json")
+    balance_change = request.POST.get('balance_change')
+    current_user.balance += int(balance_change)
+    current_user.save()
+    resp={'code':'The User balance was modified'}
     return HttpResponse(json.dumps(resp), content_type = "application/json")

@@ -12,23 +12,25 @@ xhttp.onreadystatechange = function() {
 		}else{
 			var k=0;
 			var dataIndian = [];
+			/*console.log(data);*/
 			for (var c=0; c<data.length; c++) {
 				if(data[c].market_type == "BSE" || data[c].market_type == "Both") {
 					dataIndian[k] = data[c];
 					k++;
 					}
-				}	
+				}
 			for (var i = 0; i < dataIndian.length; i++) {
-				document.getElementsByClassName('main')[0].innerHTML += '<div class="stock"><div class="shown"><div class="name" id="stockName">'+dataIndian[i].name+'</div><div class="price">&#8377 <span>' + dataIndian[i].price + ' </span><span class="increasePrice"> &#x25B2; </span><span class="decreasePrice"> &#x25BC; </span></div></div><div class="hidden"><div class="buy" id="myBtn" name="buy"> <button onclick="modalOpen('+dataIndian[i].id+')">BUY</button> </div><div class="sell" id="myBtn" name="sell"> <button class="button" onclick="modalOpenS('+dataIndian[i].id+')">SELL</button></div></div></div>';
-				if(dataIndian[i].price_trend>0) {
+			    var price_trend = parseFloat(dataIndian[i].price) - parseFloat(dataIndian[i].initial);
+				document.getElementsByClassName('main')[0].innerHTML += '<div class="stock"><div class="shown"><div class="name" id="stockName">'+dataIndian[i].name+'</div><div class="price">&#8377 <span>' + dataIndian[i].price + ' </span><span class="increasePrice"> &#x25B2; </span><span class="decreasePrice"> &#x25BC; </span><span class="percentChange">' + (price_trend/(parseFloat(dataIndian[i].initial))*100).toFixed(2) + '%</span></div></div><div class="hidden"><div class="buy" id="myBtn" name="buy"> <button onclick="modalOpen('+dataIndian[i].id+')">BUY</button> </div><div class="sell" id="myBtn" name="sell"> <button class="button" onclick="modalOpenS('+dataIndian[i].id+')">SELL</button></div></div></div>';
+				if(price_trend>=0) {
 					document.getElementsByClassName("increasePrice")[i].style.display = "inline";
 				}
-				else if (dataIndian[i].price_trend<0) {
+				else if (price_trend<0) {
 					document.getElementsByClassName("decreasePrice")[i].style.display = "inline";
 				}
 			}
-				
-				
+
+
 			var j=1;
 			while (j<=dataIndian.length){
 			document.getElementsByClassName("stock")[j].addEventListener("click", function(){
@@ -43,12 +45,12 @@ xhttp.onreadystatechange = function() {
 
 function openBuy() {
 	document.getElementsByClassName("formBuy")[0].style.display = "block";
-	console.log("opened");
+	document.getElementsByClassName('errorText')[0].innerHTML = null;
 }
 
 function openSell() {
 	document.getElementsByClassName("formSell")[0].style.display = "block";
-	console.log("opened");
+	document.getElementsByClassName('errorText')[0].innerHTML = null;
 }
 
 xhttp.open('POST',url, true);

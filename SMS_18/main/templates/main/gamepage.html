@@ -8,6 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'main/css/home.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'main/css/template.css' %}">
 	<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+	<link rel="shortcut icon" type="image/x-icon" href="{% static 'main/img/sms_ico/favicon.ico' %}"/>
 </head>
 <body>
 	<div class="container">
@@ -15,13 +16,13 @@
 				<!-- <div class="title"> <span> STOCK MARKET SIMULATION </span> </div> -->
 				<div class="profile">
 					<div class="user user1" id="userName"></div>
-					<div class="user user2">Balance: &#8377 
+					<div class="user user2">Balance: &#8377
 						<span  id="userBalance"></span>
 						<span class="conversionRate"> (&#36 1 = &#8377 <span id="conversionRate"></span>)</span>
 						<span class="hamburgerIcon"onclick="openNav()">&#9776;</span></div>
 				</div>
 				<div class="navbar">
-					
+
 					<a href="{% url 'main:game' %}"><div class="nav active"><span>Indian</span> </div> </a>
 		  			<a href="{% url 'main:international' %}"> <div class="nav"><span>International</span> </div> </a>
 
@@ -38,7 +39,7 @@
 				</div>
 				<!-- <div class="hidden">
 					<div class="buy" id="myBtn"><button onclick="modalOpen()">BUY</button> </div>
-					
+
 					<div class="sell" id="myBtn"><button class="button" onclick="modalOpenS()">SELL</button></div>
 
 					 <div class=""> <button id="myBtn" onclick="modalOpen()">Open Modal</button> </div>
@@ -46,25 +47,25 @@
 			</div>
 		</div>
 
-		
+
 		<div class="sideBar">
 			<div id="mySidenav" class="sidenav">
-				<div class="closebtndiv"> 
+				<div class="closebtndiv">
 					<span>SMS</span>
-					<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> 
+					<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 				</div>
-				<div> 
+				<div>
 					<a class="links" href="{% url 'main:profile' %}">Portfolio</a> <hr>
 				<a class="links" href="{% url 'main:game' %}">Market</a> <hr>
-				<a class="links" href="{% url 'main:leaderboard' %}">Leaderboard</a> <hr> 
+				<a class="links" href="{% url 'main:leaderboard' %}">Leaderboard</a> <hr>
 				<a class="links" href="{% url 'main:news' %}">News </a> <hr>
 				<a class="links" href="{% url 'main:logout' %}">Logout</a> <hr>
 				</div>
 			</div>
 		</div>
 
-	
-	
+
+
 
 				 <!-- The Modal -->
 		<div id="myModal" class="modal">
@@ -79,6 +80,7 @@
 			      	<p>Enter stocks to buy</p>
 			      	<p><input type="number" min="0" value="0" class="counter" id="purchaseAmount"></p>
 			      	<p class="errorText"></p>
+			      	<p class="taxRate"> * Brokerage tax apply </p>
 			    </div>
 			    <div class="modal-footer">
 			    	<button onclick="buyStocks()" class="myButton"> Confirm Purchase </button>
@@ -117,7 +119,7 @@
 <script type="text/javascript" src="{% static 'main/js/userDetails.js' %}"></script>
 <script type="text/javascript" src="{% static 'main/js/market.js' %}" ></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<script type="text/javascript" src="{% static 'main/js/conversionRate.js' %}" ></script>	
+<script type="text/javascript" src="{% static 'main/js/conversionRate.js' %}" ></script>
 <script type="text/javascript" src="{% static 'main/js/status.js' %}"></script>
 <script type="text/javascript">
 	// Get the modal
@@ -135,11 +137,15 @@
 	function modalOpen(id) {
 	    modal.style.display = "block";
 	    stockId = id;
+	    document.getElementsByClassName('errorText')[0].innerHTML = null;
+	    document.getElementById('purchaseAmount').value = 0;
 	}
 
 	function modalOpenS(id) {
 		modals.style.display = "block";
 	    stockId = id;
+	    document.getElementsByClassName('errorText')[1].innerHTML = null;
+	    document.getElementById('sellAmount').value = 0;
 	}
 
 	// When the user clicks on <span> (x), close the modal
@@ -158,11 +164,11 @@
 	    }
 	}
 
-	var timeout = setTimeout("location.reload(true);",60000);
+	/*var timeout = setTimeout("location.reload(true);",60000);
   function resetTimeout() {
     clearTimeout(timeout);
     timeout = setTimeout("location.reload(true);",60000);
-  }
+  }*/
 
 
 

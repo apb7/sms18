@@ -18,16 +18,17 @@ body {
 
 .profileLeader{
 	width: 100%;
-	height: 10vh;
+	height: 13vh;
 	background: #ffffff;
 	border-radius: 0px;
 	margin: 0.5vh auto;
-	line-height: 10vh;
 	padding-left: 2vw;
 	display: flex;
 	justify-content: space-around;
 	max-width: 1200px;
 	box-shadow: 2px 2px 2px 2px #9e9e9e;
+    padding-top: 7%;
+
 }
 
 .balance1 {

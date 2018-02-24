@@ -144,11 +144,18 @@ a{
 	text-decoration: none;
 }
 
+
+button {
+	cursor: pointer;
+	border-radius: 0;
+}
+
 .buy button{
-	padding: 12px 19px;
+	padding: 10px 22px;
 	color: white;
 	background: #25b256;
 	transition: background 500ms;
+	border-radius: 20px;
 }
 
 .buy button:hover{
@@ -156,20 +163,17 @@ a{
 }
 
 .sell button{
-	padding: 12px 19px;
+	padding: 10px 22px;
 	color: white;
 	background: #f71b1b;
 	transition: background 500ms;
+	border-radius: 20px;
 }
 
 .sell button:hover{
 	background: #e51919;
 }
 
-button {
-	cursor: pointer;
-	border-radius: 0;
-}
 
 .disabled {
 	cursor: not-allowed;
@@ -217,7 +221,7 @@ button {
 
 /* Add Animation */
 @-webkit-keyframes animatetop {
-    from {top:-300px; opacity:0} 
+    from {top:-300px; opacity:0}
     to {top:0px; opacity:1}
 }
 

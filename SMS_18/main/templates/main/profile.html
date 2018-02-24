@@ -10,6 +10,7 @@
 	<script type="text/javascript" src="{% static 'main/js/profile.js' %}"></script>
 	<script type="text/javascript" src="{% static 'main/js/conversionRate.js' %}" ></script>
 	<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+	<link rel="shortcut icon" type="image/x-icon" href="{% static 'main/img/sms_ico/favicon.ico' %}"/>
 	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 </head>
 <body>
@@ -19,7 +20,7 @@
 				<!-- <div class="title"> <span> STOCK MARKET SIMULATION </span> </div> -->
 				<div class="profile profile1">
 					<div class="user user1" id="userName"></div>
-					<div class="user user2">Balance: &#8377 
+					<div class="user user2">Balance: &#8377
 						<span  id="userBalance"></span>
 						<span class="conversionRate"> (&#36 1 = &#8377 <span id="conversionRate"></span>)</span>
 						<span class="hamburgerIcon"onclick="openNav()">&#9776;</span></div>
@@ -44,13 +45,13 @@
 
 		<div id="mySidenav" class="sidenav">
 			<div class="closebtndiv">
-			<span> SMS </span> 
-				<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> 
+			<span> SMS </span>
+				<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 			</div>
-			<div> 
+			<div>
 				<a class="links" href="{% url 'main:profile' %}">Portfolio</a> <hr>
 				<a class="links" href="{% url 'main:game' %}">Market</a> <hr>
-				<a class="links" href="{% url 'main:leaderboard' %}">Leaderboard</a> <hr> 
+				<a class="links" href="{% url 'main:leaderboard' %}">Leaderboard</a> <hr>
 				<a class="links" href="{% url 'main:news' %}">News </a> <hr>
 				<a class="links" href="{% url 'main:logout' %}">Logout</a> <hr>
 			</div>

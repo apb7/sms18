@@ -1,27 +1,29 @@
+{% load staticfiles %}
 <!DOCTYPE>
 <html>
 <head lang="en">
 	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Login</title>
-	
+
 	<!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
-	
+
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css" integrity="sha256-uHu2MAd1LvCOVEAhvMld4LpJi7dUGS7GVzvG/5B3hlo=" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="../../static/main/css/login.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/css/login.css' %}">
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Anton|Kavivanar|Raleway" rel="stylesheet">
 	<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
-
-	
+	<link rel="shortcut icon" type="image/png" href="../../media/img/sms_ico/favicon-16x16.png"/>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'main/img/sms_ico/favicon.ico' %}"/>
 </head>
 <body>
 
 
 	{% load socialaccount %}
-	
 
+	<!-- <img src="../../media/img/SMS_favicon.png"> -->
 	<!-- <a href="{% provider_login_url 'google' method='oauth2' %}">Google OAuth2</a> -->
-	
+
 
 
 	<!-- <form method="POST" action="/register">
@@ -32,7 +34,7 @@
 		<input type="password" name="password" placeholder="password" />
 		<input type="submit" />
 	</form>
-	
+
 
 
 	<form method="POST" action="/login">
@@ -45,25 +47,32 @@
 
 	<!-- <div class="title"> <span> <img src="../main/media/img/stock_market.png">  STOCK MARKET SIMULATION </span> </div>
  -->
-  <div class="login-box">
-    
+  <!-- <div class="login-box"> -->
 
-    <div class="lb-header">
+
+    <!-- <div class="lb-header">
       <a href="#" class="active" id="login-box-link">Login</a>
       <a href="#" id="signup-box-link">Sign Up</a>
-    </div>
-    
+    </div> -->
 
-    <div class="social-login">
-      <div class="loginBtn"><a href="{% provider_login_url 'google' method='oauth2' %}">
-        <i class="fa fa-google-plus fa-lg"></i>
-        log in with Google 
-      </a> </div>
-    </div>
-    
-    
+    <div class="container">
+	    <div class="title">
+	    	<span class="line1">STOCK  MARKET <br> SIMULATION</span> <br>
+	    	<span class="line2"> ACM in collaboration with EFA <br> </span>
+	    	<span class="line3">Final Round <span class="separate">|</span> 24th Feb <span class="separate">|</span> 8:30 PM <span class="separate">|</span> Rotunda <br> </span>
+	    	<span class="line4"> Sign in to play! <br> <b> Time for your inner Investor to step up! </b> </span>
+	    </div>
 
-    <form class="email-login" id="email-login" method="POST" action="/login">
+	    <div class="social-login">
+	      <div class="loginBtn"><a href="{% provider_login_url 'google' method='oauth2' %}">
+	        <i class="fa fa-google-plus fa-lg"></i>
+	        log in with Google
+	      </a> </div>
+	    </div>
+    </div>
+
+
+    <!-- <form class="email-login" id="email-login" method="POST" action="/login">
     	{% csrf_token %}
       <div class="u-form-group">
         <input type="text" placeholder="Username" name="username" />
@@ -74,11 +83,11 @@
       <div class="u-form-group">
         <button type="submit" class="submitBtn">Login</button>
       </div>
-    </form>
-    
+    </form> -->
 
 
-    <form class="email-signup" method="POST" action="/register">
+
+    <!-- <form class="email-signup" method="POST" action="/register">
     	{% csrf_token %}
       <div class="u-form-group">
         <input type="text" placeholder="Username" name="username" />
@@ -88,17 +97,17 @@
       </div>
       <div class="u-form-group">
         <input type="password" placeholder="Password" name="password" />
-      </div>
+      </div> -->
       <!-- <div class="u-form-group">
         <input type="password" placeholder="Confirm Password"/>
       </div> -->
-      <div class="u-form-group">
+      <!-- <div class="u-form-group">
         <button type="submit" class="submitBtn">Register</button>
       </div>
-    </form>
- 
+    </form> -->
 
-  </div>
+
+  <!-- </div> -->
 
 <script type="text/javascript" >
 
@@ -118,21 +127,21 @@
 	});
 
 		var loginForm = document.getElementsByClassName("email-login")[0];
-	
+
 		loginForm.onsubmit = function(e) {
 			var http = new XMLHttpRequest();
 			e.preventDefault();
 			var data =  'username='+loginForm.username.value + '&password='+loginForm.password.value ;
-			
+
 			http.onreadystatechange = function() {
 		   	 	if(http.readyState == 4 && http.status == 200) {
 	   	 			var received = JSON.parse(http.responseText);
 	   	 			if(received.status == "success"){
-		   	 			sessionStorage.setItem("email", received['email']);
+		   	 			localStorage.setItem("email", received['email']);
 		   	 		}
 	       			window.location = received['url'];
 	    		}
-	    	}	
+	    	}
 			http.open("POST", '/login', true);
 			http.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 			http.send(data);
@@ -141,7 +150,7 @@
 
 
 		var regForm = document.getElementsByClassName("email-signup")[0];
-	
+
 		regForm.onsubmit = function(e) {
 			var http = new XMLHttpRequest();
 			e.preventDefault();
@@ -150,7 +159,7 @@
 		   	 	if(http.readyState == 4 && http.status == 200) {
 	   	 			var received = JSON.parse(http.responseText);
 	   	 			if(received.status == "success"){
-		   	 			sessionStorage.setItem("email", received['email']);
+		   	 			localStorage.setItem("email", received['email']);
 		   	 		}
 	       			window.location = received['url'];
 		    	}
@@ -164,12 +173,12 @@
 
 		/*var frm = $('#email-login');
 
-		
+
     	frm.submit(function (e) {
 
         e.preventDefault();
-        
-		var formdata = { 
+
+		var formdata = {
 			'username': frm[0].username.value,
 			'password': frm[0].password.value
 		};
@@ -189,7 +198,7 @@
         });
     });*/
 
-		
+
 </script>
 
 

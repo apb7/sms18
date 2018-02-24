@@ -36,6 +36,7 @@
 	background: white;
 	text-align: center;
 	line-height: 75px;
+	overflow: hidden;
 	background: #0091EA;
 }
 
@@ -149,7 +150,7 @@
     top: 0;
     right: 25px;*/
     font-size: 36px;
-    margin-left: 50px;	
+    margin-left: 50px;
     color: white;
 }
 
@@ -178,7 +179,7 @@ hr {
 	}
 }
 
-/* INCREASE AND DECREASE MARKERS */ 
+/* INCREASE AND DECREASE MARKERS */
 .increasePrice, .decreasePrice {
 	display: none;
 	text-align: right;
@@ -210,7 +211,7 @@ hr {
 /* NON NAVBAR DESIGN */
 .profile1 {
 	height: 85px;
-}	
+}
 .header1 {
 	height: 87px;
 }
@@ -219,3 +220,19 @@ hr {
 	top: 90px;
 }
 
+.percentChange {
+    font-size: 11px;
+    color: steelblue;
+}
+
+@media and all (max-width: 768px) {
+    .percentChange{
+        font-size: 7px;
+    }
+
+    }
+
+.taxRate {
+    font-size: 12px;
+    color: red;
+}
